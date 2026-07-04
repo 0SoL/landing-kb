@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% set breadcrumbs = [{'title': _('Проекты'), 'url': url('projects:list')}, {'title': project.title, 'url': None}] %}
+{% include 'components/breadcrumbs.html' %}
+
+<article class="project-detail">
+
+  <header class="project-detail__header page-hero page-hero--dark"
+          {% if project.cover_image %}style="background-image: url('{{ project.cover_image.url }}')"{% else %}style="background-image: url('{{ static('img/hero-bg.jpg') }}')"{% endif %}>
+    <div class="page-hero__overlay"></div>
+    <div class="container">
+      <span class="project-card__badge">{{ project.get_client_type_display() }}</span>
+      <h1 class="page-hero__title">{{ project.title }}</h1>
+      <div class="project-detail__meta">
+        <span>{{ project.location }}</span>
+        <span>{{ project.year }} {{ _('год') }}</span>
+        {% if project.track_length_km %}
+        <span><span class="mono">{{ project.track_length_km }}</span> {{ _('км пути') }}</span>
+        {% endif %}
+        {% if project.client %}
+        <span>{{ project.client }}</span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+
+  <div class="container project-detail__body">
+
+    <div class="project-story">
+      <section class="project-story__section">
+        <h2 class="project-story__label">{{ _('Задача') }}</h2>
+        <p class="project-story__text">{{ project.task }}</p>
+      </section>
+
+      <section class="project-story__section">
+        <h2 class="project-story__label">{{ _('Решение') }}</h2>
+        <p class="project-story__text">{{ project.solution }}</p>
+      </section>
+
+      <section class="project-story__section">
+        <h2 class="project-story__label">{{ _('Результат') }}</h2>
+        <p class="project-story__text">{{ project.result }}</p>
+      </section>
+    </div>
+
+    {% if project.track_length_km or project.switches_count or project.duration_months or project.budget_display %}
+    <aside class="project-params">
+      <h2 class="project-params__title">{{ _('Параметры проекта') }}</h2>
+      <dl class="project-params__list">
+        {% if project.track_length_km %}
+        <div class="project-params__item">
+          <dt>{{ _('Длина пути') }}</dt>
+          <dd class="mono">{{ project.track_length_km }} {{ _('км') }}</dd>
+        </div>
+        {% endif %}
+        {% if project.switches_count %}
+        <div class="project-params__item">
+          <dt>{{ _('Стрелочных переводов') }}</dt>
+          <dd class="mono">{{ project.switches_count }} {{ _('шт.') }}</dd>
+        </div>
+        {% endif %}
+        {% if project.duration_months %}
+        <div class="project-params__item">
+          <dt>{{ _('Срок выполнения') }}</dt>
+          <dd class="mono">{{ project.duration_months }} {{ _('мес.') }}</dd>
+        </div>
+        {% endif %}
+        {% if project.budget_display %}
+        <div class="project-params__item">
+          <dt>{{ _('Стоимость') }}</dt>
+          <dd>{{ project.budget_display }}</dd>
+        </div>
+        {% endif %}
+      </dl>
+    </aside>
+    {% endif %}
+
+  </div>
+
+  {% if images %}
+  <section class="project-gallery section">
+    <div class="container">
+      <h2 class="section__title">{{ _('Галерея') }}</h2>
+      <div class="gallery-grid">
+        {% for img in images %}
+        <div class="gallery-item">
+          <img src="{{ img.image.url }}" alt="{{ img.alt_text or (project.title) }}" loading="lazy" class="gallery-item__img">
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+  {% endif %}
+
+</article>
+
+{% endblock %}

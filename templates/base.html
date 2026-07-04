@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="{{ get_language() }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% include 'components/seo_head.html' %}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ static('css/base.css') }}">
+  <link rel="stylesheet" href="{{ static('css/components.css') }}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body{% if page_id %} data-page="{{ page_id }}"{% endif %}>
+  <a href="#main-content" class="skip-link">{{ _('Перейти к содержимому') }}</a>
+  {% include 'components/header.html' %}
+  <main id="main-content">
+    {% block content %}{% endblock %}
+  </main>
+  {% include 'components/footer.html' %}
+  <script src="{{ static('js/main.js') }}" defer></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

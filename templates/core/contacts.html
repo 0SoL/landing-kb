@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-bg.jpg') }}')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <h1 class="page-hero__title">{{ _('Контакты') }}</h1>
+    <p class="page-hero__sub">{{ _('Свяжитесь с нами — ответим в течение рабочего дня') }}</p>
+  </div>
+</section>
+
+<section class="section contacts-section">
+  <div class="container contacts-grid">
+
+    <div class="contacts-info" itemscope itemtype="https://schema.org/Organization">
+      <h2 class="contacts-info__title">{{ _('Конкурент-Б') }}</h2>
+
+      <div class="contacts-info__item" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+        <h3>{{ _('Адрес') }}</h3>
+        <address itemprop="streetAddress">{{ _('Казахстан') }}</address>
+      </div>
+
+      <div class="contacts-info__item">
+        <h3>{{ _('Телефон') }}</h3>
+        <a href="tel:+77000000000" itemprop="telephone" class="contacts-info__link">+7 (700) 000-00-00</a>
+      </div>
+
+      <div class="contacts-info__item">
+        <h3>Email</h3>
+        <a href="mailto:info@example.kz" itemprop="email" class="contacts-info__link">info@example.kz</a>
+      </div>
+
+      <div class="contacts-info__item">
+        <h3>{{ _('Режим работы') }}</h3>
+        <p>{{ _('Пн–Пт: 9:00–18:00 (GMT+6, Алматы)') }}</p>
+      </div>
+
+      <div class="contacts-map">
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=76.5,43.1,77.5,43.5&layer=mapnik"
+          width="100%"
+          height="300"
+          loading="lazy"
+          title="{{ _('Карта расположения офиса') }}"
+          aria-label="{{ _('Карта расположения офиса компании') }}"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="contacts-form-wrap">
+      <h2>{{ _('Оставить заявку') }}</h2>
+      <p class="contacts-form-wrap__sub">{{ _('Опишите задачу — подготовим предварительный расчёт бесплатно') }}</p>
+
+      <form class="contact-form" method="post" action="{{ url('core:contacts') }}" novalidate>
+        {{ csrf_input }}
+
+        <div class="form__group">
+          <label for="{{ form.name.id_for_label }}" class="form__label">{{ form.name.label }} <span class="required">*</span></label>
+          {{ form.name }}
+          {% if form.name.errors %}
+          <span class="form__error">{{ form.name.errors[0] }}</span>
+          {% endif %}
+        </div>
+
+        <div class="form__group">
+          <label for="{{ form.company.id_for_label }}" class="form__label">{{ form.company.label }}</label>
+          {{ form.company }}
+        </div>
+
+        <div class="form__group">
+          <label for="{{ form.phone.id_for_label }}" class="form__label">{{ form.phone.label }} <span class="required">*</span></label>
+          {{ form.phone }}
+          {% if form.phone.errors %}
+          <span class="form__error">{{ form.phone.errors[0] }}</span>
+          {% endif %}
+        </div>
+
+        <div class="form__group">
+          <label for="{{ form.email.id_for_label }}" class="form__label">{{ form.email.label }}</label>
+          {{ form.email }}
+        </div>
+
+        <div class="form__group">
+          <label for="{{ form.message.id_for_label }}" class="form__label">{{ form.message.label }}</label>
+          {{ form.message }}
+        </div>
+
+        <button type="submit" class="btn btn--accent btn--lg btn--full">{{ _('Отправить заявку') }}</button>
+        <p class="form__note">{{ _('Нажимая кнопку, вы соглашаетесь на обработку персональных данных') }}</p>
+      </form>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

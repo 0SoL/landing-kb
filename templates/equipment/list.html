@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-images/technika.jpg') }}')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <h1 class="page-hero__title">{{ _('Парк техники') }}</h1>
+    <p class="page-hero__sub">{{ _('Собственный флот специализированной железнодорожной путевой техники') }}</p>
+  </div>
+</section>
+
+<section class="section equipment-section">
+  <div class="container">
+    {% for category in categories %}
+    <div class="equipment-category">
+      <h2 class="equipment-category__title">{{ category.name }}</h2>
+      <div class="equipment-grid">
+        {% for item in category.items.filter(is_published=True).order_by('order') %}
+        <article class="equipment-card">
+          {% if item.image %}
+          <div class="equipment-card__img-wrap">
+            <img src="{{ item.image.url }}" alt="{{ item.name }}" loading="lazy" class="equipment-card__img">
+          </div>
+          {% endif %}
+          <div class="equipment-card__body">
+            <h3 class="equipment-card__name">{{ item.name }}</h3>
+            <p class="equipment-card__purpose">{{ item.purpose }}</p>
+            {% if item.application %}
+            <p class="equipment-card__application"><strong>{{ _('Применение:') }}</strong> {{ item.application }}</p>
+            {% endif %}
+            {% if item.specifications %}
+            <details class="equipment-specs">
+              <summary class="equipment-specs__toggle">{{ _('Технические характеристики') }}</summary>
+              <dl class="equipment-specs__list">
+                {% for key, value in item.specifications.items() %}
+                <div class="equipment-specs__item">
+                  <dt>{{ key }}</dt>
+                  <dd class="mono">{{ value }}</dd>
+                </div>
+                {% endfor %}
+              </dl>
+            </details>
+            {% endif %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </div>
+    {% else %}
+    <p>{{ _('Техника скоро будет добавлена.') }}</p>
+    {% endfor %}
+  </div>
+</section>
+
+{% endblock %}

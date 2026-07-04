@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% set breadcrumbs = [{'title': _('Услуги'), 'url': url('services:list')}, {'title': service.title, 'url': None}] %}
+{% include 'components/breadcrumbs.html' %}
+
+<article class="service-detail">
+
+  <header class="page-hero page-hero--dark"
+          {% if service.cover_image %}style="background-image: url('{{ service.cover_image.url }}')"{% else %}style="background-image: url('{{ static('img/hero-bg.jpg') }}')"{% endif %}>
+    <div class="page-hero__overlay"></div>
+    <div class="container">
+      <span class="service-detail__category">{{ service.category.name }}</span>
+      <h1 class="page-hero__title">{{ service.title }}</h1>
+      <p class="page-hero__sub">{{ service.short_description }}</p>
+    </div>
+  </header>
+
+  <div class="container service-detail__body">
+
+    <div class="service-detail__main">
+      <section class="service-detail__section">
+        <h2>{{ _('О услуге') }}</h2>
+        <div class="rich-text">{{ (service.full_description) | safe }}</div>
+      </section>
+
+      {% if service.get_tasks_list() %}
+      <section class="service-detail__section">
+        <h2>{{ _('Какие задачи решает') }}</h2>
+        <ul class="task-list">
+          {% for task in service.get_tasks_list() %}
+          <li class="task-list__item">{{ task }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if service.stages %}
+      <section class="service-detail__section">
+        <h2>{{ _('Этапы работ') }}</h2>
+        <ol class="stages-list">
+          {% for stage in service.stages %}
+          <li class="stages-list__item">
+            <div class="stages-list__body">
+              <h3 class="stages-list__title">{{ stage.title }}</h3>
+              <p class="stages-list__desc">{{ stage.description }}</p>
+            </div>
+          </li>
+          {% endfor %}
+        </ol>
+      </section>
+      {% endif %}
+
+      {% if service.client_result %}
+      <section class="service-detail__section">
+        <h2>{{ _('Что получает заказчик') }}</h2>
+        <div class="client-result">{{ service.client_result | safe }}</div>
+      </section>
+      {% endif %}
+    </div>
+
+    <aside class="service-detail__sidebar">
+      {% if service.duration %}
+      <div class="service-sidebar-box">
+        <h3>{{ _('Срок выполнения') }}</h3>
+        <p class="mono service-sidebar-box__value">{{ service.duration }}</p>
+      </div>
+      {% endif %}
+      <div class="service-sidebar-box service-sidebar-box--cta">
+        <h3>{{ _('Нужна консультация?') }}</h3>
+        <p>{{ _('Расскажите о вашей задаче — подготовим предложение') }}</p>
+        <a href="{{ url('core:contacts') }}" class="btn btn--accent">{{ _('Написать нам') }}</a>
+      </div>
+    </aside>
+
+  </div>
+
+</article>
+
+{% endblock %}

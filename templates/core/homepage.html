@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- HERO -->
+<section class="hero" aria-label="{{ _('Главный экран') }}">
+  <div class="hero__overlay"></div>
+  <div class="container hero__content">
+    <h1 class="hero__title">{{ _('Строим') }} <span class="accent-word">{{ _('железные дороги') }}</span> {{ _('промышленного масштаба') }}</h1>
+    <p class="hero__sub">{{ _('Проектирование, строительство и реконструкция железнодорожных путей для заводов, портов и терминалов Казахстана') }}</p>
+    <div class="hero__actions">
+      <a href="{{ url('projects:list') }}" class="btn btn--accent btn--lg">{{ _('Наши проекты') }}</a>
+      <a href="{{ url('core:contacts') }}" class="btn btn--outline-light btn--lg">{{ _('Связаться') }}</a>
+    </div>
+    <a href="#services" class="hero__scroll-hint" aria-label="{{ _('Перейти к услугам') }}">{{ _('Смотреть услуги') }} ↓</a>
+  </div>
+</section>
+
+<!-- RAILWAY TIMELINE — scroll-animated journey from survey to operation -->
+<section class="railway" aria-label="{{ _('Этапы работ') }}" data-railway>
+  <div class="container railway__intro">
+    <span class="railway__eyebrow">{{ _('Полный цикл') }}</span>
+    <h2 class="railway__title">{{ _('Как мы прокладываем путь') }}</h2>
+    <p class="railway__lead">{{ _('От первого выезда инженеров на участок до момента, когда по новой ветке проходит первый состав — пять этапов одного маршрута.') }}</p>
+  </div>
+
+  <div class="railway__layout" data-railway-layout>
+    <div class="railway__rail" data-railway-rail>
+      <svg class="railway__svg" data-railway-svg aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+        <g data-rails-muted>
+          <line class="railway__rail-line railway__rail-line--muted" x1="35%" y1="0" x2="35%" y2="100%" />
+          <line class="railway__rail-line railway__rail-line--muted" x1="65%" y1="0" x2="65%" y2="100%" />
+        </g>
+        <g class="railway__sleepers-group railway__sleepers-group--muted" data-sleepers-muted></g>
+        <g data-rails-active>
+          <line class="railway__rail-line railway__rail-line--active" x1="35%" y1="0" x2="35%" y2="100%" pathLength="1" />
+          <line class="railway__rail-line railway__rail-line--active" x1="65%" y1="0" x2="65%" y2="100%" pathLength="1" />
+        </g>
+        <g class="railway__sleepers-group railway__sleepers-group--active" data-sleepers-active></g>
+      </svg>
+      <img class="railway__train" data-railway-train src="{{ static('img/railway-train.png') }}" alt="" aria-hidden="true">
+    </div>
+
+    <ol class="railway__stations" data-railway-stations>
+      <li class="railway-station" data-railway-station>
+        <span class="railway-station__marker" aria-hidden="true">
+          <span class="railway-station__pulse"></span>
+          <span class="railway-station__dot"></span>
+        </span>
+        <article class="railway-station__card">
+          <span class="railway-station__num mono">01</span>
+          <h3 class="railway-station__title">{{ _('Изыскания') }}</h3>
+          <p class="railway-station__desc">{{ _('Выезжаем на участок, ведём топографическую съёмку и инженерно-геологические изыскания. Оцениваем существующую инфраструктуру и формируем техническое задание.') }}</p>
+        </article>
+      </li>
+
+      <li class="railway-station" data-railway-station>
+        <span class="railway-station__marker" aria-hidden="true">
+          <span class="railway-station__pulse"></span>
+          <span class="railway-station__dot"></span>
+        </span>
+        <article class="railway-station__card">
+          <span class="railway-station__num mono">02</span>
+          <h3 class="railway-station__title">{{ _('Проектирование') }}</h3>
+          <p class="railway-station__desc">{{ _('Разрабатываем проектную документацию в соответствии с нормами РК. Проходим экспертизу и согласовываем технические решения с заказчиком.') }}</p>
+        </article>
+      </li>
+
+      <li class="railway-station" data-railway-station>
+        <span class="railway-station__marker" aria-hidden="true">
+          <span class="railway-station__pulse"></span>
+          <span class="railway-station__dot"></span>
+        </span>
+        <article class="railway-station__card">
+          <span class="railway-station__num mono">03</span>
+          <h3 class="railway-station__title">{{ _('Строительство') }}</h3>
+          <p class="railway-station__desc">{{ _('Выполняем земляные работы, укладку верхнего строения пути и устройство искусственных сооружений собственной техникой и силами бригад.') }}</p>
+        </article>
+      </li>
+
+      <li class="railway-station" data-railway-station>
+        <span class="railway-station__marker" aria-hidden="true">
+          <span class="railway-station__pulse"></span>
+          <span class="railway-station__dot"></span>
+        </span>
+        <article class="railway-station__card">
+          <span class="railway-station__num mono">04</span>
+          <h3 class="railway-station__title">{{ _('Пусконаладка') }}</h3>
+          <p class="railway-station__desc">{{ _('Проводим обкатку пути, регулировку стрелочных переводов и системы сигнализации. Готовим объект к приёмо-сдаточным испытаниям.') }}</p>
+        </article>
+      </li>
+
+      <li class="railway-station" data-railway-station>
+        <span class="railway-station__marker" aria-hidden="true">
+          <span class="railway-station__pulse"></span>
+          <span class="railway-station__dot"></span>
+        </span>
+        <article class="railway-station__card">
+          <span class="railway-station__num mono">05</span>
+          <h3 class="railway-station__title">{{ _('Эксплуатация') }}</h3>
+          <p class="railway-station__desc">{{ _('Передаём объект заказчику с полным комплектом исполнительной документации. По запросу сопровождаем эксплуатацию и обслуживание пути.') }}</p>
+        </article>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats" data-stats aria-label="{{ _('Ключевые показатели') }}">
+  <div class="container stats__grid">
+    <div class="stats__item animate-on-scroll">
+      <span class="stat-number" data-counter="{{ stats.projects_count }}">0</span>
+      <span class="stat-label">{{ _('Проектов выполнено') }}</span>
+    </div>
+    <div class="stats__item animate-on-scroll">
+      <span class="stat-number" data-counter="{{ stats.track_km }}">0</span>
+      <span class="stat-label">{{ _('Км пути уложено') }}</span>
+    </div>
+    <div class="stats__item animate-on-scroll">
+      <span class="stat-number" data-counter="{{ stats.years_on_market }}">0</span>
+      <span class="stat-label">{{ _('Лет на рынке') }}</span>
+    </div>
+    <div class="stats__item animate-on-scroll">
+      <span class="stat-number" data-counter="{{ stats.employees_count }}">0</span>
+      <span class="stat-label">{{ _('Специалистов') }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- METRO SERVICES — interactive route -->
+<section class="metro" id="services" data-metro aria-labelledby="metro-title">
+  <div class="container metro__head">
+    <span class="metro__eyebrow">{{ _('Линия услуг') }}</span>
+    <h2 class="metro__title" id="metro-title">{{ _('Маршрут наших компетенций') }}</h2>
+    <p class="metro__lead">{{ _('Выберите станцию, чтобы узнать об услуге подробнее.') }}</p>
+  </div>
+
+  <div class="container">
+    <div class="metro__board">
+      <div class="metro-route" data-metro-route>
+        <svg class="metro-route__svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <path class="metro-route__path metro-route__path--muted" d="M 80 240 L 220 240 L 320 140 L 980 140 L 1020 140 L 1120 60" />
+          <path class="metro-route__path metro-route__path--active" d="M 80 240 L 220 240 L 320 140 L 980 140 L 1020 140 L 1120 60" pathLength="1" data-metro-active-path />
+
+          <g data-metro-rings>
+            <g class="metro-route__node is-active" data-metro-ring="0">
+              <circle class="metro-route__ring" cx="80" cy="240" r="16" />
+              <circle class="metro-route__core" cx="80" cy="240" r="6" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="1">
+              <circle class="metro-route__ring" cx="320" cy="140" r="16" />
+              <circle class="metro-route__core" cx="320" cy="140" r="6" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="2">
+              <circle class="metro-route__ring" cx="650" cy="140" r="16" />
+              <circle class="metro-route__core" cx="650" cy="140" r="6" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="3">
+              <circle class="metro-route__ring" cx="980" cy="140" r="16" />
+              <circle class="metro-route__core" cx="980" cy="140" r="6" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="4">
+              <circle class="metro-route__ring" cx="1120" cy="60" r="16" />
+              <circle class="metro-route__core" cx="1120" cy="60" r="6" />
+            </g>
+          </g>
+
+          <circle class="metro-route__train" data-metro-train cx="80" cy="240" r="10" />
+        </svg>
+
+        <div class="metro-route__buttons" role="tablist" aria-label="{{ _('Услуги') }}">
+          <button type="button" class="metro-btn is-active" data-metro-btn="0" data-metro-len="0"
+                  id="metro-btn-0" role="tab" aria-selected="true" aria-controls="metro-panel-0"
+                  style="--metro-x: 6.667%; --metro-y: 75%;">
+            <span class="metro-btn__label-wrap">
+              <span class="metro-btn__index mono" aria-hidden="true">01</span>
+              <span class="metro-btn__name">{{ _('Проектирование') }}</span>
+            </span>
+          </button>
+          <button type="button" class="metro-btn" data-metro-btn="1" data-metro-len="281.42"
+                  id="metro-btn-1" role="tab" aria-selected="false" aria-controls="metro-panel-1" tabindex="-1"
+                  style="--metro-x: 26.667%; --metro-y: 43.75%;">
+            <span class="metro-btn__label-wrap">
+              <span class="metro-btn__index mono" aria-hidden="true">02</span>
+              <span class="metro-btn__name">{{ _('Строительство') }}</span>
+            </span>
+          </button>
+          <button type="button" class="metro-btn" data-metro-btn="2" data-metro-len="611.42"
+                  id="metro-btn-2" role="tab" aria-selected="false" aria-controls="metro-panel-2" tabindex="-1"
+                  style="--metro-x: 54.167%; --metro-y: 43.75%;">
+            <span class="metro-btn__label-wrap">
+              <span class="metro-btn__index mono" aria-hidden="true">03</span>
+              <span class="metro-btn__name">{{ _('Реконструкция') }}</span>
+            </span>
+          </button>
+          <button type="button" class="metro-btn" data-metro-btn="3" data-metro-len="941.42"
+                  id="metro-btn-3" role="tab" aria-selected="false" aria-controls="metro-panel-3" tabindex="-1"
+                  style="--metro-x: 81.667%; --metro-y: 43.75%;">
+            <span class="metro-btn__label-wrap">
+              <span class="metro-btn__index mono" aria-hidden="true">04</span>
+              <span class="metro-btn__name">{{ _('Технический надзор') }}</span>
+            </span>
+          </button>
+          <button type="button" class="metro-btn" data-metro-btn="4" data-metro-len="1109.48"
+                  id="metro-btn-4" role="tab" aria-selected="false" aria-controls="metro-panel-4" tabindex="-1"
+                  style="--metro-x: 93.333%; --metro-y: 18.75%;">
+            <span class="metro-btn__label-wrap">
+              <span class="metro-btn__index mono" aria-hidden="true">05</span>
+              <span class="metro-btn__name">{{ _('Консалтинг') }}</span>
+            </span>
+          </button>
+        </div>
+
+        <!-- Onboarding hint: a little figure bouncing above the next station -->
+        <div class="metro-hint" data-metro-hint aria-hidden="true">
+          <div class="metro-hint__inner">
+            <svg class="metro-hint__figure" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <circle cx="12" cy="4.6" r="3.6"/>
+              <path d="M12 9.4c-2.9 0-4.6 1.6-4.6 4.2v6h2.1l0.8 11h3.4l0.8-11h2.1v-6c0-2.6-1.7-4.2-4.6-4.2z"/>
+            </svg>
+            <svg class="metro-hint__chevron" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <path d="M1 1l5 5 5-5" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="metro-panels" data-metro-panels>
+        <article class="metro-panel is-active" id="metro-panel-0" data-metro-panel="0"
+                 role="tabpanel" aria-labelledby="metro-btn-0">
+          <span class="metro-panel__num mono">01 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Проектирование') }}</h3>
+          <p class="metro-panel__desc">{{ _('Разрабатываем проектную документацию для подъездных путей, внутрипортовых коммуникаций и сортировочных станций — с учётом норм РК и требований заказчика.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Топосъёмка') }}</li>
+            <li>{{ _('Экспертиза') }}</li>
+            <li>{{ _('Рабочая документация') }}</li>
+          </ul>
+        </article>
+        <article class="metro-panel" id="metro-panel-1" data-metro-panel="1"
+                 role="tabpanel" aria-labelledby="metro-btn-1" hidden>
+          <span class="metro-panel__num mono">02 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Строительство') }}</h3>
+          <p class="metro-panel__desc">{{ _('Выполняем земляные работы, укладку верхнего строения пути и устройство искусственных сооружений силами собственных бригад и техники.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Земляное полотно') }}</li>
+            <li>{{ _('Балласт и шпалы') }}</li>
+            <li>{{ _('Стрелочные переводы') }}</li>
+          </ul>
+        </article>
+        <article class="metro-panel" id="metro-panel-2" data-metro-panel="2"
+                 role="tabpanel" aria-labelledby="metro-btn-2" hidden>
+          <span class="metro-panel__num mono">03 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Реконструкция') }}</h3>
+          <p class="metro-panel__desc">{{ _('Модернизируем существующие пути необщего пользования — от усиления балласта до полной перекладки рельсо-шпальной решётки. Работаем с минимальной остановкой производства заказчика.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Капитальный ремонт') }}</li>
+            <li>{{ _('Усиление основания') }}</li>
+            <li>{{ _('Замена пути') }}</li>
+          </ul>
+        </article>
+        <article class="metro-panel" id="metro-panel-3" data-metro-panel="3"
+                 role="tabpanel" aria-labelledby="metro-btn-3" hidden>
+          <span class="metro-panel__num mono">04 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Технический надзор') }}</h3>
+          <p class="metro-panel__desc">{{ _('Контролируем качество работ на всех этапах: приёмку материалов, соответствие проекту, ведение исполнительной документации и подготовку объекта к сдаче.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Авторский надзор') }}</li>
+            <li>{{ _('Лабораторный контроль') }}</li>
+            <li>{{ _('Приёмо-сдаточные испытания') }}</li>
+          </ul>
+        </article>
+        <article class="metro-panel" id="metro-panel-4" data-metro-panel="4"
+                 role="tabpanel" aria-labelledby="metro-btn-4" hidden>
+          <span class="metro-panel__num mono">05 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Консалтинг') }}</h3>
+          <p class="metro-panel__desc">{{ _('Сопровождаем проект на стадии концепции и технико-экономического обоснования — помогаем выбрать оптимальную схему пути и подготовиться к экспертизе.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Концепция') }}</li>
+            <li>{{ _('ТЭО') }}</li>
+            <li>{{ _('Подготовка к экспертизе') }}</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURED PROJECTS -->
+{% if featured_projects %}
+<section class="section section--dark featured-projects" id="featured-projects">
+  <div class="container">
+    <h2 class="section__title section__title--light animate-on-scroll">{{ _('Ключевые проекты') }}</h2>
+    <div class="projects-grid">
+      {% for project in featured_projects %}
+      <article class="project-card">
+        {% if project.cover_image %}
+        <div class="project-card__img-wrap">
+          <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="project-card__img">
+        </div>
+        {% endif %}
+        <div class="project-card__body">
+          <span class="project-card__badge">{{ project.get_client_type_display() }}</span>
+          <h3 class="project-card__title">{{ project.title }}</h3>
+          <p class="project-card__meta">{{ project.location }}, {{ project.year }}</p>
+          {% if project.track_length_km %}
+          <p class="project-card__stat"><span class="mono">{{ project.track_length_km }}</span> {{ _('км пути') }}</p>
+          {% endif %}
+          <a href="{{ url('projects:detail', slug=project.slug) }}" class="project-card__link">{{ _('Читать проект') }} →</a>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="section__footer">
+      <a href="{{ url('projects:list') }}" class="btn btn--outline-light">{{ _('Все проекты') }}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- LATEST NEWS -->
+{% if latest_news %}
+<section class="section latest-news">
+  <div class="container">
+    <h2 class="section__title animate-on-scroll">{{ _('Последние новости') }}</h2>
+    <div class="news-grid">
+      {% for article in latest_news %}
+      <article class="news-card">
+        {% if article.cover_image %}
+        <div class="news-card__img-wrap">
+          <img src="{{ article.cover_image.url }}" alt="{{ article.title }}" loading="lazy" class="news-card__img">
+        </div>
+        {% endif %}
+        <h3 class="news-card__title">
+          <a href="{{ url('articles:detail', slug=article.slug) }}">{{ article.title }}</a>
+        </h3>
+      </article>
+      {% endfor %}
+    </div>
+    <div class="section__footer">
+      <a href="{{ url('articles:news_list') }}" class="btn btn--outline">{{ _('Все новости') }}</a>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+<script src="{{ static('js/railway-timeline.js') }}" defer></script>
+<script src="{{ static('js/metro-services.js') }}" defer></script>
+{% endblock %}

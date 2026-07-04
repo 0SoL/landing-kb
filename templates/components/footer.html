@@ -1,0 +1,48 @@
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <div class="site-footer__brand">
+      <a href="{{ url('core:home') }}" class="site-footer__logo">{{ _('Конкурент-Б') }}</a>
+      <p class="site-footer__tagline">{{ _('Строительство и реконструкция железнодорожных путей') }}</p>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="{{ _('Навигация в подвале') }}">
+      <div class="footer-nav-col">
+        <h3 class="footer-nav-col__title">{{ _('Компания') }}</h3>
+        <ul>
+          <li><a href="{{ url('core:about') }}">{{ _('О компании') }}</a></li>
+          <li><a href="{{ url('projects:list') }}">{{ _('Проекты') }}</a></li>
+          <li><a href="{{ url('equipment:list') }}">{{ _('Техника') }}</a></li>
+          <li><a href="{{ url('core:faq') }}">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h3 class="footer-nav-col__title">{{ _('Услуги') }}</h3>
+        <ul>
+          <li><a href="{{ url('services:list') }}">{{ _('Все услуги') }}</a></li>
+        </ul>
+      </div>
+      <div class="footer-nav-col">
+        <h3 class="footer-nav-col__title">{{ _('Информация') }}</h3>
+        <ul>
+          <li><a href="{{ url('articles:news_list') }}">{{ _('Новости') }}</a></li>
+          <li><a href="{{ url('investor_list') }}">{{ _('Инвесторам') }}</a></li>
+          <li><a href="{{ url('tech_list') }}">{{ _('Технические статьи') }}</a></li>
+          <li><a href="{{ url('book_list') }}">{{ _('Книга директора') }}</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="site-footer__contacts" itemscope itemtype="https://schema.org/Organization">
+      <h3 class="footer-nav-col__title">{{ _('Контакты') }}</h3>
+      <address>
+        <a href="{{ url('core:contacts') }}" class="site-footer__contact-link">{{ _('Написать нам') }}</a>
+      </address>
+    </div>
+  </div>
+
+  <div class="site-footer__bottom">
+    <div class="container">
+      <p>&copy; {{ now().year }} {{ _('Конкурент-Б') }} {{ _('Все права защищены.') }}</p>
+    </div>
+  </div>
+</footer>

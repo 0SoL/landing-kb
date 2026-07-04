@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% set breadcrumbs = [{'title': _('О компании'), 'url': url('core:about')}, {'title': _('Наши люди'), 'url': None}] %}
+{% include 'components/breadcrumbs.html' %}
+
+<section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-images/our-leaders.jpeg') }}')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <h1 class="page-hero__title">{{ _('Наши люди') }}</h1>
+    <p class="page-hero__sub">{{ _('Специалисты, которые строят железнодорожные пути Казахстана') }}</p>
+  </div>
+</section>
+
+<div class="section people-editorial">
+  <div class="container">
+
+    <div class="people-section">
+      <div class="people-section__image">
+        <img src="{{ static('img/hero-images/technika.jpg') }}" alt="{{ _('Команда специалистов на объекте') }}" loading="lazy" class="people-section__img">
+      </div>
+      <div class="people-section__content">
+        <h2 class="people-section__title">{{ _('Строим вместе — с первого дня') }}</h2>
+        <p class="people-section__text">{{ _('В основе нашей работы — люди, которые выходят на объект, а не только в офис. Инженеры, геодезисты, прорабы и машинисты путевой техники — каждый знает свою роль и несёт ответственность за результат.') }}</p>
+        <p class="people-section__text">{{ _('За годы работы сложилась команда, которая умеет решать нестандартные задачи: сложный рельеф, сжатые сроки, промышленные нагрузки — это наша обычная рабочая среда.') }}</p>
+      </div>
+    </div>
+
+    <div class="people-section people-section--reverse">
+      <div class="people-section__image">
+        <img src="{{ static('img/hero-images/technika.jpg') }}" alt="{{ _('Проектное подразделение компании') }}" loading="lazy" class="people-section__img">
+      </div>
+      <div class="people-section__content">
+        <h2 class="people-section__title">{{ _('Инженерный подход к каждому объекту') }}</h2>
+        <p class="people-section__text">{{ _('Наше проектное подразделение выполняет полный цикл — от геодезических изысканий до согласования в КТЖ и Госэкспертизе. Специалисты работают в постоянном контакте со строительными бригадами, что исключает разрыв между проектом и реализацией.') }}</p>
+        <p class="people-section__text">{{ _('Мы не привлекаем субподрядчиков для ключевых этапов. Это означает единую ответственность и предсказуемое качество на каждом этапе работ.') }}</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

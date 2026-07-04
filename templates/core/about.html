@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{# ── HERO ── #}
+<section class="page-hero page-hero--dark about-hero" style="background-image: url('{{ static('img/hero-images/about.jpg') }}')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <p class="about-hero__eyebrow">{{ _('О компании') }}</p>
+    <h1 class="page-hero__title">{{ _('Конкурент-Б') }}</h1>
+    <p class="about-hero__lead">
+      {{ _('Мы строим железнодорожные пути для промышленных предприятий Казахстана — с момента проектирования до сдачи готового объекта с исполнительной документацией.') }}
+    </p>
+  </div>
+</section>
+
+{# ── INTRO ── #}
+<section class="section about-intro">
+  <div class="container">
+    <div class="about-intro__text">
+      <h2>{{ _('Строим то, что работает десятилетиями') }}</h2>
+      <p>{{ _('Мы специализируемся на полном цикле работ с железнодорожными путями необщего пользования: от геодезических изысканий и проектирования до строительства, реконструкции и технического обслуживания.') }}</p>
+      <p>{{ _('Наши клиенты — промышленные предприятия, порты, логистические терминалы и индустриальные парки Казахстана. Мы понимаем специфику каждого типа объектов и строим пути, которые выдерживают промышленные нагрузки.') }}</p>
+      <p>{{ _('Работаем в соответствии с нормативной базой Республики Казахстан, нормами КМК и СП.') }}</p>
+    </div>
+  </div>
+</section>
+
+{# ── PEOPLE NAV CARDS ── #}
+<section class="section section--bg about-people-nav">
+  <div class="container">
+    <div class="pillars-grid pillars-grid--two">
+      <a href="{{ url('core:our_people') }}" class="pillar-card">
+        <div class="pillar-card__inner">
+          <h3 class="pillar-card__title">{{ _('Наша команда') }}</h3>
+          <p class="pillar-card__text">{{ _('Специалисты, которые проектируют, строят и обслуживают железнодорожные пути. Опытные инженеры, технологи и рабочие.') }}</p>
+          <span class="pillar-card__link">{{ _('Наши люди') }} →</span>
+        </div>
+      </a>
+      <a href="{{ url('core:our_leaders') }}" class="pillar-card">
+        <div class="pillar-card__inner">
+          <h3 class="pillar-card__title">{{ _('Руководство') }}</h3>
+          <p class="pillar-card__text">{{ _('Команда управленцев с многолетним опытом в отрасли. Определяют стратегию и отвечают за качество каждого объекта.') }}</p>
+          <span class="pillar-card__link">{{ _('Руководство') }} →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+{# ── TIMELINE ── #}
+<section class="section section--dark about-timeline">
+  <div class="container">
+    <h2 class="section__title section__title--light">{{ _('История компании') }}</h2>
+    <ol class="timeline">
+      <li class="timeline__item">
+        <span class="timeline__year">2010</span>
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ _('Основание компании') }}</h3>
+          <p class="timeline__text">{{ _('Компания основана в Казахстане как специализированный подрядчик по строительству железнодорожных путей необщего пользования для промышленных предприятий.') }}</p>
+        </div>
+      </li>
+      <li class="timeline__item">
+        <span class="timeline__year">2013</span>
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ _('Первые крупные объекты') }}</h3>
+          <p class="timeline__text">{{ _('Выполнены первые контракты для металлургических предприятий севера Казахстана. Сформирован собственный парк путевой техники.') }}</p>
+        </div>
+      </li>
+      <li class="timeline__item">
+        <span class="timeline__year">2016</span>
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ _('Расширение географии') }}</h3>
+          <p class="timeline__text">{{ _('Выход на портовые и логистические объекты. Начало работ в западном и южном Казахстане.') }}</p>
+        </div>
+      </li>
+      <li class="timeline__item">
+        <span class="timeline__year">2019</span>
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ _('Полный проектно-строительный цикл') }}</h3>
+          <p class="timeline__text">{{ _('Сформировано собственное проектное подразделение — от изысканий до согласования в КТЖ и Госэкспертизе.') }}</p>
+        </div>
+      </li>
+      <li class="timeline__item">
+        <span class="timeline__year">{{ _('Сегодня') }}</span>
+        <div class="timeline__body">
+          <h3 class="timeline__title">{{ stats.projects_count }}+ {{ _('проектов по всему Казахстану') }}</h3>
+          <p class="timeline__text">{{ _('Работаем с заводами, портами, терминалами и индустриальными парками.') }} {{ stats.track_km }} {{ _('км пути сдано заказчикам.') }}</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+{# ── PILLAR CARDS ── #}
+<section class="section section--bg about-pillars">
+  <div class="container">
+    <h2 class="section__title">{{ _('Что нас отличает') }}</h2>
+    <div class="pillars-grid">
+
+      <a href="{{ url('services:list') }}" class="pillar-card">
+        <div class="pillar-card__inner">
+          <h3 class="pillar-card__title">{{ _('Полный цикл работ') }}</h3>
+          <p class="pillar-card__text">{{ _('От геодезии и проектирования до строительства, сдачи и сопровождения. Один подрядчик — одна ответственность.') }}</p>
+          <span class="pillar-card__link">{{ _('Наши услуги') }} →</span>
+        </div>
+      </a>
+
+      <a href="{{ url('projects:list') }}" class="pillar-card">
+        <div class="pillar-card__inner">
+          <h3 class="pillar-card__title">{{ _('Подтверждённый опыт') }}</h3>
+          <p class="pillar-card__text">{{ stats.projects_count }} {{ _('завершённых объектов для заводов, портов и терминалов. Каждый проект — в портфолио с параметрами и результатами.') }}</p>
+          <span class="pillar-card__link">{{ _('Смотреть проекты') }} →</span>
+        </div>
+      </a>
+
+      <a href="{{ url('equipment:list') }}" class="pillar-card">
+        <div class="pillar-card__inner">
+          <h3 class="pillar-card__title">{{ _('Собственная техника') }}</h3>
+          <p class="pillar-card__text">{{ _('Не зависим от субподрядчиков. Парк специализированного путевого оборудования под контролем — сроки выдерживаются.') }}</p>
+          <span class="pillar-card__link">{{ _('Парк техники') }} →</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+{% endblock %}

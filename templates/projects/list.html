@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-bg.jpg') }}')">
+  <div class="page-hero__overlay"></div>
+  <div class="container">
+    <h1 class="page-hero__title">{{ _('Проекты') }}</h1>
+    <p class="page-hero__sub">{{ _('Реализованные объекты строительства и реконструкции железнодорожных путей') }}</p>
+  </div>
+</section>
+
+<section class="section projects-section">
+  <div class="container">
+
+    <div class="projects-filter" role="group" aria-label="{{ _('Фильтр по типу клиента') }}">
+      <button class="btn-filter {% if not active_type %}btn-filter--active{% endif %}" data-filter="">{{ _('Все проекты') }}</button>
+      {% for value, label in client_types %}
+      <button class="btn-filter {% if active_type == value %}btn-filter--active{% endif %}" data-filter="{{ value }}">{{ label }}</button>
+      {% endfor %}
+    </div>
+
+    <div class="projects-grid" id="projects-grid">
+      {% for project in projects %}
+      <article class="project-card" data-type="{{ project.client_type }}">
+        {% if project.cover_image %}
+        <div class="project-card__img-wrap">
+          <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="project-card__img">
+        </div>
+        {% endif %}
+        <div class="project-card__body">
+          <span class="project-card__badge">{{ project.get_client_type_display() }}</span>
+          <h2 class="project-card__title">{{ project.title }}</h2>
+          <p class="project-card__meta">{{ project.location }}, {{ project.year }}</p>
+          {% if project.track_length_km %}
+          <p class="project-card__stat"><span class="mono">{{ project.track_length_km }}</span> {{ _('км пути') }}</p>
+          {% endif %}
+          <a href="{{ url('projects:detail', slug=project.slug) }}" class="project-card__link">{{ _('Подробнее') }} →</a>
+        </div>
+      </article>
+      {% else %}
+      <p class="no-results">{{ _('Проекты не найдены.') }}</p>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}

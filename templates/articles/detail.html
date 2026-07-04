@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% set breadcrumbs = [{'title': article.category.name, 'url': url('articles:news_list')}, {'title': article.title, 'url': None}] %}
+{% include 'components/breadcrumbs.html' %}
+
+<article class="article-detail" itemscope itemtype="https://schema.org/Article">
+
+  <header class="article-detail__header page-hero">
+    <div class="container">
+      <div class="article-detail__meta">
+        <time datetime="{{ article.published_at.isoformat() }}" itemprop="datePublished">
+          {{ article.published_at.strftime('%d.%m.%Y') }}
+        </time>
+        {% if article.author %}
+        <span itemprop="author">{{ article.author }}</span>
+        {% endif %}
+      </div>
+      <h1 class="page-hero__title" itemprop="headline">{{ article.title }}</h1>
+      <p class="page-hero__sub" itemprop="description">{{ article.excerpt }}</p>
+    </div>
+  </header>
+
+  {% if article.cover_image %}
+  <div class="article-detail__cover">
+    <img src="{{ article.cover_image.url }}" alt="{{ article.title }}" class="article-detail__cover-img" itemprop="image">
+  </div>
+  {% endif %}
+
+  <div class="container article-detail__body">
+    <div class="rich-text article-content" itemprop="articleBody">
+      {{ (article.content) | safe }}
+    </div>
+  </div>
+
+</article>
+
+{% endblock %}

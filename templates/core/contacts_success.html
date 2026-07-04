@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="section success-section">
+  <div class="container success-container">
+    <div class="success-icon" aria-hidden="true">✓</div>
+    <h1 class="success-title">{{ _('Заявка принята') }}</h1>
+    <p class="success-text">{{ _('Спасибо! Мы получили вашу заявку и свяжемся с вами в течение рабочего дня.') }}</p>
+    <a href="{{ url('core:home') }}" class="btn btn--accent">{{ _('На главную') }}</a>
+  </div>
+</section>
+{% endblock %}

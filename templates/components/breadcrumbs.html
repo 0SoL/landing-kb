@@ -1,0 +1,26 @@
+{% if breadcrumbs %}
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+  <ol class="breadcrumbs__list" itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a href="{{ url('core:home') }}" itemprop="item" class="breadcrumbs__link">
+        <span itemprop="name">{{ _('Главная') }}</span>
+      </a>
+      <meta itemprop="position" content="1">
+    </li>
+    {% for crumb in breadcrumbs %}
+    <li class="breadcrumbs__item" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      {% if crumb.url %}
+      <a href="{{ crumb.url }}" itemprop="item" class="breadcrumbs__link">
+        <span itemprop="name">{{ crumb.title }}</span>
+      </a>
+      {% else %}
+      <span class="breadcrumbs__current" itemprop="name">{{ crumb.title }}</span>
+      {% endif %}
+      <meta itemprop="position" content="{{ loop.index + 1 }}">
+    </li>
+    {% endfor %}
+  </ol>
+  </div>
+</nav>
+{% endif %}

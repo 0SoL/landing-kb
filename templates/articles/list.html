@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="page-hero">
+  <div class="container">
+    <h1 class="page-hero__title">{{ category.name }}</h1>
+  </div>
+</section>
+
+<section class="section articles-section">
+  <div class="container">
+    <div class="articles-grid">
+      {% for article in articles %}
+      <article class="article-card">
+        {% if article.cover_image %}
+        <div class="article-card__img-wrap">
+          <img src="{{ article.cover_image.url }}" alt="{{ article.title }}" loading="lazy" class="article-card__img">
+        </div>
+        {% endif %}
+        <div class="article-card__body">
+          <time class="article-card__date" datetime="{{ article.published_at.isoformat() }}">
+            {{ article.published_at.strftime('%d.%m.%Y') }}
+          </time>
+          <h2 class="article-card__title">
+            <a href="{{ url('articles:detail', slug=article.slug) }}">{{ article.title }}</a>
+          </h2>
+          <p class="article-card__excerpt">{{ article.excerpt }}</p>
+          <a href="{{ url('articles:detail', slug=article.slug) }}" class="article-card__link">{{ _('Читать') }} →</a>
+        </div>
+      </article>
+      {% else %}
+      <p>{{ _('Материалы скоро появятся.') }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}
