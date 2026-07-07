@@ -1,22 +1,11 @@
 from .base import *
-import environ
-import dj_database_url
-import os
-
-env = environ.Env()
 
 DEBUG = False
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS')
 
-DATABASES = {
-    'default': env.db('DATABASE_URL')
-}
-
-# DATABASES = {
-#     "default": dj_database_url.config(
-#         default=os.getenv("DATABASE_URL")
-#     )
-# }
+# DATABASES is built from environment variables in base settings
+# (DATABASE_URL or the discrete DB_* variables). These MUST be set in the
+# production environment — see DATABASE_SETUP.md.
 
 SECURE_SSL_REDIRECT = True
 SESSION_COOKIE_SECURE = True

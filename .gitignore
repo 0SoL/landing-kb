@@ -51,33 +51,3 @@ local_settings.py
 # ============================================
 .DS_Store
 Thumbs.db
-
-
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
-# Virtual environment
-venv/
-.venv/
-
-# Environment
-.env
-.env.*
-
-# Django
-db.sqlite3
-media/
-staticfiles/
-
-# IDE
-.vscode/
-.idea/
-
-# macOS
-.DS_Store
-
-apps/core/__pycache__/
-config/settings/__pycache__/
-venv/

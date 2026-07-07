@@ -4,7 +4,13 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 env = environ.Env()
-environ.Env.read_env(BASE_DIR / '.env')
+environ.Env.read_env(BASE_DIR / '.env', overwrite=True)
+
+print(BASE_DIR / '.env')  # добавьте временно и проверьте вывод
+
+print("DB_HOST:", env("DB_HOST", default="NOT FOUND"))
+
+print("DB_NAME:", env("DB_NAME", default="NOT FOUND"))
 
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-dev-key-change-in-production')
 DEBUG = False
@@ -83,7 +89,65 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-DATABASES = {}
+# ── Database ────────────────────────────────────────────────────────────────
+# The connection is assembled from environment variables so that no credentials
+# are ever hard-coded. Resolution order:
+#   1. DATABASE_URL      — a single connection string (overrides everything else).
+#   2. Discrete DB_* vars — DB_ENGINE / DB_NAME / DB_USER / DB_PASSWORD / ...
+#   3. SQLite fallback    — zero-config local development only.
+# See DATABASE_SETUP.md for the full list of variables.
+_DB_ENGINE_ALIASES = {
+    'postgres': 'django.db.backends.postgresql',
+    'postgresql': 'django.db.backends.postgresql',
+    'mysql': 'django.db.backends.mysql',
+    'mariadb': 'django.db.backends.mysql',
+    'sqlite': 'django.db.backends.sqlite3',
+    'sqlite3': 'django.db.backends.sqlite3',
+}
+
+
+def _build_database_config():
+    # 1. Single connection string wins if provided.
+    if env('DATABASE_URL', default=''):
+        print("Using DATABASE_URL")
+        return env.db('DATABASE_URL')
+
+    # 2. Discrete variables — activated as soon as a database name is given.
+    if env('DB_NAME', default=''):
+        print(f"Using discrete vars: DB_NAME={env('DB_NAME')}, DB_HOST={env('DB_HOST', default='localhost')}")
+        engine = env('DB_ENGINE', default='postgresql')
+        engine = _DB_ENGINE_ALIASES.get(engine.lower(), engine)
+
+        options = {}
+        if 'postgresql' in engine:
+            sslmode = env('DB_SSL_MODE', default='require')
+            if sslmode:
+                options['sslmode'] = sslmode
+            ssl_root_cert = env('DB_SSL_ROOT_CERT', default='')
+            if ssl_root_cert:
+                options['sslrootcert'] = ssl_root_cert
+
+        config = {
+            'ENGINE': engine,
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USER', default=''),
+            'PASSWORD': env('DB_PASSWORD', default=''),
+            'HOST': env('DB_HOST', default='localhost'),
+            'PORT': env('DB_PORT', default='5432'),
+            'CONN_MAX_AGE': env.int('DB_CONN_MAX_AGE', default=60),
+        }
+        if options:
+            config['OPTIONS'] = options
+        return config
+
+    # 3. Local development fallback.
+    return {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+
+
+DATABASES = {'default': _build_database_config()}
 
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
