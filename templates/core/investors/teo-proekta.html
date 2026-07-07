@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% set breadcrumbs = [{'title': _('Инвесторам'), 'url': url('investor_list')}, {'title': _('ТЭО проекта строительства подъездного жд-пути'), 'url': None}] %}
+{% set breadcrumbs = [{'title': _('Инвесторам'), 'url': url('core:investors')}, {'title': _('ТЭО проекта строительства подъездного жд-пути'), 'url': None}] %}
 {% include 'components/breadcrumbs.html' %}
 
 <section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-bg.jpg') }}')">
@@ -13,9 +13,9 @@
 
 <section class="section investor-page">
   <div class="container">
-    <div class="rich-text investor-page__content">
+    <article class="rich-text investor-page__content">
       {# ── Вставьте контент страницы сюда ── #}
-    </div>
+    </article>
   </div>
 </section>
 {% endblock %}

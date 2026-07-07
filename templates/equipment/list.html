@@ -11,44 +11,78 @@
 
 <section class="section equipment-section">
   <div class="container">
-    {% for category in categories %}
-    <div class="equipment-category">
-      <h2 class="equipment-category__title">{{ category.name }}</h2>
-      <div class="equipment-grid">
-        {% for item in category.items.filter(is_published=True).order_by('order') %}
-        <article class="equipment-card">
-          {% if item.image %}
-          <div class="equipment-card__img-wrap">
-            <img src="{{ item.image.url }}" alt="{{ item.name }}" loading="lazy" class="equipment-card__img">
-          </div>
+    <div class="equipment-grid">
+      {% for item in equipment %}
+      <article class="equipment-card">
+        {% if item.image %}
+        <div class="equipment-card__img-wrap">
+          <img src="{{ item.image.url }}" alt="{{ item.name }}" loading="lazy" class="equipment-card__img">
+        </div>
+        {% endif %}
+        <div class="equipment-card__body">
+          <h3 class="equipment-card__name">{{ item.name }}</h3>
+          <p class="equipment-card__purpose">{{ item.purpose }}</p>
+          {% if item.application %}
+          <p class="equipment-card__application"><strong>{{ _('Применение:') }}</strong> {{ item.application }}</p>
           {% endif %}
-          <div class="equipment-card__body">
-            <h3 class="equipment-card__name">{{ item.name }}</h3>
-            <p class="equipment-card__purpose">{{ item.purpose }}</p>
-            {% if item.application %}
-            <p class="equipment-card__application"><strong>{{ _('Применение:') }}</strong> {{ item.application }}</p>
-            {% endif %}
-            {% if item.specifications %}
-            <details class="equipment-specs">
-              <summary class="equipment-specs__toggle">{{ _('Технические характеристики') }}</summary>
-              <dl class="equipment-specs__list">
-                {% for key, value in item.specifications.items() %}
-                <div class="equipment-specs__item">
-                  <dt>{{ key }}</dt>
-                  <dd class="mono">{{ value }}</dd>
-                </div>
-                {% endfor %}
-              </dl>
-            </details>
-            {% endif %}
-          </div>
-        </article>
-        {% endfor %}
+          {% if item.specifications %}
+          <details class="equipment-specs">
+            <summary class="equipment-specs__toggle">{{ _('Технические характеристики') }}</summary>
+            <dl class="equipment-specs__list">
+              {% for key, value in item.specifications.items() %}
+              <div class="equipment-specs__item">
+                <dt>{{ key }}</dt>
+                <dd class="mono">{{ value }}</dd>
+              </div>
+              {% endfor %}
+            </dl>
+          </details>
+          {% endif %}
+        </div>
+      </article>
+      {% else %}
+      <p>{{ _('Техника скоро будет добавлена.') }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{# ── ADVANTAGES — distilled from tech.txt «Ключевые преимущества» ── #}
+<section class="section section--bg equipment-advantages">
+  <div class="container">
+    <h2 class="section__title">{{ _('Почему наш парк техники — это преимущество') }}</h2>
+    <p class="equipment-advantages__intro">{{ _('Собственный парк тяжёлой и специализированной техники позволяет выполнять полный цикл работ — от земляного полотна до верхнего строения пути и искусственных сооружений — без привлечения субподрядных организаций.') }}</p>
+
+    <div class="values-grid">
+      <div class="value-item">
+        <h3>{{ _('Тяжёлая землеройная техника') }}</h3>
+        <p>{{ _('Гидравлические экскаваторы массой до 53 тонн и карьерные самосвалы грузоподъёмностью до 39 тонн обеспечивают высокую производительность на земляных работах.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Грузоподъёмная техника до 150 тонн') }}</h3>
+        <p>{{ _('Гусеничные и автомобильные краны для монтажа мостовых, железобетонных и металлических конструкций.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Специализированная путевая техника') }}</h3>
+        <p>{{ _('Тяговый модуль (ТМВ), путевая машина Combi SC 8016-03, подъёмно-рихтовочная машина и хоппер-дозатор ВПМ-770 для полного цикла работ по верхнему строению пути.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Полный цикл без субподрядчиков') }}</h3>
+        <p>{{ _('Земляные работы, верхнее строение пути, искусственные сооружения и прирельсовая инфраструктура — электроснабжение, связь и СЦБ — собственными силами.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Работа в сложных условиях') }}</h3>
+        <p>{{ _('Выполнение работ на слабонесущих и переувлажнённых грунтах, в стеснённых условиях и вблизи действующей железнодорожной инфраструктуры.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Высокая мобильность') }}</h3>
+        <p>{{ _('Быстрая мобилизация техники и одновременное производство работ на нескольких участках.') }}</p>
+      </div>
+      <div class="value-item">
+        <h3>{{ _('Круглогодичная эксплуатация') }}</h3>
+        <p>{{ _('Готовность к работе в любых климатических условиях Республики Казахстан.') }}</p>
       </div>
     </div>
-    {% else %}
-    <p>{{ _('Техника скоро будет добавлена.') }}</p>
-    {% endfor %}
   </div>
 </section>
 

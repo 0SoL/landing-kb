@@ -3021,3 +3021,11 @@ msgstr ""
 #: venv/lib/python3.12/site-packages/unfold/widgets.py:983
 msgid "Select currency"
 msgstr ""
+
+#: apps/projects/models.py
+msgid "Логистический центр"
+msgstr "Logistics Center"
+
+#: apps/projects/models.py
+msgid "Другое"
+msgstr "Other"

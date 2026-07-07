@@ -1,15 +1,16 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from parler.models import TranslatableModel, TranslatedFields
 
 
 class Project(TranslatableModel):
     CLIENT_TYPES = [
-        ('port', 'Порт'),
-        ('factory', 'Завод'),
-        ('terminal', 'Терминал'),
-        ('logistics', 'Логистический центр'),
-        ('other', 'Другое'),
+        ('port', _('Порт')),
+        ('factory', _('Завод')),
+        ('terminal', _('Терминал')),
+        ('logistics', _('Логистический центр')),
+        ('other', _('Другое')),
     ]
 
     translations = TranslatedFields(

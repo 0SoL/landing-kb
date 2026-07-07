@@ -328,4 +328,8 @@ p {
 .rich-text h2 { margin-top: var(--space-3xl); margin-bottom: var(--space-lg); }
 .rich-text h3 { margin-top: var(--space-xl); margin-bottom: var(--space-md); }
 .rich-text ul, .rich-text ol { margin-bottom: var(--space-lg); padding-left: var(--space-xl); list-style: disc; }
+.rich-text ol { list-style: decimal; }
 .rich-text li { margin-bottom: var(--space-xs); }
+.rich-text dl { margin-bottom: var(--space-lg); }
+.rich-text dt { font-weight: 600; margin-top: var(--space-lg); }
+.rich-text dd { margin-left: 0; margin-bottom: var(--space-sm); }

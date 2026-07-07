@@ -13,13 +13,17 @@
         <li><a href="{{ url('core:about') }}" class="site-nav__link">{{ _('О компании') }}</a></li>
         <li><a href="{{ url('articles:news_list') }}" class="site-nav__link">{{ _('Новости') }}</a></li>
         <li class="site-nav__item--dropdown" data-dropdown>
-          <button type="button" class="site-nav__link site-nav__toggle" data-dropdown-toggle
-                  aria-expanded="false" aria-controls="nav-investors">
-            {{ _('Инвесторам') }}<span class="site-nav__caret" aria-hidden="true">▾</span>
-          </button>
+          <div class="site-nav__dropdown-head">
+            <a href="{{ url('core:investors') }}" class="site-nav__link">{{ _('Инвесторам') }}</a>
+            <button type="button" class="site-nav__toggle" data-dropdown-toggle
+                    aria-expanded="false" aria-controls="nav-investors"
+                    aria-label="{{ _('Открыть меню «Инвесторам»') }}">
+              <span class="site-nav__caret" aria-hidden="true">▾</span>
+            </button>
+          </div>
           <ul class="site-nav__dropdown" id="nav-investors">
             <li><a href="{{ url('core:investor_page', slug='vybor-ploshchadki') }}" class="site-nav__sublink">{{ _('Выбор площадки под строительство объекта') }}</a></li>
-            <li><a href="https://www.k-b.kz/page/rekomendacii-po-stroitelstvu" class="site-nav__sublink" target="_blank" rel="noopener">{{ _('Рекомендации по строительству') }}</a></li>
+            <li><a href="{{ url('core:construction_recommendations') }}" class="site-nav__sublink">{{ _('Рекомендации по строительству') }}</a></li>
             <li><a href="{{ url('core:investor_page', slug='spravochnik-terminov') }}" class="site-nav__sublink">{{ _('Справочник терминов') }}</a></li>
             <li><a href="{{ url('core:investor_page', slug='tekhnologiya-stroitelstva') }}" class="site-nav__sublink">{{ _('Технология строительства') }}</a></li>
             <li><a href="{{ url('core:investor_page', slug='teo-proekta') }}" class="site-nav__sublink">{{ _('ТЭО проекта строительства подъездного жд-пути') }}</a></li>

@@ -123,6 +123,19 @@ def project_schema(project, request=None):
     return schema
 
 
+def webpage_schema(name, description, request=None):
+    schema = {
+        '@context': 'https://schema.org',
+        '@type': 'WebPage',
+        'name': name,
+        'description': description,
+        'publisher': ORGANIZATION_BASE,
+    }
+    if request is not None:
+        schema['url'] = request.build_absolute_uri()
+    return schema
+
+
 def to_json(schema_or_list):
     """Accepts a single schema dict or a list of schema dicts."""
     return json.dumps(schema_or_list, ensure_ascii=False, indent=2)

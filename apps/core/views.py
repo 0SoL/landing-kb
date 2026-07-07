@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import CompanyStats, FAQItem
 from .forms import ContactForm
 from apps.projects.models import Project
 from apps.articles.models import Article
-from apps.seo.jsonld import organization_schema, faq_schema, to_json
+from apps.seo.jsonld import organization_schema, faq_schema, webpage_schema, breadcrumb_schema, to_json
 
 
 def homepage(request):
@@ -89,32 +90,76 @@ def our_leaders(request):
     return render(request, 'core/our_leaders.html', context)
 
 
+def investors(request):
+    meta_title = 'Инвесторам — Конкурент-Б'
+    meta_description = 'Информация для инвесторов о строительстве подъездных железнодорожных путей в Казахстане: выгоды, стоимость, окупаемость и порядок реализации проекта.'
+    crumbs = [
+        ('Главная', reverse('core:home')),
+        ('Инвесторам', None),
+    ]
+    schemas = [
+        webpage_schema(meta_title, meta_description, request),
+        breadcrumb_schema(request, crumbs),
+    ]
+    context = {
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
+    }
+    return render(request, 'core/investors.html', context)
+
+
+def construction_recommendations(request):
+    meta_title = 'Рекомендации по строительству — Конкурент-Б'
+    meta_description = 'Как сократить сроки и уменьшить расходы при строительстве подъездного железнодорожного пути: практические рекомендации по срокам, договорам и материалам.'
+    crumbs = [
+        ('Главная', reverse('core:home')),
+        ('Инвесторам', reverse('core:investors')),
+        ('Рекомендации по строительству', None),
+    ]
+    schemas = [
+        webpage_schema(meta_title, meta_description, request),
+        breadcrumb_schema(request, crumbs),
+    ]
+    context = {
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
+    }
+    return render(request, 'core/construction_recommendations.html', context)
+
+
 # ── Investor info pages — static skeletons, content is edited in templates ──
 INVESTOR_PAGES = {
     'vybor-ploshchadki': {
         'template': 'core/investors/vybor-ploshchadki.html',
+        'title': 'Выбор площадки под строительство объекта',
         'meta_title': 'Выбор площадки под строительство объекта — Конкурент-Б',
-        'meta_description': 'Рекомендации по выбору площадки под строительство объекта с подъездным железнодорожным путём.',
+        'meta_description': 'Что проверить при выборе площадки под подъездной железнодорожный путь: возможность врезки, расстояние до станции, землеотвод и факторы удорожания.',
     },
     'spravochnik-terminov': {
         'template': 'core/investors/spravochnik-terminov.html',
+        'title': 'Справочник терминов',
         'meta_title': 'Справочник терминов — Конкурент-Б',
-        'meta_description': 'Справочник терминов железнодорожного строительства и путевого хозяйства.',
+        'meta_description': 'Справочник терминов железнодорожного строительства и путевого хозяйства: балласт, верхнее строение пути, стрелочный перевод и другие понятия.',
     },
     'tekhnologiya-stroitelstva': {
         'template': 'core/investors/tekhnologiya-stroitelstva.html',
+        'title': 'Технология строительства',
         'meta_title': 'Технология строительства — Конкурент-Б',
-        'meta_description': 'Технология строительства железнодорожных путей: этапы, методы и требования.',
+        'meta_description': 'Технология строительства железнодорожного пути: земляные работы, устройство верхнего строения пути и способы укладки рельсошпальной решётки.',
     },
     'teo-proekta': {
         'template': 'core/investors/teo-proekta.html',
+        'title': 'ТЭО проекта строительства подъездного жд-пути',
         'meta_title': 'ТЭО проекта строительства подъездного жд-пути — Конкурент-Б',
         'meta_description': 'Технико-экономическое обоснование проекта строительства подъездного железнодорожного пути.',
     },
     'etapy-stroitelstva': {
         'template': 'core/investors/etapy-stroitelstva.html',
+        'title': 'Этапы строительства жд-пути',
         'meta_title': 'Этапы строительства жд-пути — Конкурент-Б',
-        'meta_description': 'Основные этапы строительства железнодорожного пути: от изысканий до сдачи в эксплуатацию.',
+        'meta_description': 'Этапы строительства подъездного железнодорожного пути: подготовительные и проектные работы, строительство и ввод в эксплуатацию, сроки и стоимость.',
     },
 }
 
@@ -123,9 +168,19 @@ def investor_page(request, slug):
     page = INVESTOR_PAGES.get(slug)
     if page is None:
         raise Http404
+    crumbs = [
+        ('Главная', reverse('core:home')),
+        ('Инвесторам', reverse('core:investors')),
+        (page['title'], None),
+    ]
+    schemas = [
+        webpage_schema(page['meta_title'], page['meta_description'], request),
+        breadcrumb_schema(request, crumbs),
+    ]
     context = {
         'meta_title': page['meta_title'],
         'meta_description': page['meta_description'],
+        'schema_json': to_json(schemas),
     }
     return render(request, page['template'], context)
 

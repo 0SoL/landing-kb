@@ -11,5 +11,7 @@ urlpatterns = [
     path('kontakty/spasibo/', views.contacts_success, name='contacts_success'),
     path('our-people/', views.our_people, name='our_people'),
     path('our-leaders/', views.our_leaders, name='our_leaders'),
+    path('investory/', views.investors, name='investors'),
+    path('rekomendatsii-po-stroitelstvu/', views.construction_recommendations, name='construction_recommendations'),
     path('investoram/<slug:slug>/', views.investor_page, name='investor_page'),
 ]
