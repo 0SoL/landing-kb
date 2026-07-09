@@ -185,52 +185,10 @@ PARLER_LANGUAGES = {
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# ── Storage backends (Django 4.2+ STORAGES dict) ─────────────────────────────
-# Static files are always served by WhiteNoise. Media (user uploads) is served
-# from S3-compatible object storage (AWS S3 / Cloudflare R2 / Backblaze B2)
-# because Render.com's filesystem is ephemeral — uploads would vanish on every
-# redeploy/restart. When no bucket is configured (e.g. local dev), media falls
-# back to the local filesystem so development works with zero cloud setup.
-#
-# All credentials come from environment variables — never hard-code them.
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID', default='')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY', default='')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME', default='')
-# Endpoint URL is required for R2 / Backblaze; leave unset for pure AWS S3.
-AWS_S3_ENDPOINT_URL = env('AWS_S3_ENDPOINT_URL', default='') or None
-AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='') or None
-# Optional CDN / custom domain that serves the bucket (e.g. cdn.example.com).
-AWS_S3_CUSTOM_DOMAIN = env('AWS_S3_CUSTOM_DOMAIN', default='') or None
-AWS_DEFAULT_ACL = None
-AWS_S3_FILE_OVERWRITE = False
-AWS_QUERYSTRING_AUTH = False  # objects are public — serve plain, unsigned URLs
-
-_STATICFILES_BACKEND = {
-    'BACKEND': 'whitenoise.storage.CompressedManifestStaticFilesStorage',
-}
-
-if AWS_STORAGE_BUCKET_NAME:
-    STORAGES = {
-        'default': {'BACKEND': 'storages.backends.s3.S3Storage'},
-        'staticfiles': _STATICFILES_BACKEND,
-    }
-    # Derive MEDIA_URL from the way the bucket is exposed.
-    if AWS_S3_CUSTOM_DOMAIN:
-        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-    elif AWS_S3_ENDPOINT_URL:
-        MEDIA_URL = f"{AWS_S3_ENDPOINT_URL.rstrip('/')}/{AWS_STORAGE_BUCKET_NAME}/"
-    else:
-        _region = f'.{AWS_S3_REGION_NAME}' if AWS_S3_REGION_NAME else ''
-        MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3{_region}.amazonaws.com/'
-else:
-    # Local development fallback — filesystem media.
-    STORAGES = {
-        'default': {'BACKEND': 'django.core.files.storage.FileSystemStorage'},
-        'staticfiles': _STATICFILES_BACKEND,
-    }
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
