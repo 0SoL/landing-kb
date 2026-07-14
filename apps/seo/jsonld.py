@@ -1,30 +1,35 @@
 import json
 
-ORGANIZATION_BASE = {
-    '@type': 'Organization',
-    'name': 'РЖД-Инфра Казахстан',
-    'description': 'Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и логистических терминалов Казахстана.',
-    'areaServed': 'Kazakhstan',
-    'serviceType': [
-        'Строительство железнодорожных путей',
-        'Реконструкция железнодорожных путей',
-        'Проектирование железнодорожных путей',
-        'Укладка рельсов',
-    ],
-    'address': {
-        '@type': 'PostalAddress',
-        'addressCountry': 'KZ',
-    },
-    'contactPoint': {
-        '@type': 'ContactPoint',
-        'contactType': 'customer service',
-        'availableLanguage': ['Russian', 'English'],
-    },
-}
+from django.utils.translation import gettext as _
+
+
+def organization_base():
+    """Built per-request so the active language is applied to translatable strings."""
+    return {
+        '@type': 'Organization',
+        'name': 'РЖД-Инфра Казахстан',
+        'description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и логистических терминалов Казахстана.'),
+        'areaServed': 'Kazakhstan',
+        'serviceType': [
+            _('Строительство железнодорожных путей'),
+            _('Реконструкция железнодорожных путей'),
+            _('Проектирование железнодорожных путей'),
+            _('Укладка рельсов'),
+        ],
+        'address': {
+            '@type': 'PostalAddress',
+            'addressCountry': 'KZ',
+        },
+        'contactPoint': {
+            '@type': 'ContactPoint',
+            'contactType': 'customer service',
+            'availableLanguage': ['Russian', 'English'],
+        },
+    }
 
 
 def organization_schema(request=None):
-    schema = {'@context': 'https://schema.org', **ORGANIZATION_BASE}
+    schema = {'@context': 'https://schema.org', **organization_base()}
     if request is not None:
         site_url = request.build_absolute_uri('/')
         schema['url'] = site_url
@@ -79,10 +84,10 @@ def article_schema(article, request=None):
         'description': article.excerpt,
         'author': {
             '@type': 'Person',
-            'name': article.author or 'Редакция',
+            'name': article.author or _('Редакция'),
         },
         'datePublished': str(article.published_at),
-        'publisher': ORGANIZATION_BASE,
+        'publisher': organization_base(),
     }
     if request is not None and article.cover_image:
         schema['image'] = request.build_absolute_uri(article.cover_image.url)
@@ -97,7 +102,7 @@ def service_schema(service, request=None):
         '@type': 'Service',
         'name': service.title,
         'description': service.short_description,
-        'provider': ORGANIZATION_BASE,
+        'provider': organization_base(),
         'areaServed': 'Kazakhstan',
         'serviceType': service.title,
     }
@@ -116,20 +121,20 @@ def project_schema(project, request=None):
             '@type': 'Place',
             'name': project.location,
         },
-        'provider': ORGANIZATION_BASE,
+        'provider': organization_base(),
     }
     if request is not None:
         schema['url'] = request.build_absolute_uri(project.get_absolute_url())
     return schema
 
 
-def webpage_schema(name, description, request=None):
+def webpage_schema(name, description, request=None, page_type='WebPage'):
     schema = {
         '@context': 'https://schema.org',
-        '@type': 'WebPage',
+        '@type': page_type,
         'name': name,
         'description': description,
-        'publisher': ORGANIZATION_BASE,
+        'publisher': organization_base(),
     }
     if request is not None:
         schema['url'] = request.build_absolute_uri()

@@ -895,7 +895,7 @@
 
 .form__error {
   font-size: 0.8rem;
-  color: #c0392b;
+  color: var(--color-error);
 }
 
 .form__note {
@@ -1196,21 +1196,6 @@
    EQUIPMENT
    ============================================ */
 
-.equipment-category {
-  margin-bottom: var(--space-4xl);
-}
-
-.equipment-category:last-child {
-  margin-bottom: 0;
-}
-
-.equipment-category__title {
-  font-size: clamp(1.75rem, 3vw, 2.5rem);
-  margin-bottom: var(--space-3xl);
-  padding-bottom: var(--space-lg);
-  border-bottom: 2px solid var(--color-accent);
-}
-
 .equipment-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1413,14 +1398,6 @@
   margin-bottom: var(--space-lg);
 }
 
-.about-hero__lead {
-  font-size: clamp(1.1rem, 1.8vw, 1.35rem);
-  color: rgba(255, 255, 255, 0.8);
-  max-width: 680px;
-  margin-top: var(--space-xl);
-  line-height: 1.65;
-}
-
 .about-intro__grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -1571,44 +1548,6 @@
     top: var(--space-xs);
     margin-top: 0;
   }
-}
-
-/* ── HIGHLIGHT STAT — inspired by Martinus standalone "1,900 staff" callout ── */
-
-.about-highlight {
-  background-color: var(--color-accent);
-  padding-block: var(--space-4xl);
-}
-
-.about-highlight__inner {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-3xl);
-  flex-wrap: wrap;
-}
-
-.about-highlight__number {
-  font-family: var(--font-mono);
-  font-size: clamp(5rem, 14vw, 11rem);
-  font-weight: 700;
-  color: var(--color-primary);
-  line-height: 1;
-  letter-spacing: -0.04em;
-}
-
-.about-highlight__unit {
-  font-size: 0.45em;
-  letter-spacing: 0;
-  opacity: 0.6;
-  margin-left: 0.15em;
-}
-
-.about-highlight__caption {
-  font-size: clamp(1rem, 2vw, 1.5rem);
-  color: var(--color-primary);
-  opacity: 0.75;
-  max-width: 320px;
-  line-height: 1.4;
 }
 
 /* ── PILLAR CARDS — inspired by Martinus "Way / People / Leaders" nav cards ── */
@@ -2175,7 +2114,8 @@
   stroke-width: 2.5;
   stroke-dasharray: 1;
   stroke-dashoffset: calc(1 - var(--railway-progress));
-  filter: drop-shadow(0 0 0.4px rgba(200, 146, 42, 0.6));
+  /* no filter here: an SVG drop-shadow re-rasterises the full-height rail
+     on every scroll frame while --railway-progress is scrubbed */
 }
 
 .railway__sleepers-group line {

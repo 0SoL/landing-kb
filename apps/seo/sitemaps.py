@@ -5,21 +5,37 @@ from apps.services.models import Service
 from apps.articles.models import Article
 
 
+# url name → sitemap priority (homepage 1.0, key sections 0.9, the rest 0.7)
+STATIC_VIEW_PRIORITIES = {
+    'core:home': 1.0,
+    'services:list': 0.9,
+    'projects:list': 0.9,
+    'equipment:list': 0.9,
+    'core:about': 0.7,
+    'core:faq': 0.7,
+    'core:contacts': 0.7,
+    'core:investors': 0.7,
+    'core:construction_recommendations': 0.7,
+    'core:our_people': 0.7,
+    'core:our_leaders': 0.7,
+    'articles:news_list': 0.7,
+    'investor_list': 0.7,
+    'tech_list': 0.7,
+    'book_list': 0.7,
+}
+
+
 class StaticViewSitemap(Sitemap):
-    priority = 1.0
     changefreq = 'monthly'
 
     def items(self):
-        return [
-            'core:home',
-            'core:about',
-            'core:faq',
-            'core:contacts',
-            'equipment:list',
-        ]
+        return list(STATIC_VIEW_PRIORITIES.keys())
 
     def location(self, item):
         return reverse(item)
+
+    def priority(self, item):
+        return STATIC_VIEW_PRIORITIES[item]
 
 
 class InvestorPagesSitemap(Sitemap):

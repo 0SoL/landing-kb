@@ -15,8 +15,10 @@ if (header) {
   }
 
   let lastScroll = 0;
+  let ticking = false;
 
-  window.addEventListener('scroll', () => {
+  const updateHeader = () => {
+    ticking = false;
     const current = window.scrollY;
 
     if (isHomePage) {
@@ -35,6 +37,14 @@ if (header) {
     }
 
     lastScroll = current;
+  };
+
+  // Coalesce scroll events into one rAF-aligned update per frame
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateHeader);
+    }
   }, { passive: true });
 }
 

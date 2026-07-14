@@ -1,6 +1,6 @@
-<title>{{ meta_title }} | РЖД-Инфра Казахстан</title>
+<title>{{ meta_title }} | {{ _('РЖД-Инфра Казахстан') }}</title>
 <meta name="description" content="{{ meta_description }}">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="{{ meta_robots | default('index, follow') }}">
 <link rel="canonical" href="{{ request.build_absolute_uri() }}">
 <meta name="ai-content-purpose" content="B2B industrial services, railway infrastructure Kazakhstan">
 
@@ -13,12 +13,10 @@
 <meta property="og:title" content="{{ meta_title }}">
 <meta property="og:description" content="{{ meta_description }}">
 <meta property="og:url" content="{{ request.build_absolute_uri() }}">
-<meta property="og:type" content="website">
+<meta property="og:type" content="{{ og_type | default('website') }}">
 <meta property="og:locale" content="{{ 'en_US' if get_language() == 'en' else 'ru_KZ' }}">
-<meta property="og:site_name" content="РЖД-Инфра Казахстан">
-{% if og_image %}
-<meta property="og:image" content="{{ og_image }}">
-{% endif %}
+<meta property="og:site_name" content="{{ _('РЖД-Инфра Казахстан') }}">
+<meta property="og:image" content="{{ og_image or request.build_absolute_uri(static('img/hero-bg.jpg')) }}">
 
 <!-- Structured Data -->
 {% if schema_json %}

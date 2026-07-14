@@ -3,6 +3,8 @@ from django.http import Http404
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
+from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy
 from .models import CompanyStats, FAQItem
 from .forms import ContactForm
 from apps.projects.models import Project
@@ -18,8 +20,8 @@ def homepage(request):
         'stats': stats,
         'featured_projects': featured_projects,
         'latest_news': latest_news,
-        'meta_title': 'Строительство и реконструкция железных дорог в Казахстане',
-        'meta_description': 'Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта.',
+        'meta_title': _('Строительство и реконструкция железных дорог в Казахстане'),
+        'meta_description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта.'),
         'schema_json': to_json(organization_schema(request)),
         'page_id': 'home',
     }
@@ -30,8 +32,8 @@ def about(request):
     stats = CompanyStats.load()
     context = {
         'stats': stats,
-        'meta_title': 'О компании — РЖД-Инфра Казахстан',
-        'meta_description': 'Казахстанская компания по строительству и реконструкции железнодорожных путей. Работаем с промышленными предприятиями, портами и логистическими терминалами.',
+        'meta_title': _('О компании'),
+        'meta_description': _('Казахстанская компания по строительству и реконструкции железнодорожных путей. Работаем с промышленными предприятиями, портами и логистическими терминалами.'),
         'schema_json': to_json(organization_schema(request)),
     }
     return render(request, 'core/about.html', context)
@@ -41,8 +43,8 @@ def faq(request):
     items = FAQItem.objects.filter(is_published=True)
     context = {
         'items': items,
-        'meta_title': 'Часто задаваемые вопросы — РЖД-Инфра Казахстан',
-        'meta_description': 'Ответы на часто задаваемые вопросы о строительстве железнодорожных путей, стоимости проектов и сроках работ.',
+        'meta_title': _('Часто задаваемые вопросы'),
+        'meta_description': _('Ответы на часто задаваемые вопросы о строительстве железнодорожных путей, стоимости проектов и сроках работ.'),
         'schema_json': to_json(faq_schema(items)),
     }
     return render(request, 'core/faq.html', context)
@@ -66,36 +68,57 @@ def contacts(request):
             return redirect('core:contacts_success')
     else:
         form = ContactForm()
+    meta_title = _('Контакты')
+    meta_description = _('Свяжитесь с нами для получения консультации по строительству железнодорожных путей. Ответим в течение рабочего дня.')
+    schemas = [
+        webpage_schema(meta_title, meta_description, request, page_type='ContactPage'),
+        breadcrumb_schema(request, [(_('Главная'), reverse('core:home')), (_('Контакты'), None)]),
+    ]
     context = {
         'form': form,
-        'meta_title': 'Контакты — РЖД-Инфра Казахстан',
-        'meta_description': 'Свяжитесь с нами для получения консультации по строительству железнодорожных путей. Ответим в течение рабочего дня.',
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
     }
     return render(request, 'core/contacts.html', context)
 
 
 def our_people(request):
+    meta_title = _('Наши люди')
+    meta_description = _('Команда специалистов по строительству и реконструкции железнодорожных путей в Казахстане.')
+    schemas = [
+        webpage_schema(meta_title, meta_description, request, page_type='AboutPage'),
+        breadcrumb_schema(request, [(_('Главная'), reverse('core:home')), (_('Наши люди'), None)]),
+    ]
     context = {
-        'meta_title': 'Наши люди — Конкурент-Б',
-        'meta_description': 'Команда специалистов по строительству и реконструкции железнодорожных путей в Казахстане.',
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
     }
     return render(request, 'core/our_people.html', context)
 
 
 def our_leaders(request):
+    meta_title = _('Руководство')
+    meta_description = _('Руководящий состав компании Конкурент-Б — опытные управленцы в железнодорожной отрасли Казахстана.')
+    schemas = [
+        webpage_schema(meta_title, meta_description, request, page_type='AboutPage'),
+        breadcrumb_schema(request, [(_('Главная'), reverse('core:home')), (_('Руководство'), None)]),
+    ]
     context = {
-        'meta_title': 'Руководство — Конкурент-Б',
-        'meta_description': 'Руководящий состав компании Конкурент-Б — опытные управленцы в железнодорожной отрасли Казахстана.',
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
     }
     return render(request, 'core/our_leaders.html', context)
 
 
 def investors(request):
-    meta_title = 'Инвесторам — Конкурент-Б'
-    meta_description = 'Информация для инвесторов о строительстве подъездных железнодорожных путей в Казахстане: выгоды, стоимость, окупаемость и порядок реализации проекта.'
+    meta_title = _('Инвесторам')
+    meta_description = _('Информация для инвесторов о строительстве подъездных железнодорожных путей в Казахстане: выгоды, стоимость, окупаемость и порядок реализации проекта.')
     crumbs = [
-        ('Главная', reverse('core:home')),
-        ('Инвесторам', None),
+        (_('Главная'), reverse('core:home')),
+        (_('Инвесторам'), None),
     ]
     schemas = [
         webpage_schema(meta_title, meta_description, request),
@@ -110,12 +133,12 @@ def investors(request):
 
 
 def construction_recommendations(request):
-    meta_title = 'Рекомендации по строительству — Конкурент-Б'
-    meta_description = 'Как сократить сроки и уменьшить расходы при строительстве подъездного железнодорожного пути: практические рекомендации по срокам, договорам и материалам.'
+    meta_title = _('Рекомендации по строительству')
+    meta_description = _('Как сократить сроки и уменьшить расходы при строительстве подъездного железнодорожного пути: практические рекомендации по срокам, договорам и материалам.')
     crumbs = [
-        ('Главная', reverse('core:home')),
-        ('Инвесторам', reverse('core:investors')),
-        ('Рекомендации по строительству', None),
+        (_('Главная'), reverse('core:home')),
+        (_('Инвесторам'), reverse('core:investors')),
+        (_('Рекомендации по строительству'), None),
     ]
     schemas = [
         webpage_schema(meta_title, meta_description, request),
@@ -133,33 +156,33 @@ def construction_recommendations(request):
 INVESTOR_PAGES = {
     'vybor-ploshchadki': {
         'template': 'core/investors/vybor-ploshchadki.html',
-        'title': 'Выбор площадки под строительство объекта',
-        'meta_title': 'Выбор площадки под строительство объекта — Конкурент-Б',
-        'meta_description': 'Что проверить при выборе площадки под подъездной железнодорожный путь: возможность врезки, расстояние до станции, землеотвод и факторы удорожания.',
+        'title': gettext_lazy('Выбор площадки под строительство объекта'),
+        'meta_title': gettext_lazy('Выбор площадки под строительство объекта'),
+        'meta_description': gettext_lazy('Что проверить при выборе площадки под подъездной железнодорожный путь: возможность врезки, расстояние до станции, землеотвод и факторы удорожания.'),
     },
     'spravochnik-terminov': {
         'template': 'core/investors/spravochnik-terminov.html',
-        'title': 'Справочник терминов',
-        'meta_title': 'Справочник терминов — Конкурент-Б',
-        'meta_description': 'Справочник терминов железнодорожного строительства и путевого хозяйства: балласт, верхнее строение пути, стрелочный перевод и другие понятия.',
+        'title': gettext_lazy('Справочник терминов'),
+        'meta_title': gettext_lazy('Справочник терминов'),
+        'meta_description': gettext_lazy('Справочник терминов железнодорожного строительства и путевого хозяйства: балласт, верхнее строение пути, стрелочный перевод и другие понятия.'),
     },
     'tekhnologiya-stroitelstva': {
         'template': 'core/investors/tekhnologiya-stroitelstva.html',
-        'title': 'Технология строительства',
-        'meta_title': 'Технология строительства — Конкурент-Б',
-        'meta_description': 'Технология строительства железнодорожного пути: земляные работы, устройство верхнего строения пути и способы укладки рельсошпальной решётки.',
+        'title': gettext_lazy('Технология строительства'),
+        'meta_title': gettext_lazy('Технология строительства'),
+        'meta_description': gettext_lazy('Технология строительства железнодорожного пути: земляные работы, устройство верхнего строения пути и способы укладки рельсошпальной решётки.'),
     },
     'teo-proekta': {
         'template': 'core/investors/teo-proekta.html',
-        'title': 'ТЭО проекта строительства подъездного жд-пути',
-        'meta_title': 'ТЭО проекта строительства подъездного жд-пути — Конкурент-Б',
-        'meta_description': 'Технико-экономическое обоснование проекта строительства подъездного железнодорожного пути.',
+        'title': gettext_lazy('ТЭО проекта строительства подъездного жд-пути'),
+        'meta_title': gettext_lazy('ТЭО проекта строительства подъездного жд-пути'),
+        'meta_description': gettext_lazy('Технико-экономическое обоснование проекта строительства подъездного железнодорожного пути.'),
     },
     'etapy-stroitelstva': {
         'template': 'core/investors/etapy-stroitelstva.html',
-        'title': 'Этапы строительства жд-пути',
-        'meta_title': 'Этапы строительства жд-пути — Конкурент-Б',
-        'meta_description': 'Этапы строительства подъездного железнодорожного пути: подготовительные и проектные работы, строительство и ввод в эксплуатацию, сроки и стоимость.',
+        'title': gettext_lazy('Этапы строительства жд-пути'),
+        'meta_title': gettext_lazy('Этапы строительства жд-пути'),
+        'meta_description': gettext_lazy('Этапы строительства подъездного железнодорожного пути: подготовительные и проектные работы, строительство и ввод в эксплуатацию, сроки и стоимость.'),
     },
 }
 
@@ -169,17 +192,19 @@ def investor_page(request, slug):
     if page is None:
         raise Http404
     crumbs = [
-        ('Главная', reverse('core:home')),
-        ('Инвесторам', reverse('core:investors')),
-        (page['title'], None),
+        (_('Главная'), reverse('core:home')),
+        (_('Инвесторам'), reverse('core:investors')),
+        (str(page['title']), None),
     ]
+    meta_title = str(page['meta_title'])
+    meta_description = str(page['meta_description'])
     schemas = [
-        webpage_schema(page['meta_title'], page['meta_description'], request),
+        webpage_schema(meta_title, meta_description, request),
         breadcrumb_schema(request, crumbs),
     ]
     context = {
-        'meta_title': page['meta_title'],
-        'meta_description': page['meta_description'],
+        'meta_title': meta_title,
+        'meta_description': meta_description,
         'schema_json': to_json(schemas),
     }
     return render(request, page['template'], context)
@@ -187,7 +212,8 @@ def investor_page(request, slug):
 
 def contacts_success(request):
     context = {
-        'meta_title': 'Заявка принята — РЖД-Инфра Казахстан',
-        'meta_description': 'Ваша заявка принята. Мы свяжемся с вами в течение рабочего дня.',
+        'meta_title': _('Заявка принята'),
+        'meta_description': _('Ваша заявка принята. Мы свяжемся с вами в течение рабочего дня.'),
+        'meta_robots': 'noindex, follow',
     }
     return render(request, 'core/contacts_success.html', context)
