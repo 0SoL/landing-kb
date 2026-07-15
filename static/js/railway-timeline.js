@@ -13,27 +13,61 @@
   const sleepersMuted = section.querySelector('[data-sleepers-muted]');
   const sleepersActive = section.querySelector('[data-sleepers-active]');
   const train = section.querySelector('[data-railway-train]');
+  const smoke = section.querySelector('[data-railway-smoke]');
   const stations = Array.from(section.querySelectorAll('[data-railway-station]'));
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // Smoke spawns DOM nodes each frame the train moves — keep it to precise
+  // pointers (desktop) so it never adds paint churn to mobile scrolling.
+  const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const smokeEnabled = !reduceMotion && finePointer;
 
   // Cached geometry — re-measured only on resize/refresh so the per-scroll
   // update never reads layout (avoids layout thrashing).
   let railH = 0;
   let trainH = 0;
 
+  // Live train state — the scroll mechanism owns trainY, the rock loop owns
+  // rock; applyTrainTransform composes them into one compositor-only write.
+  let trainY = 0;
+  let rock = 0;
+
   function measure() {
     railH = rail.getBoundingClientRect().height;
     trainH = train ? train.offsetHeight : 0;
   }
 
+  // Compose the current position (trainY) and rock angle into a single
+  // transform. Both the scroll updates and the rock loop route through here.
+  function applyTrainTransform() {
+    if (!train) return;
+    train.style.transform =
+      'translate3d(-50%, ' + trainY.toFixed(1) + 'px, 0) rotate(' + rock.toFixed(2) + 'deg)';
+  }
+
   // Move the train to progress p using transform only (compositor-friendly).
   // The nose (bottom edge, minus a small visual overlap) rides the leading
-  // edge of the laid track.
+  // edge of the laid track. Clamped to [0, railH − 0.4·trainH] so it never
+  // rises above the track top (which would overlap the heading/lead text).
   function placeTrain(p) {
     if (!train) return;
-    const y = p * railH - trainH * 0.9;
-    train.style.transform = 'translate3d(-50%, ' + y.toFixed(1) + 'px, 0)';
+    const raw = p * railH - trainH * 0.9;
+    trainY = Math.max(0, Math.min(railH - trainH * 0.4, raw));
+    applyTrainTransform();
+  }
+
+  // Spawn one short-lived smoke puff at the locomotive's rear (top of the box,
+  // since it travels nose-down). The puff animates and removes itself via CSS.
+  function spawnSmoke() {
+    // Cap concurrent puffs so a fast flick never piles up blurred layers.
+    if (!smoke || smoke.childElementCount > 10) return;
+    const puff = document.createElement('span');
+    puff.className = 'railway__smoke-puff';
+    puff.style.top = (trainY + 6).toFixed(1) + 'px';
+    puff.style.setProperty('--dx', (Math.random() * 40 - 20).toFixed(1) + 'px');
+    puff.style.animationDuration = (850 + Math.random() * 450).toFixed(0) + 'ms';
+    puff.addEventListener('animationend', () => puff.remove(), { once: true });
+    smoke.appendChild(puff);
   }
 
   // Static fallback: completed track + all stations active, train at the end.
@@ -112,14 +146,6 @@
       }
     };
 
-    // The train image may finish loading after start() — re-measure its height.
-    if (train && !train.complete) {
-      train.addEventListener('load', () => {
-        measure();
-        applyProgress(progressObj.value);
-      }, { once: true });
-    }
-
     // Main scrub: drive the rail-fill progress across the section's scroll range.
     const mainST = ScrollTrigger.create({
       trigger: layout,
@@ -159,6 +185,48 @@
     };
 
     window.addEventListener('resize', handleResize, { passive: true });
+
+    // ── Rocking engine + smoke ──
+    // A gentle idle wobble whose amplitude grows with the train's scroll speed,
+    // like a locomotive rolling over sleepers. Runs only while the section is
+    // on screen (IntersectionObserver) so it costs nothing elsewhere on the page.
+    let loopId = 0;
+    let lastTrainY = 0;
+
+    const tick = (t) => {
+      loopId = requestAnimationFrame(tick);
+      const now = t / 1000;
+      const speed = Math.abs(trainY - lastTrainY);
+      lastTrainY = trainY;
+      const amp = 0.3 + Math.min(speed * 0.06, 1.2);
+      rock = Math.sin(now * 5.2) * amp;
+      applyTrainTransform();
+      if (smokeEnabled && speed > 0.8 && Math.random() < 0.6) spawnSmoke();
+    };
+
+    const startLoop = () => {
+      if (!loopId && !reduceMotion) {
+        lastTrainY = trainY;
+        loopId = requestAnimationFrame(tick);
+      }
+    };
+    const stopLoop = () => {
+      if (loopId) {
+        cancelAnimationFrame(loopId);
+        loopId = 0;
+        rock = 0;
+        applyTrainTransform();
+      }
+    };
+
+    if ('IntersectionObserver' in window) {
+      const visObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => (entry.isIntersecting ? startLoop() : stopLoop()));
+      }, { threshold: 0 });
+      visObserver.observe(section);
+    } else {
+      startLoop();
+    }
 
     // Initial paint.
     requestAnimationFrame(() => {

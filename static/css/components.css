@@ -2001,6 +2001,13 @@
   --railway-active: var(--color-accent);
   --railway-sleeper-gap: 28px;
   --railway-progress: 0;
+  /* Train (locomotive) palette — imported from the "Поезд на скролле" design */
+  --railway-train-body: var(--color-primary);
+  --railway-train-border: #3a3a3a;
+  --railway-train-roof: #efe9dd;
+  --railway-train-glass: var(--color-accent);
+  --railway-train-light: #e9b646;
+  --railway-smoke: rgba(120, 114, 104, 0.5);
   position: relative;
   background-color: var(--color-bg);
   padding-block: var(--section-pad);
@@ -2019,6 +2026,9 @@
 
 .railway__intro {
   position: relative;
+  /* Keep the heading/lead above the train layer — the locomotive's start
+     position sits slightly above the track and must never cover this text. */
+  z-index: 2;
   text-align: center;
   max-width: 760px;
   margin-bottom: clamp(2.5rem, 5vw, 4rem);
@@ -2077,25 +2087,126 @@
   overflow: visible;
 }
 
-/* Train image riding the rails. JS moves it with translate3d (compositor-only,
-   no layout) so it stays in sync with the rail fill; ScrollTrigger's scrub
-   provides the smoothing. .railway__rail is position:absolute, so it already
-   establishes the containing block for this absolutely-positioned child. */
+/* Locomotive riding the rails — composed from layered elements (body, roof,
+   gold glass, headlights, coupler, shadow) rather than a flat image, so it can
+   rock and puff smoke. JS moves it with translate3d + rotate (compositor-only,
+   no layout) in sync with the rail fill; ScrollTrigger's scrub smooths it.
+   .railway__rail is position:absolute, so it establishes the containing block. */
 .railway__train {
   position: absolute;
   top: 0;
-  /* Horizontally centered between the two rail lines (35% / 65% -> 50%);
-     the -90% Y puts the train's nose at the leading edge of the laid track.
-     JS overrides this transform with the scroll-driven position. */
+  /* Horizontally centered between the two rail lines (35% / 65% -> 50%).
+     JS overrides this transform with the scroll-driven position + rock. */
   left: 50%;
-  transform: translate(-50%, -90%);
-  width: 48px;
-  height: auto;
+  width: 46px;
+  height: 96px;
+  transform: translate3d(-50%, -48px, 0);
+  transform-origin: 50% 50%;
   z-index: 2;
   pointer-events: none;
+  /* Promote to its own compositor layer once. The per-frame rock is then a
+     pure transform (translate + rotate) that re-composites the cached bitmap
+     — no repaint, so the wobble stays smooth even while scrolling. */
   will-change: transform;
-  /* Soft grounded shadow under the train for a semi-3D look. */
-  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.35));
+  backface-visibility: hidden;
+}
+
+.railway__train span {
+  position: absolute;
+}
+
+/* Grounded shadow via box-shadow rather than a blur filter: a filter would
+   force the layer to re-rasterize on every rotation frame (the source of the
+   scroll jank); a box-shadow bakes into the layer and just transforms with it. */
+.railway__train-shadow {
+  left: 3px;
+  right: 3px;
+  top: 8px;
+  bottom: 2px;
+  border-radius: 14px 14px 22px 22px;
+  background: transparent;
+  box-shadow: 0 11px 16px -5px rgba(0, 0, 0, 0.4);
+}
+
+.railway__train-coupler {
+  left: 18px;
+  top: -4px;
+  width: 10px;
+  height: 7px;
+  border-radius: 3px;
+  background: var(--railway-train-border);
+}
+
+.railway__train-body {
+  inset: 0;
+  border-radius: 13px 13px 22px 22px;
+  background: var(--railway-train-body);
+  border: 1px solid var(--railway-train-border);
+}
+
+.railway__train-roof {
+  left: 11px;
+  right: 11px;
+  top: 12px;
+  height: 54px;
+  border-radius: 9px;
+  background: var(--railway-train-roof);
+}
+
+.railway__train-glass {
+  left: 12px;
+  right: 12px;
+  top: 72px;
+  height: 15px;
+  border-radius: 8px;
+  background: var(--railway-train-glass);
+  opacity: 0.92;
+}
+
+.railway__train-light {
+  top: 84px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--railway-train-light);
+  box-shadow: 0 0 8px var(--railway-train-light);
+}
+
+.railway__train-light--l { left: 8px; }
+.railway__train-light--r { right: 8px; }
+
+/* Smoke layer — JS spawns short-lived puffs at the locomotive's rear while it
+   moves; each puff drifts up and fades via the railwaySmokeRise keyframe. */
+.railway__smoke {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: visible;
+}
+
+.railway__smoke-puff {
+  position: absolute;
+  left: 50%;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--railway-smoke);
+  filter: blur(3px);
+  will-change: transform, opacity;
+  transform: translate(-50%, 0) scale(0.5);
+  animation-name: railwaySmokeRise;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes railwaySmokeRise {
+  0%   { transform: translate(-50%, 0) scale(0.5); opacity: 0.5; }
+  100% { transform: translate(calc(-50% + var(--dx)), -72px) scale(2.4); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .railway__smoke { display: none; }
 }
 
 .railway__rail-line {
