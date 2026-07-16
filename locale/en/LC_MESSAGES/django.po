@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-15 03:17+0500\n"
+"POT-Creation-Date: 2026-07-15 22:29+0500\n"
 "PO-Revision-Date: 2026-04-24 00:00+0500\n"
 "Last-Translator: rustamkadirov4@gmail.com\n"
 "Language-Team: English\n"
@@ -50,8 +50,8 @@ msgstr ""
 msgid "Завершённые проекты, отраслевые события и обновления компании"
 msgstr "Completed projects, industry events and company updates"
 
-#: apps/articles/views.py:15 apps/core/views.py:117 apps/core/views.py:121
-#: apps/core/views.py:140 apps/core/views.py:196
+#: apps/articles/views.py:15 apps/core/views.py:121 apps/core/views.py:125
+#: apps/core/views.py:144 apps/core/views.py:200
 #: templates/components/footer.html:28 templates/components/header.html:17
 #: templates/core/construction_recommendations.html:4
 #: templates/core/investors.html:4 templates/core/investors.html:10
@@ -104,20 +104,20 @@ msgstr "Analytical materials and articles from the company’s management."
 msgid "Аналитические материалы и статьи от руководства компании"
 msgstr "Analytical materials and articles from the company’s management"
 
-#: apps/articles/views.py:39 apps/articles/views.py:60 apps/core/views.py:75
-#: apps/core/views.py:91 apps/core/views.py:106 apps/core/views.py:120
-#: apps/core/views.py:139 apps/core/views.py:195 apps/equipment/views.py:13
+#: apps/articles/views.py:39 apps/articles/views.py:60 apps/core/views.py:79
+#: apps/core/views.py:95 apps/core/views.py:110 apps/core/views.py:124
+#: apps/core/views.py:143 apps/core/views.py:199 apps/equipment/views.py:13
 #: apps/projects/views.py:16 apps/projects/views.py:38
 #: apps/services/views.py:13 apps/services/views.py:32
 #: templates/components/breadcrumbs.html:7
 msgid "Главная"
 msgstr "Home"
 
-#: apps/core/views.py:23
+#: apps/core/views.py:27
 msgid "Строительство и реконструкция железных дорог в Казахстане"
 msgstr "Railway construction and reconstruction in Kazakhstan"
 
-#: apps/core/views.py:24
+#: apps/core/views.py:28
 msgid ""
 "Проектирование, строительство и реконструкция железнодорожных путей для "
 "промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта."
@@ -125,13 +125,13 @@ msgstr ""
 "Design, construction and reconstruction of railway tracks for industrial "
 "enterprises, ports and terminals in Kazakhstan. Over 15 years of experience."
 
-#: apps/core/views.py:35 templates/components/footer.html:12
+#: apps/core/views.py:39 templates/components/footer.html:12
 #: templates/components/header.html:13 templates/core/about.html:9
 #: templates/core/our_leaders.html:4 templates/core/our_people.html:4
 msgid "О компании"
 msgstr "About"
 
-#: apps/core/views.py:36
+#: apps/core/views.py:40
 msgid ""
 "Казахстанская компания по строительству и реконструкции железнодорожных "
 "путей. Работаем с промышленными предприятиями, портами и логистическими "
@@ -140,11 +140,11 @@ msgstr ""
 "A Kazakhstani company for railway track construction and reconstruction. We "
 "work with industrial enterprises, ports and logistics terminals."
 
-#: apps/core/views.py:46 templates/core/faq.html:7
+#: apps/core/views.py:50 templates/core/faq.html:7
 msgid "Часто задаваемые вопросы"
 msgstr "Frequently Asked Questions"
 
-#: apps/core/views.py:47
+#: apps/core/views.py:51
 msgid ""
 "Ответы на часто задаваемые вопросы о строительстве железнодорожных путей, "
 "стоимости проектов и сроках работ."
@@ -152,12 +152,12 @@ msgstr ""
 "Answers to frequently asked questions about railway track construction, "
 "project costs and timelines."
 
-#: apps/core/views.py:71 apps/core/views.py:75
+#: apps/core/views.py:75 apps/core/views.py:79
 #: templates/components/footer.html:36 templates/core/contacts.html:7
 msgid "Контакты"
 msgstr "Contacts"
 
-#: apps/core/views.py:72
+#: apps/core/views.py:76
 msgid ""
 "Свяжитесь с нами для получения консультации по строительству железнодорожных "
 "путей. Ответим в течение рабочего дня."
@@ -165,12 +165,12 @@ msgstr ""
 "Contact us for a consultation on railway track construction. We reply within "
 "one business day."
 
-#: apps/core/views.py:87 apps/core/views.py:91 templates/core/about.html:37
+#: apps/core/views.py:91 apps/core/views.py:95 templates/core/about.html:37
 #: templates/core/our_people.html:4 templates/core/our_people.html:10
 msgid "Наши люди"
 msgstr "Our People"
 
-#: apps/core/views.py:88
+#: apps/core/views.py:92
 msgid ""
 "Команда специалистов по строительству и реконструкции железнодорожных путей "
 "в Казахстане."
@@ -178,13 +178,13 @@ msgstr ""
 "A team of specialists in railway track construction and reconstruction in "
 "Kazakhstan."
 
-#: apps/core/views.py:102 apps/core/views.py:106 templates/core/about.html:42
+#: apps/core/views.py:106 apps/core/views.py:110 templates/core/about.html:42
 #: templates/core/about.html:44 templates/core/our_leaders.html:4
 #: templates/core/our_leaders.html:10
 msgid "Руководство"
 msgstr "Leadership"
 
-#: apps/core/views.py:103
+#: apps/core/views.py:107
 msgid ""
 "Руководящий состав компании Конкурент-Б — опытные управленцы в "
 "железнодорожной отрасли Казахстана."
@@ -192,7 +192,7 @@ msgstr ""
 "The leadership of Konkurent-B — experienced managers in Kazakhstan’s railway "
 "industry."
 
-#: apps/core/views.py:118
+#: apps/core/views.py:122
 msgid ""
 "Информация для инвесторов о строительстве подъездных железнодорожных путей в "
 "Казахстане: выгоды, стоимость, окупаемость и порядок реализации проекта."
@@ -200,14 +200,14 @@ msgstr ""
 "Information for investors on the construction of railway sidings in "
 "Kazakhstan: benefits, cost, payback and project delivery process."
 
-#: apps/core/views.py:136 apps/core/views.py:141
+#: apps/core/views.py:140 apps/core/views.py:145
 #: templates/components/header.html:26
 #: templates/core/construction_recommendations.html:4
 #: templates/core/construction_recommendations.html:10
 msgid "Рекомендации по строительству"
 msgstr "Construction recommendations"
 
-#: apps/core/views.py:137
+#: apps/core/views.py:141
 msgid ""
 "Как сократить сроки и уменьшить расходы при строительстве подъездного "
 "железнодорожного пути: практические рекомендации по срокам, договорам и "
@@ -216,14 +216,14 @@ msgstr ""
 "How to shorten timelines and reduce costs when building a railway siding: "
 "practical recommendations on schedules, contracts and materials."
 
-#: apps/core/views.py:159 apps/core/views.py:160
+#: apps/core/views.py:163 apps/core/views.py:164
 #: templates/components/header.html:25
 #: templates/core/investors/vybor-ploshchadki.html:4
 #: templates/core/investors/vybor-ploshchadki.html:10
 msgid "Выбор площадки под строительство объекта"
 msgstr "Choosing a site for construction"
 
-#: apps/core/views.py:161
+#: apps/core/views.py:165
 msgid ""
 "Что проверить при выборе площадки под подъездной железнодорожный путь: "
 "возможность врезки, расстояние до станции, землеотвод и факторы удорожания."
@@ -232,14 +232,14 @@ msgstr ""
 "feasibility, distance to the station, land allocation and cost-increasing "
 "factors."
 
-#: apps/core/views.py:165 apps/core/views.py:166
+#: apps/core/views.py:169 apps/core/views.py:170
 #: templates/components/header.html:27
 #: templates/core/investors/spravochnik-terminov.html:4
 #: templates/core/investors/spravochnik-terminov.html:10
 msgid "Справочник терминов"
 msgstr "Glossary of terms"
 
-#: apps/core/views.py:167
+#: apps/core/views.py:171
 msgid ""
 "Справочник терминов железнодорожного строительства и путевого хозяйства: "
 "балласт, верхнее строение пути, стрелочный перевод и другие понятия."
@@ -247,14 +247,14 @@ msgstr ""
 "A glossary of railway construction and track facility terms: ballast, track "
 "superstructure, turnout and other concepts."
 
-#: apps/core/views.py:171 apps/core/views.py:172
+#: apps/core/views.py:175 apps/core/views.py:176
 #: templates/components/header.html:28
 #: templates/core/investors/tekhnologiya-stroitelstva.html:4
 #: templates/core/investors/tekhnologiya-stroitelstva.html:10
 msgid "Технология строительства"
 msgstr "Construction technology"
 
-#: apps/core/views.py:173
+#: apps/core/views.py:177
 msgid ""
 "Технология строительства железнодорожного пути: земляные работы, устройство "
 "верхнего строения пути и способы укладки рельсошпальной решётки."
@@ -262,27 +262,27 @@ msgstr ""
 "Railway track construction technology: earthworks, track superstructure "
 "installation and methods of laying the rail-and-sleeper grid."
 
-#: apps/core/views.py:177 apps/core/views.py:178
+#: apps/core/views.py:181 apps/core/views.py:182
 #: templates/components/header.html:29
 #: templates/core/investors/teo-proekta.html:4
 #: templates/core/investors/teo-proekta.html:10
 msgid "ТЭО проекта строительства подъездного жд-пути"
 msgstr "Feasibility study for a railway siding construction project"
 
-#: apps/core/views.py:179
+#: apps/core/views.py:183
 msgid ""
 "Технико-экономическое обоснование проекта строительства подъездного "
 "железнодорожного пути."
 msgstr "Feasibility study for a railway siding construction project."
 
-#: apps/core/views.py:183 apps/core/views.py:184
+#: apps/core/views.py:187 apps/core/views.py:188
 #: templates/components/header.html:30
 #: templates/core/investors/etapy-stroitelstva.html:4
 #: templates/core/investors/etapy-stroitelstva.html:10
 msgid "Этапы строительства жд-пути"
 msgstr "Stages of railway track construction"
 
-#: apps/core/views.py:185
+#: apps/core/views.py:189
 msgid ""
 "Этапы строительства подъездного железнодорожного пути: подготовительные и "
 "проектные работы, строительство и ввод в эксплуатацию, сроки и стоимость."
@@ -290,11 +290,11 @@ msgstr ""
 "Stages of railway siding construction: preparatory and design work, "
 "construction and commissioning, timelines and cost."
 
-#: apps/core/views.py:215 templates/core/contacts_success.html:7
+#: apps/core/views.py:219 templates/core/contacts_success.html:7
 msgid "Заявка принята"
 msgstr "Request Received"
 
-#: apps/core/views.py:216
+#: apps/core/views.py:220
 msgid "Ваша заявка принята. Мы свяжемся с вами в течение рабочего дня."
 msgstr ""
 "Your request has been received. We will contact you within one business day."
@@ -397,7 +397,7 @@ msgstr ""
 
 #: apps/services/views.py:14 apps/services/views.py:33
 #: templates/components/footer.html:19 templates/components/header.html:10
-#: templates/core/homepage.html:170 templates/services/detail.html:4
+#: templates/core/homepage.html:179 templates/services/detail.html:4
 #: templates/services/list.html:7
 msgid "Услуги"
 msgstr "Services"
@@ -798,12 +798,12 @@ msgstr ""
 "From the engineers’ first site visit to the moment the first train runs on "
 "the new line — five stages of one route."
 
-#: templates/core/homepage.html:51 templates/core/homepage.html:208
-#: templates/core/homepage.html:275
+#: templates/core/homepage.html:60 templates/core/homepage.html:217
+#: templates/core/homepage.html:284
 msgid "Консалтинг"
 msgstr "Consulting"
 
-#: templates/core/homepage.html:52
+#: templates/core/homepage.html:61
 msgid ""
 "Выезжаем на участок, ведём топографическую съёмку и инженерно-геологический "
 "консалтинг. Оцениваем существующую инфраструктуру и формируем техническое "
@@ -813,12 +813,12 @@ msgstr ""
 "consulting. We assess the existing infrastructure and draw up the terms of "
 "reference."
 
-#: templates/core/homepage.html:63 templates/core/homepage.html:176
-#: templates/core/homepage.html:231
+#: templates/core/homepage.html:72 templates/core/homepage.html:185
+#: templates/core/homepage.html:240
 msgid "Проектирование"
 msgstr "Engineering Design"
 
-#: templates/core/homepage.html:64
+#: templates/core/homepage.html:73
 msgid ""
 "Разрабатываем проектную документацию в соответствии с нормами РК. Проходим "
 "экспертизу и согласовываем технические решения с заказчиком."
@@ -826,12 +826,12 @@ msgstr ""
 "We develop design documentation in line with Kazakhstan standards, pass "
 "expert review and agree technical solutions with the client."
 
-#: templates/core/homepage.html:75 templates/core/homepage.html:184
-#: templates/core/homepage.html:242
+#: templates/core/homepage.html:84 templates/core/homepage.html:193
+#: templates/core/homepage.html:251
 msgid "Строительство"
 msgstr "Construction"
 
-#: templates/core/homepage.html:76
+#: templates/core/homepage.html:85
 msgid ""
 "Выполняем земляные работы, укладку верхнего строения пути и устройство "
 "искусственных сооружений собственной техникой и силами бригад."
@@ -839,11 +839,11 @@ msgstr ""
 "We perform earthworks, track superstructure laying and construction of "
 "engineering structures with our own equipment and crews."
 
-#: templates/core/homepage.html:87
+#: templates/core/homepage.html:96
 msgid "Пусконаладка"
 msgstr "Commissioning"
 
-#: templates/core/homepage.html:88
+#: templates/core/homepage.html:97
 msgid ""
 "Проводим обкатку пути, регулировку стрелочных переводов и системы "
 "сигнализации. Готовим объект к приёмо-сдаточным испытаниям."
@@ -851,11 +851,11 @@ msgstr ""
 "We run in the track, adjust turnouts and the signalling system. We prepare "
 "the facility for acceptance testing."
 
-#: templates/core/homepage.html:99
+#: templates/core/homepage.html:108
 msgid "Эксплуатация"
 msgstr "Operation"
 
-#: templates/core/homepage.html:100
+#: templates/core/homepage.html:109
 msgid ""
 "Передаём объект заказчику с полным комплектом исполнительной документации. "
 "По запросу сопровождаем эксплуатацию и обслуживание пути."
@@ -863,47 +863,47 @@ msgstr ""
 "We hand the facility over to the client with a full set of as-built "
 "documentation. On request, we support track operation and maintenance."
 
-#: templates/core/homepage.html:108
+#: templates/core/homepage.html:117
 msgid "Ключевые показатели"
 msgstr "Key Figures"
 
-#: templates/core/homepage.html:112
+#: templates/core/homepage.html:121
 msgid "Проектов выполнено"
 msgstr "Projects Completed"
 
-#: templates/core/homepage.html:116
+#: templates/core/homepage.html:125
 msgid "Км пути уложено"
 msgstr "Km of Track Laid"
 
-#: templates/core/homepage.html:120
+#: templates/core/homepage.html:129
 msgid "Лет на рынке"
 msgstr "Years in the Market"
 
-#: templates/core/homepage.html:124
+#: templates/core/homepage.html:133
 msgid "Специалистов"
 msgstr "Specialists"
 
-#: templates/core/homepage.html:132
+#: templates/core/homepage.html:141
 msgid "Линия услуг"
 msgstr "Service line"
 
-#: templates/core/homepage.html:133
+#: templates/core/homepage.html:142
 msgid "Маршрут наших компетенций"
 msgstr "The route of our expertise"
 
-#: templates/core/homepage.html:134
+#: templates/core/homepage.html:143
 msgid "Выберите станцию, чтобы узнать об услуге подробнее."
 msgstr "Select a station to learn more about the service."
 
-#: templates/core/homepage.html:192 templates/core/homepage.html:253
+#: templates/core/homepage.html:201 templates/core/homepage.html:262
 msgid "Реконструкция"
 msgstr "Reconstruction"
 
-#: templates/core/homepage.html:200 templates/core/homepage.html:264
+#: templates/core/homepage.html:209 templates/core/homepage.html:273
 msgid "Технический надзор"
 msgstr "Technical supervision"
 
-#: templates/core/homepage.html:232
+#: templates/core/homepage.html:241
 msgid ""
 "Разрабатываем проектную документацию для подъездных путей, внутрипортовых "
 "коммуникаций и сортировочных станций — с учётом норм РК и требований "
@@ -913,19 +913,19 @@ msgstr ""
 "marshalling yards — in line with Kazakhstan standards and client "
 "requirements."
 
-#: templates/core/homepage.html:234
+#: templates/core/homepage.html:243
 msgid "Топосъёмка"
 msgstr "Topographic survey"
 
-#: templates/core/homepage.html:235
+#: templates/core/homepage.html:244
 msgid "Экспертиза"
 msgstr "Expert review"
 
-#: templates/core/homepage.html:236
+#: templates/core/homepage.html:245
 msgid "Рабочая документация"
 msgstr "Detailed design documentation"
 
-#: templates/core/homepage.html:243
+#: templates/core/homepage.html:252
 msgid ""
 "Выполняем земляные работы, укладку верхнего строения пути и устройство "
 "искусственных сооружений силами собственных бригад и техники."
@@ -933,19 +933,19 @@ msgstr ""
 "We perform earthworks, track superstructure laying and construction of "
 "engineering structures with our own crews and equipment."
 
-#: templates/core/homepage.html:245
+#: templates/core/homepage.html:254
 msgid "Земляное полотно"
 msgstr "Subgrade"
 
-#: templates/core/homepage.html:246
+#: templates/core/homepage.html:255
 msgid "Балласт и шпалы"
 msgstr "Ballast and sleepers"
 
-#: templates/core/homepage.html:247
+#: templates/core/homepage.html:256
 msgid "Стрелочные переводы"
 msgstr "Turnouts"
 
-#: templates/core/homepage.html:254
+#: templates/core/homepage.html:263
 msgid ""
 "Модернизируем существующие пути необщего пользования — от усиления балласта "
 "до полной перекладки рельсо-шпальной решётки. Работаем с минимальной "
@@ -955,19 +955,19 @@ msgstr ""
 "complete relaying of the rail-and-sleeper grid. We work with minimal "
 "disruption to the client’s operations."
 
-#: templates/core/homepage.html:256
+#: templates/core/homepage.html:265
 msgid "Капитальный ремонт"
 msgstr "Major overhaul"
 
-#: templates/core/homepage.html:257
+#: templates/core/homepage.html:266
 msgid "Усиление основания"
 msgstr "Subgrade reinforcement"
 
-#: templates/core/homepage.html:258
+#: templates/core/homepage.html:267
 msgid "Замена пути"
 msgstr "Track replacement"
 
-#: templates/core/homepage.html:265
+#: templates/core/homepage.html:274
 msgid ""
 "Контролируем качество работ на всех этапах: приёмку материалов, соответствие "
 "проекту, ведение исполнительной документации и подготовку объекта к сдаче."
@@ -975,19 +975,19 @@ msgstr ""
 "We control work quality at every stage: material acceptance, compliance with "
 "the design, as-built documentation and preparing the facility for handover."
 
-#: templates/core/homepage.html:267
+#: templates/core/homepage.html:276
 msgid "Авторский надзор"
 msgstr "Designer’s supervision"
 
-#: templates/core/homepage.html:268
+#: templates/core/homepage.html:277
 msgid "Лабораторный контроль"
 msgstr "Laboratory testing"
 
-#: templates/core/homepage.html:269
+#: templates/core/homepage.html:278
 msgid "Приёмо-сдаточные испытания"
 msgstr "Acceptance testing"
 
-#: templates/core/homepage.html:276
+#: templates/core/homepage.html:285
 msgid ""
 "Сопровождаем проект на стадии концепции и технико-экономического обоснования "
 "— помогаем выбрать оптимальную схему пути и подготовиться к экспертизе."
@@ -995,40 +995,44 @@ msgstr ""
 "We support the project at the concept and feasibility-study stage — helping "
 "choose the optimal track layout and prepare for expert review."
 
-#: templates/core/homepage.html:278
+#: templates/core/homepage.html:287
 msgid "Концепция"
 msgstr "Concept"
 
-#: templates/core/homepage.html:279
+#: templates/core/homepage.html:288
 msgid "ТЭО"
 msgstr "Feasibility study"
 
-#: templates/core/homepage.html:280
+#: templates/core/homepage.html:289
 msgid "Подготовка к экспертизе"
 msgstr "Preparation for expert review"
 
-#: templates/core/homepage.html:292
+#: templates/core/homepage.html:299 templates/core/homepage.html:304
 msgid "Ключевые проекты"
 msgstr "Key Projects"
 
-#: templates/core/homepage.html:306 templates/projects/detail.html:19
-#: templates/projects/list.html:35
-msgid "км пути"
-msgstr "km of track"
+#: templates/core/homepage.html:303
+msgid "Портфолио"
+msgstr "Portfolio"
 
-#: templates/core/homepage.html:308
-msgid "Читать проект"
-msgstr "Read Project"
-
-#: templates/core/homepage.html:314 templates/projects/list.html:16
+#: templates/core/homepage.html:306 templates/core/homepage.html:334
+#: templates/projects/list.html:16
 msgid "Все проекты"
 msgstr "All Projects"
 
-#: templates/core/homepage.html:324
+#: templates/core/homepage.html:317
+msgid "фото проекта"
+msgstr "project photo"
+
+#: templates/core/homepage.html:327
+msgid "Читать проект"
+msgstr "Read Project"
+
+#: templates/core/homepage.html:344
 msgid "Последние новости"
 msgstr "Latest News"
 
-#: templates/core/homepage.html:340
+#: templates/core/homepage.html:360
 msgid "Все новости"
 msgstr "All News"
 
@@ -1306,6 +1310,10 @@ msgstr ""
 #: templates/projects/detail.html:17
 msgid "год"
 msgstr "year"
+
+#: templates/projects/detail.html:19 templates/projects/list.html:35
+msgid "км пути"
+msgstr "km of track"
 
 #: templates/projects/detail.html:33
 msgid "Задача"

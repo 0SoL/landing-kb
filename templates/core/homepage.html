@@ -294,59 +294,44 @@
   </div>
 </section>
 
-<!-- FEATURED PROJECTS -->
-{% if featured_projects %}
-<section class="section section--dark featured-projects" id="featured-projects">
+<!-- KEY PROJECTS — light bento (desktop) / stacked white cards (mobile) -->
+{% if key_projects %}
+<section class="section kp" id="featured-projects" aria-label="{{ _('Ключевые проекты') }}">
   <div class="container">
-    <h2 class="section__title section__title--light animate-on-scroll">{{ _('Ключевые проекты') }}</h2>
-    <div class="projects-grid">
-      {% for project in featured_projects %}
-      <article class="project-card">
-        {% if project.cover_image %}
-        <div class="project-card__img-wrap">
-          <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="project-card__img">
-        </div>
-        {% endif %}
-        <div class="project-card__body">
-          <span class="project-card__badge">{{ project.get_client_type_display() }}</span>
-          <h3 class="project-card__title">{{ project.title }}</h3>
-          <p class="project-card__meta">{{ project.location }}, {{ project.year }}</p>
-          {% if project.track_length_km %}
-          <p class="project-card__stat"><span class="mono">{{ project.track_length_km }}</span> {{ _('км пути') }}</p>
-          {% endif %}
-          <a href="{{ url('projects:detail', slug=project.slug) }}" class="project-card__link">{{ _('Читать проект') }} →</a>
-        </div>
-      </article>
-      {% endfor %}
+    <div class="kp__head animate-on-scroll">
+      <div>
+        <span class="kp__eyebrow">{{ _('Портфолио') }}</span>
+        <h2 class="kp__title">{{ _('Ключевые проекты') }}</h2>
+      </div>
+      <a href="{{ url('projects:list') }}" class="kp__all">{{ _('Все проекты') }} →</a>
     </div>
-    <div class="section__footer">
-      <a href="{{ url('projects:list') }}" class="btn btn--outline-light">{{ _('Все проекты') }}</a>
-    </div>
-  </div>
-</section>
-{% endif %}
 
-<!-- LATEST NEWS -->
-{% if latest_news %}
-<section class="section latest-news">
-  <div class="container">
-    <h2 class="section__title animate-on-scroll">{{ _('Последние новости') }}</h2>
-    <div class="news-grid">
-      {% for article in latest_news %}
-      <article class="news-card">
-        {% if article.cover_image %}
-        <div class="news-card__img-wrap">
-          <img src="{{ article.cover_image.url }}" alt="{{ article.title }}" loading="lazy" class="news-card__img">
+    <div class="kp__grid">
+      {% for project in key_projects %}
+      <a href="{{ url('projects:detail', slug=project.slug) }}"
+         class="kp-card{% if loop.first %} kp-card--featured{% endif %}">
+        <div class="kp-card__media">
+          {% if project.cover_image %}
+          <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" loading="lazy" class="kp-card__img">
+          {% else %}
+          <span class="kp-card__ph">{{ _('фото проекта') }}</span>
+          {% endif %}
         </div>
-        {% endif %}
-        <h3 class="news-card__title">
-          <a href="{{ url('articles:detail', slug=article.slug) }}">{{ article.title }}</a>
-        </h3>
-      </article>
+        <div class="kp-card__body">
+          <span class="kp-card__tag">{{ project.get_client_type_display() }}</span>
+          <h3 class="kp-card__title">{{ project.title }}</h3>
+          <div class="kp-card__meta">
+            {% if project.location %}<span class="kp-card__loc">{{ project.location }}</span>{% endif %}
+            <span class="kp-card__year">{{ project.year }}</span>
+          </div>
+          <span class="kp-card__link">{{ _('Читать проект') }} →</span>
+        </div>
+      </a>
       {% endfor %}
     </div>
-    <div class="section__footer">
-      <a href="{{ url('articles:news_list') }}" class="btn btn--outline">{{ _('Все новости') }}</a>
+
+    <div class="kp__foot">
+      <a href="{{ url('projects:list') }}" class="btn btn--outline">{{ _('Все проекты') }}</a>
     </div>
   </div>
 </section>

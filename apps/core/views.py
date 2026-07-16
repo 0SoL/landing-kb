@@ -8,18 +8,19 @@ from django.utils.translation import gettext_lazy
 from .models import CompanyStats, FAQItem
 from .forms import ContactForm
 from apps.projects.models import Project
-from apps.articles.models import Article
 from apps.seo.jsonld import organization_schema, faq_schema, webpage_schema, breadcrumb_schema, to_json
 
 
 def homepage(request):
     stats = CompanyStats.load()
-    featured_projects = Project.objects.filter(is_featured=True, is_published=True)[:3]
-    latest_news = Article.objects.filter(is_published=True, category__slug='novosti')[:3]
+    # Key-projects bento: up to five, featured first, newest first. Broadened
+    # beyond is_featured so the grid always fills even when few are flagged.
+    key_projects = list(
+        Project.objects.filter(is_published=True).order_by('-is_featured', '-year', 'order')[:5]
+    )
     context = {
         'stats': stats,
-        'featured_projects': featured_projects,
-        'latest_news': latest_news,
+        'key_projects': key_projects,
         'meta_title': _('Строительство и реконструкция железных дорог в Казахстане'),
         'meta_description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта.'),
         'schema_json': to_json(organization_schema(request)),
