@@ -7,8 +7,9 @@ def organization_base():
     """Built per-request so the active language is applied to translatable strings."""
     return {
         '@type': 'Organization',
-        'name': 'Konkurent-B',
-        'legalName': 'ТОО «Konkurent-B»',
+        'name': _('Конкурент-Б'),
+        # Registered legal name — always Cyrillic regardless of page locale
+        'legalName': 'ТОО «Конкурент-Б»',
         'description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и логистических терминалов Казахстана.'),
         'areaServed': 'Kazakhstan',
         'serviceType': [
@@ -43,7 +44,7 @@ def website_schema(request):
     return {
         '@context': 'https://schema.org',
         '@type': 'WebSite',
-        'name': 'Konkurent-B',
+        'name': _('Конкурент-Б'),
         'url': site_url,
         'inLanguage': ['ru', 'en'],
         'publisher': organization_base(),

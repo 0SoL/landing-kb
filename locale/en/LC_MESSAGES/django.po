@@ -186,7 +186,7 @@ msgstr "Leadership"
 
 #: apps/core/views.py:107
 msgid ""
-"Руководящий состав компании Konkurent-B — опытные управленцы в "
+"Руководящий состав компании Конкурент-Б — опытные управленцы в "
 "железнодорожной отрасли Казахстана."
 msgstr ""
 "The leadership of Konkurent-B — experienced managers in Kazakhstan’s railway "
@@ -430,6 +430,13 @@ msgstr ""
 msgid "Оставить заявку"
 msgstr "Submit a Request"
 
+#: templates/components/footer.html:4 templates/components/footer.html:45
+#: templates/components/header.html:4 templates/components/seo_head.html:1
+#: templates/components/seo_head.html:19 templates/core/about.html:10
+#: templates/core/contacts.html:16 apps/seo/jsonld.py:10
+msgid "Конкурент-Б"
+msgstr "Konkurent-B"
+
 #: templates/components/footer.html:5
 msgid "Строительство и реконструкция железнодорожных путей"
 msgstr "Railway Track Construction and Reconstruction"
@@ -463,7 +470,7 @@ msgid "Все права защищены."
 msgstr "All rights reserved."
 
 #: templates/components/header.html:3
-msgid "Konkurent-B — на главную"
+msgid "Конкурент-Б — на главную"
 msgstr "Konkurent-B — back to home"
 
 #: templates/components/header.html:5 templates/core/contacts.html:20

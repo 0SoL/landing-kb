@@ -8,10 +8,12 @@
   const hasSchema = document.querySelector('script[type="application/ld+json"]');
   if (hasSchema) return; // server already injected one
 
+  // Brand name follows the page locale: Cyrillic on ru, Latin on en
+  const isEn = document.documentElement.lang === 'en';
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'Konkurent-B',
+    name: isEn ? 'Konkurent-B' : 'Конкурент-Б',
     areaServed: 'Kazakhstan',
   };
 

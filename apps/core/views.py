@@ -101,7 +101,7 @@ def our_people(request):
 
 def our_leaders(request):
     meta_title = _('Руководство')
-    meta_description = _('Руководящий состав компании Konkurent-B — опытные управленцы в железнодорожной отрасли Казахстана.')
+    meta_description = _('Руководящий состав компании Конкурент-Б — опытные управленцы в железнодорожной отрасли Казахстана.')
     schemas = [
         webpage_schema(meta_title, meta_description, request, page_type='AboutPage'),
         breadcrumb_schema(request, [(_('Главная'), reverse('core:home')), (_('Руководство'), None)]),
