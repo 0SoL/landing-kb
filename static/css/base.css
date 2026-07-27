@@ -13,6 +13,9 @@
   --color-border: #E0DBD4;
   --color-dark: #111111;
   --color-error: #C0392B;
+  /* Semantic aliases + tokens referenced by people/leaders components */
+  --color-text: var(--color-primary);
+  --color-bg-alt: #EDE8E1;
 
   /* Typography — single family covers Cyrillic + Latin identically */
   --font-base: 'Geologica', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -21,6 +24,12 @@
   /* Aliases kept for backwards compatibility */
   --font-display: var(--font-heading);
   --font-body: var(--font-base);
+
+  /* Type scale */
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.25rem;
+  --text-2xl: clamp(1.5rem, 2.5vw, 2rem);
 
   /* Spacing */
   --space-2xs: 0.25rem;
@@ -38,6 +47,10 @@
   --container-max: 1440px;
   --container-pad: clamp(1rem, 5vw, 4rem);
   --section-pad: clamp(3rem, 6vw, 5.5rem);
+  --header-h: 80px; /* fixed header clearance used by heroes/breadcrumbs */
+
+  /* Shadows */
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.1);
 
   /* Transitions */
   --transition-fast: 150ms ease;
