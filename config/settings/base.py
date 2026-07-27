@@ -244,7 +244,7 @@ DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@example.com')
 INQUIRY_RECIPIENT_EMAIL = env('INQUIRY_RECIPIENT_EMAIL', default='info@example.com')
 
 UNFOLD = {
-    'SITE_TITLE': 'РЖД-Инфра Казахстан',
+    'SITE_TITLE': 'Konkurent-B',
     'SITE_HEADER': 'Управление сайтом',
     'SITE_URL': '/',
     'COLORS': {

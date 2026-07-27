@@ -7,7 +7,8 @@ def organization_base():
     """Built per-request so the active language is applied to translatable strings."""
     return {
         '@type': 'Organization',
-        'name': 'РЖД-Инфра Казахстан',
+        'name': 'Konkurent-B',
+        'legalName': 'ТОО «Konkurent-B»',
         'description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и логистических терминалов Казахстана.'),
         'areaServed': 'Kazakhstan',
         'serviceType': [

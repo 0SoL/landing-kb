@@ -11,7 +11,7 @@
   const org = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: 'РЖД-Инфра Казахстан',
+    name: 'Konkurent-B',
     areaServed: 'Kazakhstan',
   };
 
