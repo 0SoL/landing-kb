@@ -126,6 +126,12 @@
     const { gsap, ScrollTrigger } = window;
     gsap.registerPlugin(ScrollTrigger);
 
+    // On phones the URL bar collapsing/expanding fires resize + viewport
+    // changes mid-scroll; letting ScrollTrigger refresh on those recomputes
+    // every trigger and visibly jumps the page. Only real size changes
+    // (orientation / window resize) should refresh.
+    ScrollTrigger.config({ ignoreMobileResize: true });
+
     let activeSleepers = buildSleepers(false);
     measure();
 
@@ -173,8 +179,15 @@
     });
 
     // Rebuild sleepers on resize (rail height changes with content/breakpoints).
+    // Height-only resizes are ignored: on mobile they come from the URL bar
+    // showing/hiding while scrolling, and the full rebuild + refresh they used
+    // to trigger caused scroll stutter and the page jumping up and down.
+    // The rail's height depends on content width, not on viewport height.
     let rafId = 0;
+    let lastWidth = window.innerWidth;
     const handleResize = () => {
+      if (window.innerWidth === lastWidth) return;
+      lastWidth = window.innerWidth;
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         activeSleepers = buildSleepers(false);
