@@ -146,9 +146,12 @@ p {
   padding-block: var(--section-pad);
 }
 
-/* Consecutive sections share one rhythm gap instead of stacking two full pads */
-.section + .section {
-  padding-top: calc(var(--section-pad) * 0.6);
+/* Vertical rhythm: a section's own padding is always symmetric (colored
+   bands need it on both edges). Only when two sections sit on the same
+   page background would their pads stack into a double gap — collapse
+   the second one's top pad so consecutive sections share a single gap. */
+.section:not(.section--bg):not(.section--dark) + .section:not(.section--bg):not(.section--dark) {
+  padding-top: 0;
 }
 
 .section--dark {
