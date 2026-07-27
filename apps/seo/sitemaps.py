@@ -27,6 +27,9 @@ STATIC_VIEW_PRIORITIES = {
 
 class StaticViewSitemap(Sitemap):
     changefreq = 'monthly'
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return list(STATIC_VIEW_PRIORITIES.keys())
@@ -41,6 +44,9 @@ class StaticViewSitemap(Sitemap):
 class InvestorPagesSitemap(Sitemap):
     priority = 0.7
     changefreq = 'monthly'
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         from apps.core.views import INVESTOR_PAGES
@@ -53,6 +59,9 @@ class InvestorPagesSitemap(Sitemap):
 class ProjectSitemap(Sitemap):
     priority = 0.9
     changefreq = 'monthly'
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return Project.objects.filter(is_published=True)
@@ -64,6 +73,9 @@ class ProjectSitemap(Sitemap):
 class ServiceSitemap(Sitemap):
     priority = 0.9
     changefreq = 'monthly'
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return Service.objects.filter(is_published=True)
@@ -72,6 +84,9 @@ class ServiceSitemap(Sitemap):
 class ArticleSitemap(Sitemap):
     priority = 0.7
     changefreq = 'weekly'
+    i18n = True
+    alternates = True
+    x_default = True
 
     def items(self):
         return Article.objects.filter(is_published=True)

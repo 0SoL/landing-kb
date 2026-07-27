@@ -1,7 +1,7 @@
 <title>{{ meta_title }} | Konkurent-B</title>
 <meta name="description" content="{{ meta_description }}">
 <meta name="robots" content="{{ meta_robots | default('index, follow') }}">
-<link rel="canonical" href="{{ request.build_absolute_uri() }}">
+<link rel="canonical" href="{{ request.build_absolute_uri(request.path) }}">
 <meta name="ai-content-purpose" content="B2B industrial services, railway infrastructure Kazakhstan">
 
 <!-- hreflang -->
@@ -12,11 +12,18 @@
 <!-- Open Graph -->
 <meta property="og:title" content="{{ meta_title }}">
 <meta property="og:description" content="{{ meta_description }}">
-<meta property="og:url" content="{{ request.build_absolute_uri() }}">
+<meta property="og:url" content="{{ request.build_absolute_uri(request.path) }}">
 <meta property="og:type" content="{{ og_type | default('website') }}">
 <meta property="og:locale" content="{{ 'en_US' if get_language() == 'en' else 'ru_KZ' }}">
+<meta property="og:locale:alternate" content="{{ 'ru_KZ' if get_language() == 'en' else 'en_US' }}">
 <meta property="og:site_name" content="Konkurent-B">
 <meta property="og:image" content="{{ og_image or request.build_absolute_uri(static('img/hero-bg.jpg')) }}">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ meta_title }}">
+<meta name="twitter:description" content="{{ meta_description }}">
+<meta name="twitter:image" content="{{ og_image or request.build_absolute_uri(static('img/hero-bg.jpg')) }}">
 
 <!-- Structured Data -->
 {% if schema_json %}

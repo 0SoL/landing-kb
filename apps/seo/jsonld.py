@@ -38,6 +38,18 @@ def organization_schema(request=None):
     return schema
 
 
+def website_schema(request):
+    site_url = request.build_absolute_uri('/')
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        'name': 'Konkurent-B',
+        'url': site_url,
+        'inLanguage': ['ru', 'en'],
+        'publisher': organization_base(),
+    }
+
+
 def faq_schema(items):
     return {
         '@context': 'https://schema.org',

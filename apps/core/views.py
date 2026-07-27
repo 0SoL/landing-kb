@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy
 from .models import CompanyStats, FAQItem
 from .forms import ContactForm
 from apps.projects.models import Project
-from apps.seo.jsonld import organization_schema, faq_schema, webpage_schema, breadcrumb_schema, to_json
+from apps.seo.jsonld import organization_schema, website_schema, faq_schema, webpage_schema, breadcrumb_schema, to_json
 
 
 def homepage(request):
@@ -23,7 +23,7 @@ def homepage(request):
         'key_projects': key_projects,
         'meta_title': _('Строительство и реконструкция железных дорог в Казахстане'),
         'meta_description': _('Проектирование, строительство и реконструкция железнодорожных путей для промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта.'),
-        'schema_json': to_json(organization_schema(request)),
+        'schema_json': to_json([organization_schema(request), website_schema(request)]),
         'page_id': 'home',
     }
     return render(request, 'core/homepage.html', context)
