@@ -232,10 +232,25 @@
 }
 
 .site-nav__toggle {
+  position: relative;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
   color: rgba(255, 255, 255, 0.8);
   transition: color var(--transition-fast);
+}
+
+/* Expanded hit area: guarantees a ≥44×44px tap target on touch devices
+   without growing the visual footprint of the caret in the nav row */
+.site-nav__toggle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 .site-nav__toggle:hover,
@@ -244,7 +259,9 @@
 }
 
 .site-nav__caret {
-  font-size: 0.6em;
+  display: block;
+  font-size: 0.9em;
+  line-height: 1;
   transition: transform var(--transition-fast);
 }
 
@@ -374,6 +391,11 @@
     font-size: 2rem;
     font-family: var(--font-display);
     color: var(--color-surface);
+  }
+
+  /* Scale the caret up alongside the 2rem menu links */
+  .site-nav__toggle {
+    font-size: 1.5rem;
   }
 
   /* Dropdown becomes an inline accordion inside the fullscreen menu */
