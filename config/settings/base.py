@@ -4,17 +4,15 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 env = environ.Env()
+# Reads a local .env file when present (dev). In containers no .env is copied
+# into the image, so values come straight from the process environment
+# (docker-compose `env_file`) — read_env is a no-op then.
 environ.Env.read_env(BASE_DIR / '.env', overwrite=True)
 
-print(BASE_DIR / '.env')  # добавьте временно и проверьте вывод
-
-print("DB_HOST:", env("DB_HOST", default="NOT FOUND"))
-
-print("DB_NAME:", env("DB_NAME", default="NOT FOUND"))
-
 SECRET_KEY = env('SECRET_KEY', default='django-insecure-dev-key-change-in-production')
-DEBUG = False
+DEBUG = env.bool('DEBUG', default=False)
 ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 
 DJANGO_APPS = [
     'unfold',
@@ -110,12 +108,10 @@ _DB_ENGINE_ALIASES = {
 def _build_database_config():
     # 1. Single connection string wins if provided.
     if env('DATABASE_URL', default=''):
-        print("Using DATABASE_URL")
         return env.db('DATABASE_URL')
 
     # 2. Discrete variables — activated as soon as a database name is given.
     if env('DB_NAME', default=''):
-        print(f"Using discrete vars: DB_NAME={env('DB_NAME')}, DB_HOST={env('DB_HOST', default='localhost')}")
         engine = env('DB_ENGINE', default='postgresql')
         engine = _DB_ENGINE_ALIASES.get(engine.lower(), engine)
 
@@ -233,6 +229,42 @@ else:
     MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# ── Logging ──────────────────────────────────────────────────────────────────
+# Everything goes to the console (stdout/stderr) so `docker logs` is the single
+# source of truth — no log files inside the container. Level is env-tunable.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'standard': {
+            'format': '[{asctime}] {levelname} {name}: {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': env('DJANGO_LOG_LEVEL', default='INFO'),
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': env('DJANGO_LOG_LEVEL', default='INFO'),
+            'propagate': False,
+        },
+        'django.request': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': False,
+        },
+    },
+}
 
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.console.EmailBackend')
 EMAIL_HOST = env('EMAIL_HOST', default='')

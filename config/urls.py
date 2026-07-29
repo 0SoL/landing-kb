@@ -4,9 +4,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib.sitemaps.views import sitemap
+from django.http import HttpResponse
 from apps.articles import views as article_views
 from apps.seo.sitemaps import StaticViewSitemap, InvestorPagesSitemap, ProjectSitemap, ServiceSitemap, ArticleSitemap
 from apps.seo import views as seo_views
+
+
+def health_check(request):
+    """Container liveness probe. Intentionally trivial: no DB, no S3, no
+    business logic — just proves the WSGI worker can serve a request."""
+    return HttpResponse('OK', content_type='text/plain')
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -16,8 +23,9 @@ sitemaps = {
     'articles': ArticleSitemap,
 }
 
-# Non-language-prefixed URLs: admin, language switcher, SEO files
+# Non-language-prefixed URLs: health probe, admin, language switcher, SEO files
 urlpatterns = [
+    path('health/', health_check, name='health'),
     path('admin/', admin.site.urls),
     path('i18n/', include('django.conf.urls.i18n')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
