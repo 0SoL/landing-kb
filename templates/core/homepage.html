@@ -125,6 +125,10 @@
       <span class="stat-label">{{ _('Км пути уложено') }}</span>
     </div>
     <div class="stats__item animate-on-scroll">
+      <span class="stat-number" data-counter="{{ stats.earthworks_mln_m3 }}">0</span>
+      <span class="stat-label">{{ _('Млн м³ земляных работ') }}</span>
+    </div>
+    <div class="stats__item animate-on-scroll">
       <span class="stat-number" data-counter="{{ stats.years_on_market }}">0</span>
       <span class="stat-label">{{ _('Лет на рынке') }}</span>
     </div>
@@ -146,89 +150,122 @@
   <div class="container">
     <div class="metro__board">
       <div class="metro-route" data-metro-route>
-        <svg class="metro-route__svg" viewBox="0 0 1200 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
-          <path class="metro-route__path metro-route__path--muted" d="M 80 240 L 220 240 L 320 140 L 980 140 L 1020 140 L 1120 60" />
-          <path class="metro-route__path metro-route__path--active" d="M 80 240 L 220 240 L 320 140 L 980 140 L 1020 140 L 1120 60" pathLength="1" data-metro-active-path />
-
-          <g data-metro-rings>
-            <g class="metro-route__node is-active" data-metro-ring="0">
-              <circle class="metro-route__ring" cx="80" cy="240" r="16" />
-              <circle class="metro-route__core" cx="80" cy="240" r="6" />
-            </g>
-            <g class="metro-route__node" data-metro-ring="1">
-              <circle class="metro-route__ring" cx="320" cy="140" r="16" />
-              <circle class="metro-route__core" cx="320" cy="140" r="6" />
-            </g>
-            <g class="metro-route__node" data-metro-ring="2">
-              <circle class="metro-route__ring" cx="650" cy="140" r="16" />
-              <circle class="metro-route__core" cx="650" cy="140" r="6" />
-            </g>
-            <g class="metro-route__node" data-metro-ring="3">
-              <circle class="metro-route__ring" cx="980" cy="140" r="16" />
-              <circle class="metro-route__core" cx="980" cy="140" r="6" />
-            </g>
-            <g class="metro-route__node" data-metro-ring="4">
-              <circle class="metro-route__ring" cx="1120" cy="60" r="16" />
-              <circle class="metro-route__core" cx="1120" cy="60" r="6" />
-            </g>
+        {# The line forks after «Консалтинг» into the two delivery scenarios and
+           merges again at «Проектирование». Segments are lit per-edge along the
+           chain leading to the selected station — see static/js/metro-services.js. #}
+        <svg class="metro-route__svg" viewBox="0 0 1400 600" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+          <g class="metro-route__bed">
+            <path class="metro-route__path metro-route__path--muted" d="M120,300 H300 L420,170 H520" />
+            <path class="metro-route__path metro-route__path--muted" d="M120,300 H300 L420,430 H520" />
+            <path class="metro-route__path metro-route__path--muted" d="M520,170 H650 L770,300" />
+            <path class="metro-route__path metro-route__path--muted" d="M520,430 H650 L770,300" />
+            <path class="metro-route__path metro-route__path--muted" d="M770,300 H1040" />
+            <path class="metro-route__path metro-route__path--muted" d="M1040,300 H1280" />
           </g>
 
-          <circle class="metro-route__train" data-metro-train cx="80" cy="240" r="10" />
+          <g data-metro-edges>
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="A" pathLength="100" d="M120,300 H300 L420,170 H520" />
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="B" pathLength="100" d="M120,300 H300 L420,430 H520" />
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="C" pathLength="100" d="M520,170 H650 L770,300" />
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="D" pathLength="100" d="M520,430 H650 L770,300" />
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="E" pathLength="100" d="M770,300 H1040" />
+            <path class="metro-route__path metro-route__path--active" data-metro-edge="F" pathLength="100" d="M1040,300 H1280" />
+          </g>
+
+          <g data-metro-rings>
+            <g class="metro-route__node is-active is-on" data-metro-ring="0">
+              <circle class="metro-route__ring" cx="120" cy="300" r="20" />
+              <circle class="metro-route__core" cx="120" cy="300" r="7" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="1">
+              <circle class="metro-route__ring" cx="520" cy="170" r="20" />
+              <circle class="metro-route__core" cx="520" cy="170" r="7" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="2">
+              <circle class="metro-route__ring" cx="520" cy="430" r="20" />
+              <circle class="metro-route__core" cx="520" cy="430" r="7" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="3">
+              <circle class="metro-route__ring" cx="770" cy="300" r="20" />
+              <circle class="metro-route__core" cx="770" cy="300" r="7" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="4">
+              <circle class="metro-route__ring" cx="1040" cy="300" r="20" />
+              <circle class="metro-route__core" cx="1040" cy="300" r="7" />
+            </g>
+            <g class="metro-route__node" data-metro-ring="5">
+              <circle class="metro-route__ring" cx="1280" cy="300" r="20" />
+              <circle class="metro-route__core" cx="1280" cy="300" r="7" />
+            </g>
+          </g>
         </svg>
 
-        <div class="metro-route__buttons" role="tablist" aria-label="{{ _('Услуги') }}">
-          <button type="button" class="metro-btn is-active" data-metro-btn="0" data-metro-len="0"
-                  id="metro-btn-0" role="tab" aria-selected="true" aria-controls="metro-panel-0"
-                  style="--metro-x: 6.667%; --metro-y: 75%;">
-            <span class="metro-btn__label-wrap">
-              <span class="metro-btn__index mono" aria-hidden="true">01</span>
-              <span class="metro-btn__name">{{ _('Проектирование') }}</span>
-            </span>
-          </button>
-          <button type="button" class="metro-btn" data-metro-btn="1" data-metro-len="281.42"
-                  id="metro-btn-1" role="tab" aria-selected="false" aria-controls="metro-panel-1" tabindex="-1"
-                  style="--metro-x: 26.667%; --metro-y: 43.75%;">
-            <span class="metro-btn__label-wrap">
-              <span class="metro-btn__index mono" aria-hidden="true">02</span>
-              <span class="metro-btn__name">{{ _('Строительство') }}</span>
-            </span>
-          </button>
-          <button type="button" class="metro-btn" data-metro-btn="2" data-metro-len="611.42"
-                  id="metro-btn-2" role="tab" aria-selected="false" aria-controls="metro-panel-2" tabindex="-1"
-                  style="--metro-x: 54.167%; --metro-y: 43.75%;">
-            <span class="metro-btn__label-wrap">
-              <span class="metro-btn__index mono" aria-hidden="true">03</span>
-              <span class="metro-btn__name">{{ _('Реконструкция') }}</span>
-            </span>
-          </button>
-          <button type="button" class="metro-btn" data-metro-btn="3" data-metro-len="941.42"
-                  id="metro-btn-3" role="tab" aria-selected="false" aria-controls="metro-panel-3" tabindex="-1"
-                  style="--metro-x: 81.667%; --metro-y: 43.75%;">
-            <span class="metro-btn__label-wrap">
-              <span class="metro-btn__index mono" aria-hidden="true">04</span>
-              <span class="metro-btn__name">{{ _('Технический надзор') }}</span>
-            </span>
-          </button>
-          <button type="button" class="metro-btn" data-metro-btn="4" data-metro-len="1109.48"
-                  id="metro-btn-4" role="tab" aria-selected="false" aria-controls="metro-panel-4" tabindex="-1"
-                  style="--metro-x: 93.333%; --metro-y: 18.75%;">
-            <span class="metro-btn__label-wrap">
-              <span class="metro-btn__index mono" aria-hidden="true">05</span>
-              <span class="metro-btn__name">{{ _('Консалтинг') }}</span>
-            </span>
-          </button>
-        </div>
+        {# Stage mirrors the SVG's drawing box exactly (same aspect ratio, centred
+           the way preserveAspectRatio="meet" centres it), so the percentage-placed
+           buttons stay locked to the rings at every breakpoint. #}
+        <div class="metro-route__stage">
+          <div class="metro-route__buttons" role="tablist" aria-label="{{ _('Услуги') }}">
+            <button type="button" class="metro-btn metro-btn--below is-active is-on" data-metro-btn="0" data-metro-id="consulting"
+                    id="metro-btn-0" role="tab" aria-selected="true" aria-controls="metro-panel-0"
+                    style="--metro-x: 8.571%; --metro-y: 50%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">01</span>
+                <span class="metro-btn__name">{{ _('Консалтинг') }}</span>
+              </span>
+            </button>
+            <button type="button" class="metro-btn" data-metro-btn="1" data-metro-id="recon"
+                    id="metro-btn-1" role="tab" aria-selected="false" aria-controls="metro-panel-1" tabindex="-1"
+                    style="--metro-x: 37.143%; --metro-y: 28.333%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">{{ _('02 · А') }}</span>
+                <span class="metro-btn__name">{{ _('Реконструкция') }}</span>
+              </span>
+            </button>
+            <button type="button" class="metro-btn metro-btn--below" data-metro-btn="2" data-metro-id="constr"
+                    id="metro-btn-2" role="tab" aria-selected="false" aria-controls="metro-panel-2" tabindex="-1"
+                    style="--metro-x: 37.143%; --metro-y: 71.667%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">{{ _('02 · Б') }}</span>
+                <span class="metro-btn__name">{{ _('Строительство') }}</span>
+              </span>
+            </button>
+            <button type="button" class="metro-btn metro-btn--below" data-metro-btn="3" data-metro-id="design"
+                    id="metro-btn-3" role="tab" aria-selected="false" aria-controls="metro-panel-3" tabindex="-1"
+                    style="--metro-x: 55%; --metro-y: 50%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">03</span>
+                <span class="metro-btn__name">{{ _('Проектирование') }}</span>
+              </span>
+            </button>
+            <button type="button" class="metro-btn" data-metro-btn="4" data-metro-id="supervision"
+                    id="metro-btn-4" role="tab" aria-selected="false" aria-controls="metro-panel-4" tabindex="-1"
+                    style="--metro-x: 74.286%; --metro-y: 50%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">04</span>
+                <span class="metro-btn__name">{{ _('Технический надзор') }}</span>
+              </span>
+            </button>
+            <button type="button" class="metro-btn" data-metro-btn="5" data-metro-id="operation"
+                    id="metro-btn-5" role="tab" aria-selected="false" aria-controls="metro-panel-5" tabindex="-1"
+                    style="--metro-x: 91.429%; --metro-y: 50%;">
+              <span class="metro-btn__label-wrap">
+                <span class="metro-btn__index mono" aria-hidden="true">05</span>
+                <span class="metro-btn__name">{{ _('Эксплуатация') }}</span>
+              </span>
+            </button>
+          </div>
 
-        <!-- Onboarding hint: a little figure bouncing above the next station -->
-        <div class="metro-hint" data-metro-hint aria-hidden="true">
-          <div class="metro-hint__inner">
-            <svg class="metro-hint__figure" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" focusable="false">
-              <circle cx="12" cy="4.6" r="3.6"/>
-              <path d="M12 9.4c-2.9 0-4.6 1.6-4.6 4.2v6h2.1l0.8 11h3.4l0.8-11h2.1v-6c0-2.6-1.7-4.2-4.6-4.2z"/>
-            </svg>
-            <svg class="metro-hint__chevron" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg" focusable="false">
-              <path d="M1 1l5 5 5-5" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+          <!-- Onboarding hint: a little figure bouncing above the next station -->
+          <div class="metro-hint" data-metro-hint aria-hidden="true">
+            <div class="metro-hint__inner">
+              <svg class="metro-hint__figure" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <circle cx="12" cy="4.6" r="3.6"/>
+                <path d="M12 9.4c-2.9 0-4.6 1.6-4.6 4.2v6h2.1l0.8 11h3.4l0.8-11h2.1v-6c0-2.6-1.7-4.2-4.6-4.2z"/>
+              </svg>
+              <svg class="metro-hint__chevron" viewBox="0 0 12 8" xmlns="http://www.w3.org/2000/svg" focusable="false">
+                <path d="M1 1l5 5 5-5" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -237,28 +274,17 @@
         <article class="metro-panel is-active" id="metro-panel-0" data-metro-panel="0"
                  role="tabpanel" aria-labelledby="metro-btn-0">
           <span class="metro-panel__num mono">01 / 05</span>
-          <h3 class="metro-panel__title">{{ _('Проектирование') }}</h3>
-          <p class="metro-panel__desc">{{ _('Разрабатываем проектную документацию для подъездных путей, внутрипортовых коммуникаций и сортировочных станций — с учётом норм РК и требований заказчика.') }}</p>
+          <h3 class="metro-panel__title">{{ _('Консалтинг') }}</h3>
+          <p class="metro-panel__desc">{{ _('Сопровождаем проект на стадии концепции и технико-экономического обоснования — помогаем выбрать оптимальную схему пути и подготовиться к экспертизе.') }}</p>
           <ul class="metro-panel__tags">
-            <li>{{ _('Топосъёмка') }}</li>
-            <li>{{ _('Экспертиза') }}</li>
-            <li>{{ _('Рабочая документация') }}</li>
+            <li>{{ _('Концепция') }}</li>
+            <li>{{ _('ТЭО') }}</li>
+            <li>{{ _('Подготовка к экспертизе') }}</li>
           </ul>
         </article>
         <article class="metro-panel" id="metro-panel-1" data-metro-panel="1"
                  role="tabpanel" aria-labelledby="metro-btn-1" hidden>
-          <span class="metro-panel__num mono">02 / 05</span>
-          <h3 class="metro-panel__title">{{ _('Строительство') }}</h3>
-          <p class="metro-panel__desc">{{ _('Выполняем земляные работы, укладку верхнего строения пути и устройство искусственных сооружений силами собственных бригад и техники.') }}</p>
-          <ul class="metro-panel__tags">
-            <li>{{ _('Земляное полотно') }}</li>
-            <li>{{ _('Балласт и шпалы') }}</li>
-            <li>{{ _('Стрелочные переводы') }}</li>
-          </ul>
-        </article>
-        <article class="metro-panel" id="metro-panel-2" data-metro-panel="2"
-                 role="tabpanel" aria-labelledby="metro-btn-2" hidden>
-          <span class="metro-panel__num mono">03 / 05</span>
+          <span class="metro-panel__num mono">{{ _('02 / 05 · сценарий А') }}</span>
           <h3 class="metro-panel__title">{{ _('Реконструкция') }}</h3>
           <p class="metro-panel__desc">{{ _('Модернизируем существующие пути необщего пользования — от усиления балласта до полной перекладки рельсо-шпальной решётки. Работаем с минимальной остановкой производства заказчика.') }}</p>
           <ul class="metro-panel__tags">
@@ -267,8 +293,30 @@
             <li>{{ _('Замена пути') }}</li>
           </ul>
         </article>
+        <article class="metro-panel" id="metro-panel-2" data-metro-panel="2"
+                 role="tabpanel" aria-labelledby="metro-btn-2" hidden>
+          <span class="metro-panel__num mono">{{ _('02 / 05 · сценарий Б') }}</span>
+          <h3 class="metro-panel__title">{{ _('Строительство') }}</h3>
+          <p class="metro-panel__desc">{{ _('Выполняем земляные работы, укладку верхнего строения пути и устройство искусственных сооружений силами собственных бригад и техники.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Земляное полотно') }}</li>
+            <li>{{ _('Балласт и шпалы') }}</li>
+            <li>{{ _('Стрелочные переводы') }}</li>
+          </ul>
+        </article>
         <article class="metro-panel" id="metro-panel-3" data-metro-panel="3"
                  role="tabpanel" aria-labelledby="metro-btn-3" hidden>
+          <span class="metro-panel__num mono">03 / 05</span>
+          <h3 class="metro-panel__title">{{ _('Проектирование') }}</h3>
+          <p class="metro-panel__desc">{{ _('Разрабатываем проектную документацию для подъездных путей, внутрипортовых коммуникаций и сортировочных станций — с учётом норм РК и требований заказчика.') }}</p>
+          <ul class="metro-panel__tags">
+            <li>{{ _('Топосъёмка') }}</li>
+            <li>{{ _('Экспертиза') }}</li>
+            <li>{{ _('Рабочая документация') }}</li>
+          </ul>
+        </article>
+        <article class="metro-panel" id="metro-panel-4" data-metro-panel="4"
+                 role="tabpanel" aria-labelledby="metro-btn-4" hidden>
           <span class="metro-panel__num mono">04 / 05</span>
           <h3 class="metro-panel__title">{{ _('Технический надзор') }}</h3>
           <p class="metro-panel__desc">{{ _('Контролируем качество работ на всех этапах: приёмку материалов, соответствие проекту, ведение исполнительной документации и подготовку объекта к сдаче.') }}</p>
@@ -278,15 +326,15 @@
             <li>{{ _('Приёмо-сдаточные испытания') }}</li>
           </ul>
         </article>
-        <article class="metro-panel" id="metro-panel-4" data-metro-panel="4"
-                 role="tabpanel" aria-labelledby="metro-btn-4" hidden>
+        <article class="metro-panel" id="metro-panel-5" data-metro-panel="5"
+                 role="tabpanel" aria-labelledby="metro-btn-5" hidden>
           <span class="metro-panel__num mono">05 / 05</span>
-          <h3 class="metro-panel__title">{{ _('Консалтинг') }}</h3>
-          <p class="metro-panel__desc">{{ _('Сопровождаем проект на стадии концепции и технико-экономического обоснования — помогаем выбрать оптимальную схему пути и подготовиться к экспертизе.') }}</p>
+          <h3 class="metro-panel__title">{{ _('Эксплуатация') }}</h3>
+          <p class="metro-panel__desc">{{ _('Передаём объект с полным комплектом исполнительной документации и сопровождаем его в работе: регламенты обслуживания, плановые осмотры пути и устранение замечаний в гарантийный период.') }}</p>
           <ul class="metro-panel__tags">
-            <li>{{ _('Концепция') }}</li>
-            <li>{{ _('ТЭО') }}</li>
-            <li>{{ _('Подготовка к экспертизе') }}</li>
+            <li>{{ _('Исполнительная документация') }}</li>
+            <li>{{ _('Обслуживание пути') }}</li>
+            <li>{{ _('Гарантийное сопровождение') }}</li>
           </ul>
         </article>
       </div>

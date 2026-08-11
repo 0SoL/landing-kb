@@ -7,6 +7,7 @@ class CompanyStats(models.Model):
     track_km = models.PositiveIntegerField(default=0, verbose_name='Км пути уложено')
     years_on_market = models.PositiveIntegerField(default=0, verbose_name='Лет на рынке')
     employees_count = models.PositiveIntegerField(default=0, verbose_name='Сотрудников')
+    earthworks_mln_m3 = models.PositiveIntegerField(default=0, verbose_name='Земляных работ, млн м³')
 
     class Meta:
         verbose_name = 'Показатели компании'

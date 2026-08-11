@@ -219,7 +219,7 @@
   color: var(--color-accent);
 }
 
-/* --- Dropdown (Инвесторам) --- */
+/* --- Dropdown (Руководителям Проектов) --- */
 
 .site-nav__item--dropdown {
   position: relative;
@@ -2231,8 +2231,17 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
+.pillars-grid--one {
+  grid-template-columns: minmax(0, 560px);
+  justify-content: center;
+}
+
 @media (max-width: 640px) {
   .pillars-grid--two {
+    grid-template-columns: 1fr;
+  }
+
+  .pillars-grid--one {
     grid-template-columns: 1fr;
   }
 }
@@ -2733,8 +2742,8 @@
    ============================================ */
 
 .metro {
-  --metro-progress: 0;
   --metro-muted: rgba(255, 255, 255, 0.14);
+  --metro-visited: rgba(200, 146, 42, 0.55);
   --metro-active: var(--color-accent);
   --metro-surface: #161616;
   --metro-bg: var(--color-dark);
@@ -2799,7 +2808,7 @@
 
 .metro-route {
   position: relative;
-  aspect-ratio: 1200 / 320;
+  aspect-ratio: 1400 / 600;
   width: 100%;
   margin-bottom: clamp(2rem, 5vw, 4rem);
 }
@@ -2813,6 +2822,21 @@
   overflow: visible;
 }
 
+/* Mirrors the box the SVG actually draws into: preserveAspectRatio="meet"
+   fits the drawing to the width and centres it vertically, so a layer with the
+   same aspect ratio, centred the same way, shares the viewBox coordinate
+   space. Percentage-placed buttons then track the rings exactly, including at
+   the breakpoints below where .metro-route is deliberately made taller to give
+   station labels room. */
+.metro-route__stage {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  aspect-ratio: 1400 / 600;
+}
+
 .metro-route__path {
   fill: none;
   stroke-linejoin: round;
@@ -2824,12 +2848,21 @@
   stroke-width: 4;
 }
 
+/* Each segment is drawn as a single dash the length of the path, then pulled
+   out of view. JS sets --metro-delay so segments fill in chain order. */
 .metro-route__path--active {
+  --metro-delay: 0s;
   stroke: var(--metro-active);
   stroke-width: 5;
-  stroke-dasharray: 1;
-  stroke-dashoffset: calc(1 - var(--metro-progress));
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
   filter: drop-shadow(0 0 6px rgba(200, 146, 42, 0.45));
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.metro-route__path--active.is-on {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1) var(--metro-delay);
 }
 
 .metro-route__ring {
@@ -2844,21 +2877,22 @@
   transition: fill 0.35s ease, r 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+/* Stations already passed on the way to the selected one. */
+.metro-route__node.is-on .metro-route__ring {
+  stroke: var(--metro-visited);
+}
+
+.metro-route__node.is-on .metro-route__core {
+  fill: var(--metro-visited);
+}
+
 .metro-route__node.is-active .metro-route__ring {
   stroke: var(--metro-active);
-  r: 18;
+  r: 23;
 }
 
 .metro-route__node.is-active .metro-route__core {
   fill: var(--metro-active);
-}
-
-.metro-route__train {
-  fill: var(--metro-active);
-  stroke: var(--color-surface);
-  stroke-width: 2;
-  filter: drop-shadow(0 0 10px rgba(200, 146, 42, 0.6));
-  pointer-events: none;
 }
 
 /* --- BUTTONS (HTML overlay for keyboard a11y) --- */
@@ -2905,6 +2939,14 @@
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Stations sitting on the lower fork, or between the fork legs, label
+   downwards so the text never lands on top of a route segment. */
+.metro-btn--below .metro-btn__label-wrap {
+  bottom: auto;
+  top: calc(100% + 14px);
+  flex-direction: column-reverse;
+}
+
 .metro-btn__index {
   font-size: 0.7rem;
   letter-spacing: 0.18em;
@@ -2931,8 +2973,16 @@
   transform: translateY(0);
 }
 
+.metro-btn.is-on .metro-btn__name {
+  color: rgba(255, 255, 255, 0.88);
+}
+
 .metro-btn.is-active .metro-btn__label-wrap {
   transform: translate(-50%, -4px);
+}
+
+.metro-btn--below.is-active .metro-btn__label-wrap {
+  transform: translate(-50%, 4px);
 }
 
 .metro-btn.is-active .metro-btn__name {
@@ -3087,9 +3137,12 @@
 
 /* --- RESPONSIVE --- */
 
+/* The fork needs more vertical room than the drawing itself occupies, so the
+   route box grows taller than the 1400/600 viewBox and .metro-route__stage
+   keeps the buttons aligned to the (still centred) drawing. */
 @media (max-width: 720px) {
   .metro-route {
-    aspect-ratio: 1200 / 360;
+    aspect-ratio: 1400 / 760;
   }
   .metro-btn__name {
     font-size: 0.72rem;
@@ -3097,12 +3150,15 @@
   .metro-btn__label-wrap {
     bottom: calc(100% + 8px);
   }
+  .metro-btn--below .metro-btn__label-wrap {
+    top: calc(100% + 8px);
+  }
   .metro-btn__index { display: none; }
 }
 
 @media (max-width: 480px) {
   .metro-route {
-    aspect-ratio: 1200 / 440;
+    aspect-ratio: 1400 / 900;
   }
   /* Let long station names wrap so neighbouring labels don't collide */
   .metro-btn__label-wrap {
@@ -3120,12 +3176,12 @@
     transform: translateX(-15%);
   }
   .metro-btn[data-metro-btn="0"].is-active .metro-btn__label-wrap {
-    transform: translate(-15%, -4px);
+    transform: translate(-15%, 4px);
   }
-  .metro-btn[data-metro-btn="4"] .metro-btn__label-wrap {
+  .metro-btn[data-metro-btn="5"] .metro-btn__label-wrap {
     transform: translateX(-85%);
   }
-  .metro-btn[data-metro-btn="4"].is-active .metro-btn__label-wrap {
+  .metro-btn[data-metro-btn="5"].is-active .metro-btn__label-wrap {
     transform: translate(-85%, -4px);
   }
 }
@@ -3134,9 +3190,9 @@
 
 @media (prefers-reduced-motion: reduce) {
   .metro-route__path--active,
+  .metro-route__path--active.is-on,
   .metro-route__ring,
   .metro-route__core,
-  .metro-route__train,
   .metro-btn,
   .metro-btn__index,
   .metro-panel,

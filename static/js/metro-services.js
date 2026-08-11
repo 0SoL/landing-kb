@@ -4,48 +4,74 @@
   const section = document.querySelector('[data-metro]');
   if (!section) return;
 
-  const path = section.querySelector('[data-metro-active-path]');
-  const train = section.querySelector('[data-metro-train]');
   const hint = section.querySelector('[data-metro-hint]');
-  const ringsHost = section.querySelector('[data-metro-rings]');
+  const tablist = section.querySelector('[role="tablist"]');
   const buttons = Array.from(section.querySelectorAll('[data-metro-btn]'));
   const panels = Array.from(section.querySelectorAll('[data-metro-panel]'));
-  const rings = Array.from(section.querySelectorAll('[data-metro-ring]'));
+  const edges = Array.from(section.querySelectorAll('[data-metro-edge]'));
 
-  if (!path || !buttons.length || !panels.length) return;
+  if (!buttons.length || !panels.length) return;
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // The line forks after «Консалтинг» into the two delivery scenarios and
+  // merges again at «Проектирование», so reaching a station is a chain of
+  // segments rather than a single distance along one path. BRANCH is a
+  // placeholder for whichever scenario the visitor last picked.
+  const ORDER = {
+    consulting:  ['consulting'],
+    recon:       ['consulting', 'recon'],
+    constr:      ['consulting', 'constr'],
+    design:      ['consulting', 'BRANCH', 'design'],
+    supervision: ['consulting', 'BRANCH', 'design', 'supervision'],
+    operation:   ['consulting', 'BRANCH', 'design', 'supervision', 'operation'],
+  };
 
-  // Each station carries data-metro-len = its length along the path in user units.
-  // We normalise to [0, 1] using the path's total rendered length.
-  const totalLen = path.getTotalLength();
+  // Which SVG segment joins each pair of adjacent stations.
+  const EDGE = {
+    'consulting>recon': 'A',
+    'consulting>constr': 'B',
+    'recon>design': 'C',
+    'constr>design': 'D',
+    'design>supervision': 'E',
+    'supervision>operation': 'F',
+  };
+
+  // Station the onboarding hint points at next. From «Консалтинг» the route
+  // forks, so it points at the branch currently in play.
+  const NEXT = {
+    recon: 'design',
+    constr: 'design',
+    design: 'supervision',
+    supervision: 'operation',
+    operation: null,
+  };
+
+  const BRANCHES = ['recon', 'constr'];
+  const DEFAULT_BRANCH = 'constr';
+  const STAGGER = 0.16;
+
+  const byId = {};
   const stations = buttons.map((btn) => {
-    const len = parseFloat(btn.dataset.metroLen || '0');
-    return {
-      btn,
-      ring: ringsHost && ringsHost.querySelector('[data-metro-ring="' + btn.dataset.metroBtn + '"]'),
+    const station = {
+      id: btn.dataset.metroId,
+      btn: btn,
+      ring: section.querySelector('[data-metro-ring="' + btn.dataset.metroBtn + '"]'),
       panel: panels.find((p) => p.dataset.metroPanel === btn.dataset.metroBtn),
-      len,
-      progress: totalLen > 0 ? len / totalLen : 0,
     };
+    byId[station.id] = station;
+    return station;
   });
 
   let currentIdx = 0;
-  let tween = null;
-  const state = { progress: 0 };
+  let branch = DEFAULT_BRANCH;
 
-  function setPoint(progress) {
-    section.style.setProperty('--metro-progress', progress.toFixed(4));
-    const pt = path.getPointAtLength(progress * totalLen);
-    train.setAttribute('cx', pt.x.toFixed(2));
-    train.setAttribute('cy', pt.y.toFixed(2));
+  function chainFor(id) {
+    return (ORDER[id] || ORDER.consulting).map((n) => (n === 'BRANCH' ? branch : n));
   }
 
-  // Onboarding hint: point the little figure at the next station so the
-  // user knows the dots are clickable. Hidden once the route is completed.
-  function moveHint(idx) {
+  function moveHint(id) {
     if (!hint) return;
-    const next = stations[idx + 1];
+    const nextId = id === 'consulting' ? branch : NEXT[id];
+    const next = nextId ? byId[nextId] : null;
     if (!next) {
       hint.classList.remove('is-visible');
       return;
@@ -55,53 +81,66 @@
     hint.classList.add('is-visible');
   }
 
-  function updateClasses(idx) {
-    stations.forEach((s, i) => {
-      const active = i === idx;
-      s.btn.classList.toggle('is-active', active);
-      s.btn.setAttribute('aria-selected', active ? 'true' : 'false');
-      s.btn.setAttribute('tabindex', active ? '0' : '-1');
-      if (s.ring) s.ring.classList.toggle('is-active', active);
+  function render(idx) {
+    const active = stations[idx];
+    const chain = chainFor(active.id);
+    const visited = new Set(chain);
+
+    // Segments light up in chain order, each one delayed behind the last so
+    // the route reads as travelling outward from the start.
+    const lit = {};
+    for (let i = 0; i < chain.length - 1; i++) {
+      const key = EDGE[chain[i] + '>' + chain[i + 1]];
+      if (key) lit[key] = i;
+    }
+
+    edges.forEach((edge) => {
+      const step = lit[edge.dataset.metroEdge];
+      const on = step !== undefined;
+      edge.classList.toggle('is-on', on);
+      edge.style.setProperty('--metro-delay', on ? (step * STAGGER).toFixed(2) + 's' : '0s');
+    });
+
+    stations.forEach((s) => {
+      const isActive = s === active;
+      const isOn = visited.has(s.id);
+      s.btn.classList.toggle('is-active', isActive);
+      s.btn.classList.toggle('is-on', isOn);
+      s.btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      s.btn.setAttribute('tabindex', isActive ? '0' : '-1');
+      if (s.ring) {
+        s.ring.classList.toggle('is-active', isActive);
+        s.ring.classList.toggle('is-on', isOn);
+      }
       if (s.panel) {
-        s.panel.classList.toggle('is-active', active);
-        if (active) {
+        s.panel.classList.toggle('is-active', isActive);
+        if (isActive) {
           s.panel.removeAttribute('hidden');
         } else {
           s.panel.setAttribute('hidden', '');
         }
       }
     });
+
+    moveHint(active.id);
   }
 
   function select(idx, opts) {
-    if (idx === currentIdx && !(opts && opts.force)) return;
     const target = stations[idx];
     if (!target) return;
 
-    updateClasses(idx);
+    // Picking either fork station also sets the scenario that the merged part
+    // of the route is drawn through.
+    const switched = BRANCHES.indexOf(target.id) !== -1 && target.id !== branch;
+    if (switched) branch = target.id;
+
+    if (idx === currentIdx && !switched && !(opts && opts.force)) return;
     currentIdx = idx;
-    moveHint(idx);
-
-    if (reduceMotion || typeof window.gsap === 'undefined') {
-      state.progress = target.progress;
-      setPoint(target.progress);
-      return;
-    }
-
-    if (tween) tween.kill();
-    tween = window.gsap.to(state, {
-      progress: target.progress,
-      duration: 0.85,
-      ease: 'power2.inOut',
-      onUpdate: () => setPoint(state.progress),
-    });
+    render(idx);
   }
 
-  // Initial paint — show station 0 at progress 0, hint at the next station.
-  setPoint(0);
-  moveHint(0);
+  render(0);
 
-  // Click selection.
   buttons.forEach((btn, idx) => {
     btn.addEventListener('click', () => select(idx));
   });
@@ -109,31 +148,33 @@
   // Keyboard: arrow keys move between stations, Home/End jump to ends.
   // Following the WAI-ARIA tabs pattern: arrow navigation moves focus AND
   // activates (since this is a single-selection scheme with no extra cost).
-  section.querySelector('[role="tablist"]').addEventListener('keydown', (e) => {
-    const max = buttons.length - 1;
-    let next = currentIdx;
-    switch (e.key) {
-      case 'ArrowRight':
-      case 'ArrowDown':
-        next = currentIdx >= max ? 0 : currentIdx + 1;
-        break;
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        next = currentIdx <= 0 ? max : currentIdx - 1;
-        break;
-      case 'Home':
-        next = 0;
-        break;
-      case 'End':
-        next = max;
-        break;
-      default:
-        return;
-    }
-    e.preventDefault();
-    select(next);
-    buttons[next].focus();
-  });
+  if (tablist) {
+    tablist.addEventListener('keydown', (e) => {
+      const max = buttons.length - 1;
+      let next = currentIdx;
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'ArrowDown':
+          next = currentIdx >= max ? 0 : currentIdx + 1;
+          break;
+        case 'ArrowLeft':
+        case 'ArrowUp':
+          next = currentIdx <= 0 ? max : currentIdx - 1;
+          break;
+        case 'Home':
+          next = 0;
+          break;
+        case 'End':
+          next = max;
+          break;
+        default:
+          return;
+      }
+      e.preventDefault();
+      select(next);
+      buttons[next].focus();
+    });
+  }
 
   // If a hash like #metro-panel-2 was used, jump straight to that station.
   if (location.hash) {
