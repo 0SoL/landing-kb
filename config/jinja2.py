@@ -23,12 +23,30 @@ def environment(**options):
         'now': datetime.now,
         'get_language': get_language,
         'alternate_url': alternate_url,
+        'social_links': social_links,
     })
     return env
 
 
 def url(name, **kwargs):
     return reverse(name, kwargs=kwargs)
+
+
+def social_links():
+    """Published social profiles in display order. Blank settings are omitted.
+
+    Brand names stay untranslated — they are proper nouns in every locale.
+    """
+    from django.conf import settings
+    candidates = (
+        ('instagram', 'Instagram', settings.SOCIAL_INSTAGRAM_URL),
+        ('youtube', 'YouTube', settings.SOCIAL_YOUTUBE_URL),
+    )
+    return [
+        {'key': key, 'label': label, 'url': profile_url}
+        for key, label, profile_url in candidates
+        if profile_url
+    ]
 
 
 def alternate_url(request, lang):

@@ -275,6 +275,14 @@ EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='noreply@example.com')
 INQUIRY_RECIPIENT_EMAIL = env('INQUIRY_RECIPIENT_EMAIL', default='info@example.com')
 
+# ── Social networks ─────────────────────────────────────────────────────────
+# Only Instagram and YouTube are published. A blank value hides that link
+# everywhere (contacts page, footer, and the Organization `sameAs` list).
+SOCIAL_INSTAGRAM_URL = env('SOCIAL_INSTAGRAM_URL', default='https://www.instagram.com/konkurent_b/')
+# YouTube is intentionally hidden for now. The rendering code is fully intact —
+# set SOCIAL_YOUTUBE_URL to the channel URL to bring the link back everywhere.
+SOCIAL_YOUTUBE_URL = env('SOCIAL_YOUTUBE_URL', default='')
+
 UNFOLD = {
     'SITE_TITLE': 'Конкурент-Б',
     'SITE_HEADER': 'Управление сайтом',

@@ -1107,6 +1107,44 @@
   display: block;
 }
 
+/* Social pills — labelled variant used on the contacts page */
+.social-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  margin-top: var(--space-sm);
+}
+
+.social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-primary);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.social-pill:hover,
+.social-pill:focus-visible {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-surface);
+}
+
+.social-pill__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.social-icon {
+  flex-shrink: 0;
+}
+
 .contacts-form-wrap h2 {
   font-size: clamp(1.5rem, 3vw, 2.5rem);
   margin-bottom: var(--space-md);
@@ -1975,6 +2013,53 @@
   font-size: 0.75rem;
   color: rgba(255,255,255,0.35);
   letter-spacing: 0.04em;
+}
+
+.site-footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+}
+
+.site-footer__social {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.site-footer__social-title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.35);
+}
+
+/* Social icons — compact variant used in the footer */
+.social-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.social-icons__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.7);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.social-icons__link:hover,
+.social-icons__link:focus-visible {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-surface);
 }
 
 /* ============================================

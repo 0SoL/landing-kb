@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% from 'components/social.html' import social_pills %}
 
 {% block content %}
 <section class="page-hero page-hero--dark" style="background-image: url('{{ static('img/hero-bg.jpg') }}')">
@@ -17,17 +18,17 @@
 
       <div class="contacts-info__item" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
         <h3>{{ _('Адрес') }}</h3>
-        <address itemprop="streetAddress">{{ _('Казахстан') }}</address>
+        <address itemprop="streetAddress">{{ _('Улица Жанайдар Жирентаев, 2Б, 301 офис; 3 этаж, Алматы район, Астана, Z01G0E9') }}</address>
       </div>
 
       <div class="contacts-info__item">
         <h3>{{ _('Телефон') }}</h3>
-        <a href="tel:+77000000000" itemprop="telephone" class="contacts-info__link">+7 (700) 000-00-00</a>
+        <a href="tel:+77172767878" itemprop="telephone" class="contacts-info__link">+7 (7172) 76-78-78</a>
       </div>
 
       <div class="contacts-info__item">
         <h3>Email</h3>
-        <a href="mailto:info@example.kz" itemprop="email" class="contacts-info__link">info@example.kz</a>
+        <a href="mailto:konkurent-b@mail.ru" itemprop="email" class="contacts-info__link">konkurent-b@mail.ru</a>
       </div>
 
       <div class="contacts-info__item">
@@ -35,9 +36,18 @@
         <p>{{ _('Пн–Пт: 9:00–18:00 (GMT+6, Алматы)') }}</p>
       </div>
 
+      {% set links = social_links() %}
+      {% if links %}
+      <div class="contacts-info__item">
+        <h3>{{ _('Соцсети') }}</h3>
+        {{ social_pills(links) }}
+      </div>
+      {% endif %}
+
       <div class="contacts-map">
         <iframe
-          src="https://www.openstreetmap.org/export/embed.html?bbox=76.5,43.1,77.5,43.5&layer=mapnik"
+          {# bbox is min_lon,min_lat,max_lon,max_lat — a tight box centred on the office; marker is lat,lon #}
+          src="https://www.openstreetmap.org/export/embed.html?bbox=71.4689,51.1426,71.4849,51.1506&amp;layer=mapnik&amp;marker=51.146612,71.476879"
           width="100%"
           height="300"
           loading="lazy"

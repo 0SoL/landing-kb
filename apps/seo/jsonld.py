@@ -3,8 +3,17 @@ import json
 from django.utils.translation import gettext as _
 
 
+def social_profile_urls():
+    """Published social profiles for the Organization `sameAs` list."""
+    from django.conf import settings
+    return [
+        url for url in (settings.SOCIAL_INSTAGRAM_URL, settings.SOCIAL_YOUTUBE_URL) if url
+    ]
+
+
 def organization_base():
     """Built per-request so the active language is applied to translatable strings."""
+    same_as = social_profile_urls()
     return {
         '@type': 'Organization',
         'name': _('Конкурент-Б'),
@@ -27,6 +36,7 @@ def organization_base():
             'contactType': 'customer service',
             'availableLanguage': ['Russian', 'English'],
         },
+        **({'sameAs': same_as} if same_as else {}),
     }
 
 
