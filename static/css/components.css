@@ -215,7 +215,8 @@
   transition: color var(--transition-fast);
 }
 
-.site-nav__link:hover {
+.site-nav__link:hover,
+.site-nav__link--active {
   color: var(--color-accent);
 }
 
@@ -391,6 +392,10 @@
     font-size: 2rem;
     font-family: var(--font-display);
     color: var(--color-surface);
+  }
+
+  .site-nav__link--active {
+    color: var(--color-accent);
   }
 
   /* Scale the caret up alongside the 2rem menu links */

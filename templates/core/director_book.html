@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ static('css/pages/book.css') }}">
+{% endblock %}
+
+{% block content %}
+{% set breadcrumbs = [{'title': _('Руководителям Проектов'), 'url': url('core:investors')}, {'title': _('Книга директора'), 'url': None}] %}
+{% include 'components/breadcrumbs.html' %}
+
+<div class="book-page">
+
+{# ── 1. HERO ── #}
+<section class="book-hero">
+  <div class="book-hero__photo" aria-hidden="true"></div>
+  <div class="container book-hero__inner">
+    <div class="book-hero__text">
+      <p class="book-eyebrow book-hero__eyebrow">{{ _('Исследование · Астана, 2025') }}</p>
+      <h1 class="book-hero__title">{{ _('Книга директора') }}</h1>
+      <p class="book-hero__name">{{ _('«Оценка государственной политики в отрасли железнодорожного транспорта в Казахстане»') }}</p>
+      <p class="book-hero__authors">{{ _('Б. Р. Кадиров, Т. С. Ергалиев · 74 страницы') }}</p>
+      <div class="book-hero__actions">
+        <a class="btn btn--gold book-btn" href="{{ pdf_url }}" download rel="nofollow">{{ _('Скачать PDF · 1,2 МБ') }} <span aria-hidden="true">↓</span></a>
+        <a class="book-link" href="#walk">{{ _('Кратко о книге') }} <span aria-hidden="true">↓</span></a>
+      </div>
+    </div>
+
+    <div class="book-cover" aria-hidden="true">
+      <div class="book-cover__spine"></div>
+      <div class="book-cover__face">
+        <p class="book-eyebrow book-cover__eyebrow">{{ _('Конкурент-Б') }} · 2025</p>
+        <div class="book-cover__rule"></div>
+        <p class="book-cover__kicker">{{ _('ОЦЕНКА') }}</p>
+        <p class="book-cover__title">{{ _('государственной политики в отрасли железно­дорожного транспорта в Казахстане') }}</p>
+        <p class="book-cover__authors"><b>{{ _('Б. Р. Кадиров') }}</b><b>{{ _('Т. С. Ергалиев') }}</b>{{ _('Астана') }}</p>
+        <div class="book-cover__rails"><i></i><i></i><i></i></div>
+      </div>
+    </div>
+  </div>
+
+  {# ── 2. STATS ── #}
+  <div class="book-stats">
+    <dl class="container book-stats__grid">
+      <div class="book-stats__item"><dt>7</dt><dd>{{ _('отраслевых программ с 2001 года — и противоречия между ними') }}</dd></div>
+      <div class="book-stats__item"><dt>{{ _('3 из 48') }}</dt><dd>{{ _('функций КТЖ по Уставу — функции корпоративного центра') }}</dd></div>
+      <div class="book-stats__item"><dt>60+%</dt><dd>{{ _('основных средств КТЖ — железнодорожная инфраструктура') }}</dd></div>
+      <div class="book-stats__item"><dt>{{ _('0,799') }}</dt><dd>{{ _('км ж/д на 1000 человек — 9-е место среди стран Middle Power') }}</dd></div>
+    </dl>
+  </div>
+</section>
+
+{# ── 3. WALKTHROUGH ── #}
+<section class="book-walk" id="walk">
+  <div class="container">
+    <div class="book-walk__head">
+      <div>
+        <p class="book-eyebrow book-walk__eyebrow">{{ _('Кратко о книге') }}</p>
+        <h2 class="book-walk__title">{{ _('Три главы за три минуты') }}</h2>
+      </div>
+      <figure class="book-walk__quote">
+        <blockquote><p>{{ _('Железнодорожный транспорт остаётся отраслью экономики с, пожалуй, наибольшей долей государственного участия.') }}</p></blockquote>
+        <figcaption>{{ _('Из введения') }}</figcaption>
+      </figure>
+    </div>
+
+    <article class="book-chapter">
+      <div class="book-chapter__num" aria-hidden="true">01</div>
+      <div>
+        <h3 class="book-chapter__title">{{ _('Оценка роли государства в отрасли') }}</h3>
+        <p class="book-chapter__pages">{{ _('с. 3–24') }}</p>
+        <p class="book-chapter__text">{{ _('С 2001 года принято семь отраслевых программ. Авторы проверяют, сохранялась ли в них преемственность и не противоречат ли они друг другу.') }}</p>
+      </div>
+      <aside class="book-chapter__key">
+        <p class="book-eyebrow">{{ _('Вывод') }}</p>
+        <p>{{ _('Перед стратегическими решениями нужно анализировать прежние программы и собственный опыт реформ Казахстана, а не только зарубежный.') }}</p>
+      </aside>
+    </article>
+
+    <article class="book-chapter">
+      <div class="book-chapter__num" aria-hidden="true">02</div>
+      <div>
+        <h3 class="book-chapter__title">{{ _('«Что хорошо для КТЖ…»') }}</h3>
+        <p class="book-chapter__pages">{{ _('с. 25–40') }}</p>
+        <p class="book-chapter__text">{{ _('Роль КТЖ в своей группе, функции из Устава, которые можно отдать на аутсорсинг, и варианты отделения магистральной железнодорожной сети.') }}</p>
+      </div>
+      <aside class="book-chapter__key">
+        <p class="book-eyebrow">{{ _('Ключевой факт') }}</p>
+        <p>{{ _('Из 48 видов деятельности по Уставу только 3 относятся к корпоративному центру. Большинство — к профилю оператора инфраструктуры.') }}</p>
+      </aside>
+    </article>
+
+    <article class="book-chapter">
+      <div class="book-chapter__num" aria-hidden="true">03</div>
+      <div>
+        <h3 class="book-chapter__title">{{ _('Грузовые ж/д перевозки в региональном развитии') }}</h3>
+        <p class="book-chapter__pages">{{ _('с. 41–63') }}</p>
+        <p class="book-chapter__text">{{ _('Сравнение со странами Middle Power, региональная политика и наличие железнодорожных станций в районах областей.') }}</p>
+      </div>
+      <aside class="book-chapter__key">
+        <p class="book-eyebrow">{{ _('Решение') }}</p>
+        <p>{{ _('Расширить понятия частного пользования и частной собственности в законе «О железнодорожном транспорте», чтобы привлечь частные инвестиции в регионы.') }}</p>
+      </aside>
+    </article>
+
+    {# ── 4. FULL VERSION CTA ── #}
+    <div class="book-end">
+      <div class="book-end__num" aria-hidden="true">→</div>
+      <div>
+        <h3 class="book-end__title">{{ _('Выводы и предложения — в полной версии') }}</h3>
+        <p class="book-end__text">{{ _('Подробный разбор, 12 таблиц, графики по 161 району и все предложения авторов.') }}</p>
+        <p class="book-end__meta">{{ _('PDF · 74 страницы · 1,2 МБ') }}</p>
+      </div>
+      <a class="btn btn--gold book-btn" href="{{ pdf_url }}" download rel="nofollow">{{ _('Скачать PDF') }} <span aria-hidden="true">↓</span></a>
+    </div>
+  </div>
+</section>
+
+{# Phone only: download bar pinned to the bottom of the viewport #}
+<div class="book-dock">
+  <p class="book-dock__label"><b>{{ _('Книга директора') }}</b>{{ _('PDF · 74 с. · 1,2 МБ') }}</p>
+  <a class="btn btn--gold book-btn book-dock__btn" href="{{ pdf_url }}" download rel="nofollow">{{ _('Скачать') }} <span aria-hidden="true">↓</span></a>
+</div>
+
+</div>
+{% endblock %}

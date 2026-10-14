@@ -120,6 +120,38 @@ def article_schema(article, request=None):
     return schema
 
 
+def book_schema(name, authors, date_published, number_of_pages, description, about, chapters, request=None):
+    """Book summary for search engines and AI crawlers. Deliberately carries no
+    link to the PDF itself: the landing page is the canonical place to get it."""
+    schema = {
+        '@context': 'https://schema.org',
+        '@type': 'Book',
+        'name': name,
+        'author': [{'@type': 'Person', 'name': author} for author in authors],
+        'datePublished': date_published,
+        'numberOfPages': number_of_pages,
+        'inLanguage': 'ru',
+        'bookFormat': 'https://schema.org/EBook',
+        'isAccessibleForFree': True,
+        'description': description,
+        'about': [{'@type': 'Thing', 'name': topic} for topic in about],
+        'hasPart': [
+            {
+                '@type': 'Chapter',
+                'position': position,
+                'name': title,
+                'pagination': pages,
+                'description': summary,
+            }
+            for position, (title, pages, summary) in enumerate(chapters, start=1)
+        ],
+        'publisher': organization_base(),
+    }
+    if request is not None:
+        schema['url'] = request.build_absolute_uri(request.path)
+    return schema
+
+
 def service_schema(service, request=None):
     schema = {
         '@context': 'https://schema.org',

@@ -1,0 +1,19 @@
+{
+  "name": "Конкурент-Б",
+  "short_name": "Конкурент-Б",
+  "icons": [
+    {
+      "src": "/static/img/favicon/favicon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/static/img/favicon/favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#211F19",
+  "background_color": "#211F19",
+  "display": "standalone"
+}

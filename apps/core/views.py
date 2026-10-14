@@ -3,12 +3,13 @@ from django.http import Http404
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.conf import settings
+from django.templatetags.static import static
 from django.utils.translation import gettext as _
 from django.utils.translation import gettext_lazy
 from .models import CompanyStats, FAQItem
 from .forms import ContactForm
 from apps.projects.models import Project
-from apps.seo.jsonld import organization_schema, website_schema, faq_schema, webpage_schema, breadcrumb_schema, to_json
+from apps.seo.jsonld import organization_schema, website_schema, faq_schema, webpage_schema, breadcrumb_schema, book_schema, to_json
 
 
 def homepage(request):
@@ -209,6 +210,53 @@ def investor_page(request, slug):
         'schema_json': to_json(schemas),
     }
     return render(request, page['template'], context)
+
+
+# ── Director's book — single PDF publication with a landing page ──
+DIRECTOR_BOOK_PDF = 'docs/kniga-direktora.pdf'
+
+
+def director_book(request):
+    meta_title = _('Книга директора')
+    meta_description = _('«Оценка государственной политики в отрасли железнодорожного транспорта в Казахстане» — исследование Б. Р. Кадирова и Т. С. Ергалиева. Краткое содержание трёх глав и PDF для скачивания.')
+    crumbs = [
+        (_('Главная'), reverse('core:home')),
+        (_('Руководителям Проектов'), reverse('core:investors')),
+        (_('Книга директора'), None),
+    ]
+    pdf_url = static(DIRECTOR_BOOK_PDF)
+    schemas = [
+        book_schema(
+            _('Оценка государственной политики в отрасли железнодорожного транспорта в Казахстане'),
+            [_('Б. Р. Кадиров'), _('Т. С. Ергалиев')],
+            '2025', 74,
+            description=_('Исследование о роли государства в железнодорожной отрасли Казахстана: преемственность семи отраслевых программ с 2001 года, функции и структура КТЖ, роль грузовых перевозок в развитии регионов. Полная версия на русском языке бесплатно доступна для скачивания на сайте компании «Конкурент-Б».'),
+            about=[
+                _('Железнодорожный транспорт Казахстана'),
+                _('Государственная политика в отрасли железнодорожного транспорта'),
+                _('Реформа КТЖ'),
+                _('Региональное развитие'),
+            ],
+            chapters=[
+                (_('Оценка роли государства в отрасли'), '3–24',
+                 _('С 2001 года принято семь отраслевых программ. Авторы проверяют, сохранялась ли в них преемственность и не противоречат ли они друг другу.')),
+                (_('«Что хорошо для КТЖ…»'), '25–40',
+                 _('Роль КТЖ в своей группе, функции из Устава, которые можно отдать на аутсорсинг, и варианты отделения магистральной железнодорожной сети.')),
+                (_('Грузовые ж/д перевозки в региональном развитии'), '41–63',
+                 _('Сравнение со странами Middle Power, региональная политика и наличие железнодорожных станций в районах областей.')),
+            ],
+            request=request,
+        ),
+        breadcrumb_schema(request, crumbs),
+    ]
+    context = {
+        'meta_title': meta_title,
+        'meta_description': meta_description,
+        'schema_json': to_json(schemas),
+        'pdf_url': pdf_url,
+        'nav_active': 'investors',
+    }
+    return render(request, 'core/director_book.html', context)
 
 
 def contacts_success(request):

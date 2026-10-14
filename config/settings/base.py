@@ -228,6 +228,16 @@ else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
 
+# Downloadable documents under static/docs/ (the director's book PDF): keep the
+# file itself out of search results and AI training/answers — the landing page
+# carries the summary. Pairs with the Disallow rule in apps/seo/views.robots_txt.
+def _docs_noindex_headers(headers, path, url):
+    if url.startswith(STATIC_URL + 'docs/'):
+        headers['X-Robots-Tag'] = 'noindex, nofollow, noarchive, nosnippet, noai, noimageai'
+
+
+WHITENOISE_ADD_HEADERS_FUNCTION = _docs_noindex_headers
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # ── Logging ──────────────────────────────────────────────────────────────────

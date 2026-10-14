@@ -15,6 +15,10 @@
 <section class="section investor-page">
   <div class="container">
     <article class="rich-text investor-page__content">
+      {# Long-form copy: EN lives in its own file, RU stays inline below #}
+      {% if get_language() == 'en' %}
+      {% include 'core/investors/en/vybor-ploshchadki.html' %}
+      {% else %}
 
       <p class="investor-page__lead">Если Вы планируете строительство подъездного ж\д пути к Вашему объекту, то при выборе площадки под его строительство следует выяснить, возможно ли будет построить на данном участке подъездной ж\д путь и присоединить его к Железной дороге в принципе и сколько это может стоить. Для этого нужно знать следующее:</p>
 
@@ -33,6 +37,7 @@
 
       <p>Учесть вышеперечисленные и многие другие нюансы при выборе площадки под строительство объекта с подъездными ж/д путями Вам всегда помогут специалисты нашей компании. Главное — вовремя обратиться!</p>
 
+      {% endif %}
     </article>
   </div>
 </section>

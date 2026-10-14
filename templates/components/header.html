@@ -14,7 +14,7 @@
         <li><a href="{{ url('articles:news_list') }}" class="site-nav__link">{{ _('Новости') }}</a></li>
         <li class="site-nav__item--dropdown" data-dropdown>
           <div class="site-nav__dropdown-head">
-            <a href="{{ url('core:investors') }}" class="site-nav__link">{{ _('Руководителям Проектов') }}</a>
+            <a href="{{ url('core:investors') }}" class="site-nav__link{% if nav_active == 'investors' %} site-nav__link--active{% endif %}">{{ _('Руководителям Проектов') }}</a>
             <button type="button" class="site-nav__toggle" data-dropdown-toggle
                     aria-expanded="false" aria-controls="nav-investors"
                     aria-label="{{ _('Открыть меню «Руководителям Проектов»') }}">

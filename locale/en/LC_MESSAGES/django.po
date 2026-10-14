@@ -24,7 +24,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-29 16:53+0500\n"
+"POT-Creation-Date: 2026-10-14 13:10+0500\n"
 "PO-Revision-Date: 2026-04-24 00:00+0500\n"
 "Last-Translator: rustamkadirov4@gmail.com\n"
 "Language-Team: English\n"
@@ -50,8 +50,8 @@ msgstr ""
 msgid "Завершённые проекты, отраслевые события и обновления компании"
 msgstr "Completed projects, industry events and company updates"
 
-#: apps/articles/views.py:15 apps/core/views.py:118 apps/core/views.py:122
-#: apps/core/views.py:141 apps/core/views.py:197
+#: apps/articles/views.py:15 apps/core/views.py:119 apps/core/views.py:123
+#: apps/core/views.py:142 apps/core/views.py:198
 #: templates/core/construction_recommendations.html:4
 #: templates/core/investors.html:4 templates/core/investors.html:10
 #: templates/core/investors/etapy-stroitelstva.html:4
@@ -91,7 +91,9 @@ msgstr ""
 msgid "Технические статьи, нормативная база и стандарты"
 msgstr "Technical articles, regulatory framework and standards"
 
-#: apps/articles/views.py:25 templates/components/footer.html:31
+#: apps/articles/views.py:25 apps/core/views.py:220 apps/core/views.py:225
+#: templates/components/footer.html:31 templates/core/director_book.html:8
+#: templates/core/director_book.html:19 templates/core/director_book.html:120
 msgid "Книга директора"
 msgstr "Director's Book"
 
@@ -103,20 +105,20 @@ msgstr "Analytical materials and articles from the company’s management."
 msgid "Аналитические материалы и статьи от руководства компании"
 msgstr "Analytical materials and articles from the company’s management"
 
-#: apps/articles/views.py:39 apps/articles/views.py:60 apps/core/views.py:76
-#: apps/core/views.py:92 apps/core/views.py:107 apps/core/views.py:121
-#: apps/core/views.py:140 apps/core/views.py:196 apps/equipment/views.py:13
-#: apps/projects/views.py:16 apps/projects/views.py:38
-#: apps/services/views.py:13 apps/services/views.py:32
-#: templates/components/breadcrumbs.html:7
+#: apps/articles/views.py:39 apps/articles/views.py:60 apps/core/views.py:77
+#: apps/core/views.py:93 apps/core/views.py:108 apps/core/views.py:122
+#: apps/core/views.py:141 apps/core/views.py:197 apps/core/views.py:223
+#: apps/equipment/views.py:13 apps/projects/views.py:16
+#: apps/projects/views.py:38 apps/services/views.py:13
+#: apps/services/views.py:32 templates/components/breadcrumbs.html:7
 msgid "Главная"
 msgstr "Home"
 
-#: apps/core/views.py:24
+#: apps/core/views.py:25
 msgid "Строительство и реконструкция железных дорог в Казахстане"
 msgstr "Railway construction and reconstruction in Kazakhstan"
 
-#: apps/core/views.py:25
+#: apps/core/views.py:26
 msgid ""
 "Проектирование, строительство и реконструкция железнодорожных путей для "
 "промышленных предприятий, портов и терминалов Казахстана. Более 15 лет опыта."
@@ -124,13 +126,13 @@ msgstr ""
 "Design, construction and reconstruction of railway tracks for industrial "
 "enterprises, ports and terminals in Kazakhstan. Over 15 years of experience."
 
-#: apps/core/views.py:36 templates/components/footer.html:13
+#: apps/core/views.py:37 templates/components/footer.html:13
 #: templates/components/header.html:13 templates/core/about.html:9
 #: templates/core/our_leaders.html:4 templates/core/our_people.html:4
 msgid "О компании"
 msgstr "About"
 
-#: apps/core/views.py:37
+#: apps/core/views.py:38
 msgid ""
 "Казахстанская компания по строительству и реконструкции железнодорожных "
 "путей. Работаем с промышленными предприятиями, портами и логистическими "
@@ -139,11 +141,11 @@ msgstr ""
 "A Kazakhstani company for railway track construction and reconstruction. We "
 "work with industrial enterprises, ports and logistics terminals."
 
-#: apps/core/views.py:47 templates/core/faq.html:7
+#: apps/core/views.py:48 templates/core/faq.html:7
 msgid "Часто задаваемые вопросы"
 msgstr "Frequently Asked Questions"
 
-#: apps/core/views.py:48
+#: apps/core/views.py:49
 msgid ""
 "Ответы на часто задаваемые вопросы о строительстве железнодорожных путей, "
 "стоимости проектов и сроках работ."
@@ -151,12 +153,12 @@ msgstr ""
 "Answers to frequently asked questions about railway track construction, "
 "project costs and timelines."
 
-#: apps/core/views.py:72 apps/core/views.py:76
+#: apps/core/views.py:73 apps/core/views.py:77
 #: templates/components/footer.html:37 templates/core/contacts.html:8
 msgid "Контакты"
 msgstr "Contacts"
 
-#: apps/core/views.py:73
+#: apps/core/views.py:74
 msgid ""
 "Свяжитесь с нами для получения консультации по строительству железнодорожных "
 "путей. Ответим в течение рабочего дня."
@@ -164,12 +166,12 @@ msgstr ""
 "Contact us for a consultation on railway track construction. We reply within "
 "one business day."
 
-#: apps/core/views.py:88 apps/core/views.py:92 templates/core/about.html:37
+#: apps/core/views.py:89 apps/core/views.py:93 templates/core/about.html:38
 #: templates/core/our_people.html:4 templates/core/our_people.html:10
 msgid "Наши люди"
 msgstr "Our People"
 
-#: apps/core/views.py:89
+#: apps/core/views.py:90
 msgid ""
 "Команда специалистов по строительству и реконструкции железнодорожных путей "
 "в Казахстане."
@@ -177,12 +179,12 @@ msgstr ""
 "A team of specialists in railway track construction and reconstruction in "
 "Kazakhstan."
 
-#: apps/core/views.py:103 apps/core/views.py:107
+#: apps/core/views.py:104 apps/core/views.py:108
 #: templates/core/our_leaders.html:4 templates/core/our_leaders.html:10
 msgid "Руководство"
 msgstr "Leadership"
 
-#: apps/core/views.py:104
+#: apps/core/views.py:105
 msgid ""
 "Руководящий состав компании Конкурент-Б — опытные управленцы в "
 "железнодорожной отрасли Казахстана."
@@ -190,7 +192,7 @@ msgstr ""
 "The leadership of Konkurent-B — experienced managers in Kazakhstan’s railway "
 "industry."
 
-#: apps/core/views.py:119
+#: apps/core/views.py:120
 msgid ""
 "Информация для инвесторов о строительстве подъездных железнодорожных путей в "
 "Казахстане: выгоды, стоимость, окупаемость и порядок реализации проекта."
@@ -198,14 +200,14 @@ msgstr ""
 "Information for investors on the construction of railway sidings in "
 "Kazakhstan: benefits, cost, payback and project delivery process."
 
-#: apps/core/views.py:137 apps/core/views.py:142
+#: apps/core/views.py:138 apps/core/views.py:143
 #: templates/components/header.html:26
 #: templates/core/construction_recommendations.html:4
 #: templates/core/construction_recommendations.html:10
 msgid "Рекомендации по строительству"
 msgstr "Construction recommendations"
 
-#: apps/core/views.py:138
+#: apps/core/views.py:139
 msgid ""
 "Как сократить сроки и уменьшить расходы при строительстве подъездного "
 "железнодорожного пути: практические рекомендации по срокам, договорам и "
@@ -214,14 +216,14 @@ msgstr ""
 "How to shorten timelines and reduce costs when building a railway siding: "
 "practical recommendations on schedules, contracts and materials."
 
-#: apps/core/views.py:160 apps/core/views.py:161
+#: apps/core/views.py:161 apps/core/views.py:162
 #: templates/components/header.html:25
 #: templates/core/investors/vybor-ploshchadki.html:4
 #: templates/core/investors/vybor-ploshchadki.html:10
 msgid "Выбор площадки под строительство объекта"
 msgstr "Choosing a site for construction"
 
-#: apps/core/views.py:162
+#: apps/core/views.py:163
 msgid ""
 "Что проверить при выборе площадки под подъездной железнодорожный путь: "
 "возможность врезки, расстояние до станции, землеотвод и факторы удорожания."
@@ -230,14 +232,14 @@ msgstr ""
 "feasibility, distance to the station, land allocation and cost-increasing "
 "factors."
 
-#: apps/core/views.py:166 apps/core/views.py:167
+#: apps/core/views.py:167 apps/core/views.py:168
 #: templates/components/header.html:27
 #: templates/core/investors/spravochnik-terminov.html:4
 #: templates/core/investors/spravochnik-terminov.html:10
 msgid "Справочник терминов"
 msgstr "Glossary of terms"
 
-#: apps/core/views.py:168
+#: apps/core/views.py:169
 msgid ""
 "Справочник терминов железнодорожного строительства и путевого хозяйства: "
 "балласт, верхнее строение пути, стрелочный перевод и другие понятия."
@@ -245,14 +247,14 @@ msgstr ""
 "A glossary of railway construction and track facility terms: ballast, track "
 "superstructure, turnout and other concepts."
 
-#: apps/core/views.py:172 apps/core/views.py:173
+#: apps/core/views.py:173 apps/core/views.py:174
 #: templates/components/header.html:28
 #: templates/core/investors/tekhnologiya-stroitelstva.html:4
 #: templates/core/investors/tekhnologiya-stroitelstva.html:10
 msgid "Технология строительства"
 msgstr "Construction technology"
 
-#: apps/core/views.py:174
+#: apps/core/views.py:175
 msgid ""
 "Технология строительства железнодорожного пути: земляные работы, устройство "
 "верхнего строения пути и способы укладки рельсошпальной решётки."
@@ -260,27 +262,27 @@ msgstr ""
 "Railway track construction technology: earthworks, track superstructure "
 "installation and methods of laying the rail-and-sleeper grid."
 
-#: apps/core/views.py:178 apps/core/views.py:179
+#: apps/core/views.py:179 apps/core/views.py:180
 #: templates/components/header.html:29
 #: templates/core/investors/teo-proekta.html:4
 #: templates/core/investors/teo-proekta.html:10
 msgid "ТЭО проекта строительства подъездного жд-пути"
 msgstr "Feasibility study for a railway siding construction project"
 
-#: apps/core/views.py:180
+#: apps/core/views.py:181
 msgid ""
 "Технико-экономическое обоснование проекта строительства подъездного "
 "железнодорожного пути."
 msgstr "Feasibility study for a railway siding construction project."
 
-#: apps/core/views.py:184 apps/core/views.py:185
+#: apps/core/views.py:185 apps/core/views.py:186
 #: templates/components/header.html:30
 #: templates/core/investors/etapy-stroitelstva.html:4
 #: templates/core/investors/etapy-stroitelstva.html:10
 msgid "Этапы строительства жд-пути"
 msgstr "Stages of railway track construction"
 
-#: apps/core/views.py:186
+#: apps/core/views.py:187
 msgid ""
 "Этапы строительства подъездного железнодорожного пути: подготовительные и "
 "проектные работы, строительство и ввод в эксплуатацию, сроки и стоимость."
@@ -288,16 +290,110 @@ msgstr ""
 "Stages of railway siding construction: preparatory and design work, "
 "construction and commissioning, timelines and cost."
 
-#: apps/core/views.py:216 templates/core/contacts_success.html:7
+#: apps/core/views.py:221
+msgid ""
+"«Оценка государственной политики в отрасли железнодорожного транспорта в "
+"Казахстане» — исследование Б. Р. Кадирова и Т. С. Ергалиева. Краткое "
+"содержание трёх глав и PDF для скачивания."
+msgstr ""
+"“Assessment of State Policy in the Railway Transport Sector of Kazakhstan” — "
+"a study by B. R. Kadirov and T. S. Yergaliyev. A summary of the three "
+"chapters and the full PDF (in Russian)."
+
+#: apps/core/views.py:224 templates/components/footer.html:29
+#: templates/components/header.html:17 templates/core/director_book.html:8
+msgid "Руководителям Проектов"
+msgstr "For Project Managers"
+
+#: apps/core/views.py:230
+msgid ""
+"Оценка государственной политики в отрасли железнодорожного транспорта в "
+"Казахстане"
+msgstr ""
+"Assessment of State Policy in the Railway Transport Sector of Kazakhstan"
+
+#: apps/core/views.py:231 templates/core/director_book.html:35
+msgid "Б. Р. Кадиров"
+msgstr "B. R. Kadirov"
+
+#: apps/core/views.py:231 templates/core/director_book.html:35
+msgid "Т. С. Ергалиев"
+msgstr "T. S. Yergaliyev"
+
+#: apps/core/views.py:233
+msgid ""
+"Исследование о роли государства в железнодорожной отрасли Казахстана: "
+"преемственность семи отраслевых программ с 2001 года, функции и структура "
+"КТЖ, роль грузовых перевозок в развитии регионов. Полная версия на русском "
+"языке бесплатно доступна для скачивания на сайте компании «Конкурент-Б»."
+msgstr ""
+"A study of the state’s role in Kazakhstan’s railway sector: the continuity "
+"of seven sector programmes since 2001, the functions and structure of KTZ, "
+"and the role of rail freight in regional development. The full version, in "
+"Russian, is available as a free download on the Konkurent-B website."
+
+#: apps/core/views.py:235
+msgid "Железнодорожный транспорт Казахстана"
+msgstr "Rail transport in Kazakhstan"
+
+#: apps/core/views.py:236
+msgid "Государственная политика в отрасли железнодорожного транспорта"
+msgstr "State policy in the railway transport sector"
+
+#: apps/core/views.py:237
+msgid "Реформа КТЖ"
+msgstr "KTZ reform"
+
+#: apps/core/views.py:238
+msgid "Региональное развитие"
+msgstr "Regional development"
+
+#: apps/core/views.py:241 templates/core/director_book.html:69
+msgid "Оценка роли государства в отрасли"
+msgstr "Assessing the state’s role in the sector"
+
+#: apps/core/views.py:242 templates/core/director_book.html:71
+msgid ""
+"С 2001 года принято семь отраслевых программ. Авторы проверяют, сохранялась "
+"ли в них преемственность и не противоречат ли они друг другу."
+msgstr ""
+"Seven sector programmes have been adopted since 2001. The authors examine "
+"whether they maintained continuity and whether they contradict one another."
+
+#: apps/core/views.py:243 templates/core/director_book.html:82
+msgid "«Что хорошо для КТЖ…»"
+msgstr "“What’s good for KTZ…”"
+
+#: apps/core/views.py:244 templates/core/director_book.html:84
+msgid ""
+"Роль КТЖ в своей группе, функции из Устава, которые можно отдать на "
+"аутсорсинг, и варианты отделения магистральной железнодорожной сети."
+msgstr ""
+"KTZ’s role within its group, the Charter functions that could be outsourced, "
+"and options for separating the main-line railway network."
+
+#: apps/core/views.py:245 templates/core/director_book.html:95
+msgid "Грузовые ж/д перевозки в региональном развитии"
+msgstr "Rail freight in regional development"
+
+#: apps/core/views.py:246 templates/core/director_book.html:97
+msgid ""
+"Сравнение со странами Middle Power, региональная политика и наличие "
+"железнодорожных станций в районах областей."
+msgstr ""
+"A comparison with Middle Power countries, regional policy, and the "
+"availability of railway stations across the districts of each region."
+
+#: apps/core/views.py:264 templates/core/contacts_success.html:7
 msgid "Заявка принята"
 msgstr "Request Received"
 
-#: apps/core/views.py:217
+#: apps/core/views.py:265
 msgid "Ваша заявка принята. Мы свяжемся с вами в течение рабочего дня."
 msgstr ""
 "Your request has been received. We will contact you within one business day."
 
-#: apps/equipment/views.py:10 templates/core/about.html:114
+#: apps/equipment/views.py:10 templates/core/about.html:115
 #: templates/equipment/list.html:7
 msgid "Парк техники"
 msgstr "Equipment Fleet"
@@ -357,7 +453,7 @@ msgstr "Projects"
 #: templates/components/footer.html:5 templates/components/footer.html:46
 #: templates/components/header.html:4 templates/components/seo_head.html:1
 #: templates/components/seo_head.html:19 templates/core/about.html:10
-#: templates/core/contacts.html:17
+#: templates/core/contacts.html:17 templates/core/director_book.html:31
 msgid "Конкурент-Б"
 msgstr "Konkurent-B"
 
@@ -416,7 +512,7 @@ msgstr "Read"
 msgid "Материалы скоро появятся."
 msgstr "Content coming soon."
 
-#: templates/base.html:15
+#: templates/base.html:25
 msgid "Перейти к содержимому"
 msgstr "Skip to content"
 
@@ -455,10 +551,6 @@ msgstr "All Services"
 #: templates/components/footer.html:26
 msgid "Информация"
 msgstr "Information"
-
-#: templates/components/footer.html:29 templates/components/header.html:17
-msgid "Руководителям Проектов"
-msgstr "For Project Managers"
 
 #: templates/components/footer.html:30
 msgid "Технические статьи"
@@ -510,30 +602,42 @@ msgstr ""
 "initial design through to commissioning with full as-built documentation."
 
 #: templates/core/about.html:21
-msgid "Строим то, что работает десятилетиями"
-msgstr "Building what works for decades"
+msgid "Строим то, что другие считают невозможным"
+msgstr "We build what others consider impossible"
 
 #: templates/core/about.html:22
 msgid ""
-"Мы специализируемся на полном цикле работ с железнодорожными путями необщего "
-"пользования: от геодезических изысканий и проектирования до строительства, "
-"реконструкции и технического обслуживания."
+"С 2013 года ТОО «Конкурент-Б» реализует сложнейшие инфраструктурные проекты "
+"Казахстана — от первого частного контейнерного терминала на границе с КНР и "
+"порта на Каспии до рекордной железнодорожной магистрали протяжённостью 285 "
+"км."
 msgstr ""
-"We specialize in the full cycle of works for private-use railway tracks: "
-"from geodetic surveys and engineering design to construction, "
-"reconstruction, and maintenance."
+"Since 2013, Konkurent-B LLP has been delivering Kazakhstan's most complex "
+"infrastructure projects — from the first private container terminal on the "
+"border with China and a port on the Caspian Sea to a record-breaking 285 km "
+"railway line."
 
 #: templates/core/about.html:23
 msgid ""
-"Наши клиенты — промышленные предприятия, порты, логистические терминалы и "
-"индустриальные парки Казахстана. Мы понимаем специфику каждого типа объектов "
-"и строим пути, которые выдерживают промышленные нагрузки."
+"Мы выполняем полный цикл работ с железнодорожными путями необщего "
+"пользования: от геодезических изысканий и проектирования до строительства, "
+"реконструкции и технического обслуживания."
 msgstr ""
-"Our clients are industrial enterprises, ports, logistics terminals, and "
-"industrial parks in Kazakhstan. We understand the specifics of each type of "
-"facility and build tracks that withstand industrial loads."
+"We deliver the full cycle of works on private-use railway tracks: from "
+"geodetic surveys and engineering design to construction, reconstruction, and "
+"maintenance."
 
 #: templates/core/about.html:24
+msgid ""
+"Наши клиенты — промышленные предприятия, порты, логистические терминалы и "
+"индустриальные парки. Мы понимаем специфику каждого объекта и строим пути, "
+"которые выдерживают промышленные нагрузки десятилетиями."
+msgstr ""
+"Our clients are industrial enterprises, ports, logistics terminals, and "
+"industrial parks. We understand the specifics of every facility and build "
+"tracks that withstand industrial loads for decades."
+
+#: templates/core/about.html:25
 msgid ""
 "Работаем в соответствии с нормативной базой Республики Казахстан, нормами "
 "КМК и СП."
@@ -541,11 +645,11 @@ msgstr ""
 "We operate in accordance with the regulatory framework of the Republic of "
 "Kazakhstan, KMK and SP standards."
 
-#: templates/core/about.html:35
+#: templates/core/about.html:36
 msgid "Наша команда"
 msgstr "Our Team"
 
-#: templates/core/about.html:36
+#: templates/core/about.html:37
 msgid ""
 "Специалисты, которые проектируют, строят и обслуживают железнодорожные пути. "
 "Опытные инженеры, технологи и рабочие."
@@ -553,15 +657,15 @@ msgstr ""
 "Specialists who design, build, and maintain railway tracks. Experienced "
 "engineers, technologists, and construction workers."
 
-#: templates/core/about.html:47
+#: templates/core/about.html:48
 msgid "История компании"
 msgstr "Company History"
 
-#: templates/core/about.html:52
+#: templates/core/about.html:53
 msgid "Основание компании"
 msgstr "Company Founded"
 
-#: templates/core/about.html:53
+#: templates/core/about.html:54
 msgid ""
 "Компания основана в Казахстане как специализированный подрядчик по "
 "строительству железнодорожных путей необщего пользования для промышленных "
@@ -570,11 +674,11 @@ msgstr ""
 "The company was founded in Kazakhstan as a specialized contractor for the "
 "construction of private-use railway tracks for industrial enterprises."
 
-#: templates/core/about.html:59
+#: templates/core/about.html:60
 msgid "Первые крупные объекты"
 msgstr "First Major Projects"
 
-#: templates/core/about.html:60
+#: templates/core/about.html:61
 msgid ""
 "Выполнены первые контракты для металлургических предприятий севера "
 "Казахстана. Сформирован собственный парк путевой техники."
@@ -582,11 +686,11 @@ msgstr ""
 "First contracts completed for metallurgical enterprises in northern "
 "Kazakhstan. Own fleet of track machinery assembled."
 
-#: templates/core/about.html:66
+#: templates/core/about.html:67
 msgid "Расширение географии"
 msgstr "Geographic Expansion"
 
-#: templates/core/about.html:67
+#: templates/core/about.html:68
 msgid ""
 "Выход на портовые и логистические объекты. Начало работ в западном и южном "
 "Казахстане."
@@ -594,11 +698,11 @@ msgstr ""
 "Expanded into port and logistics facilities. Work began in western and "
 "southern Kazakhstan."
 
-#: templates/core/about.html:73
+#: templates/core/about.html:74
 msgid "Полный проектно-строительный цикл"
 msgstr "Full Design-Build Cycle"
 
-#: templates/core/about.html:74
+#: templates/core/about.html:75
 msgid ""
 "Сформировано собственное проектное подразделение — от изысканий до "
 "согласования в КТЖ и Госэкспертизе."
@@ -606,31 +710,31 @@ msgstr ""
 "Own design department established — from surveys to approvals with KTZ and "
 "State Expertise."
 
-#: templates/core/about.html:78
+#: templates/core/about.html:79
 msgid "Сегодня"
 msgstr "Today"
 
-#: templates/core/about.html:80
+#: templates/core/about.html:81
 msgid "проектов по всему Казахстану"
 msgstr "projects across Kazakhstan"
 
-#: templates/core/about.html:81
+#: templates/core/about.html:82
 msgid "Работаем с заводами, портами, терминалами и индустриальными парками."
 msgstr "We work with factories, ports, terminals and industrial parks."
 
-#: templates/core/about.html:81
+#: templates/core/about.html:82
 msgid "км пути сдано заказчикам."
 msgstr "km of track delivered to clients."
 
-#: templates/core/about.html:91
+#: templates/core/about.html:92
 msgid "Что нас отличает"
 msgstr "What Sets Us Apart"
 
-#: templates/core/about.html:96
+#: templates/core/about.html:97
 msgid "Полный цикл работ"
 msgstr "Full Scope of Work"
 
-#: templates/core/about.html:97
+#: templates/core/about.html:98
 msgid ""
 "От геодезии и проектирования до строительства, сдачи и сопровождения. Один "
 "подрядчик — одна ответственность."
@@ -638,15 +742,15 @@ msgstr ""
 "From surveying and design to construction, commissioning, and ongoing "
 "support. One contractor — one responsibility."
 
-#: templates/core/about.html:98
+#: templates/core/about.html:99
 msgid "Наши услуги"
 msgstr "Our Services"
 
-#: templates/core/about.html:104
+#: templates/core/about.html:105
 msgid "Подтверждённый опыт"
 msgstr "Proven Experience"
 
-#: templates/core/about.html:105
+#: templates/core/about.html:106
 msgid ""
 "завершённых объектов для заводов, портов и терминалов. Каждый проект — в "
 "портфолио с параметрами и результатами."
@@ -654,15 +758,15 @@ msgstr ""
 "completed facilities for factories, ports, and terminals. Every project is "
 "in the portfolio with parameters and results."
 
-#: templates/core/about.html:106
+#: templates/core/about.html:107
 msgid "Смотреть проекты"
 msgstr "View Projects"
 
-#: templates/core/about.html:112
+#: templates/core/about.html:113
 msgid "Собственная техника"
 msgstr "Own Equipment Fleet"
 
-#: templates/core/about.html:113
+#: templates/core/about.html:114
 msgid ""
 "Не зависим от субподрядчиков. Парк специализированного путевого оборудования "
 "под контролем — сроки выдерживаются."
@@ -737,6 +841,157 @@ msgstr ""
 #: templates/core/contacts_success.html:9
 msgid "На главную"
 msgstr "Back to Home"
+
+#: templates/core/director_book.html:18
+msgid "Исследование · Астана, 2025"
+msgstr "Research · Astana, 2025"
+
+#: templates/core/director_book.html:20
+msgid ""
+"«Оценка государственной политики в отрасли железнодорожного транспорта в "
+"Казахстане»"
+msgstr ""
+"“Assessment of State Policy in the Railway Transport Sector of Kazakhstan”"
+
+#: templates/core/director_book.html:21
+msgid "Б. Р. Кадиров, Т. С. Ергалиев · 74 страницы"
+msgstr "B. R. Kadirov, T. S. Yergaliyev · 74 pages · in Russian"
+
+#: templates/core/director_book.html:23
+msgid "Скачать PDF · 1,2 МБ"
+msgstr "Download PDF · 1.2 MB"
+
+#: templates/core/director_book.html:24 templates/core/director_book.html:57
+msgid "Кратко о книге"
+msgstr "The book in brief"
+
+#: templates/core/director_book.html:33
+msgid "ОЦЕНКА"
+msgstr "ASSESSMENT"
+
+#: templates/core/director_book.html:34
+msgid ""
+"государственной политики в отрасли железно­дорожного транспорта в Казахстане"
+msgstr "of state policy in the rail­way transport sector of Kazakhstan"
+
+#: templates/core/director_book.html:35
+msgid "Астана"
+msgstr "Astana"
+
+#: templates/core/director_book.html:44
+msgid "отраслевых программ с 2001 года — и противоречия между ними"
+msgstr "sector programmes since 2001 — and the contradictions between them"
+
+#: templates/core/director_book.html:45
+msgid "3 из 48"
+msgstr "3 of 48"
+
+#: templates/core/director_book.html:45
+msgid "функций КТЖ по Уставу — функции корпоративного центра"
+msgstr "KTZ functions under its Charter are corporate-centre functions"
+
+#: templates/core/director_book.html:46
+msgid "основных средств КТЖ — железнодорожная инфраструктура"
+msgstr "of KTZ’s fixed assets are railway infrastructure"
+
+#: templates/core/director_book.html:47
+msgid "0,799"
+msgstr "0.799"
+
+#: templates/core/director_book.html:47
+msgid "км ж/д на 1000 человек — 9-е место среди стран Middle Power"
+msgstr "km of railway per 1,000 people — 9th among Middle Power countries"
+
+#: templates/core/director_book.html:58
+msgid "Три главы за три минуты"
+msgstr "Three chapters in three minutes"
+
+#: templates/core/director_book.html:61
+msgid ""
+"Железнодорожный транспорт остаётся отраслью экономики с, пожалуй, наибольшей "
+"долей государственного участия."
+msgstr ""
+"Rail transport remains the sector of the economy with perhaps the largest "
+"share of state involvement."
+
+#: templates/core/director_book.html:62
+msgid "Из введения"
+msgstr "From the introduction"
+
+#: templates/core/director_book.html:70
+msgid "с. 3–24"
+msgstr "pp. 3–24"
+
+#: templates/core/director_book.html:74
+msgid "Вывод"
+msgstr "Conclusion"
+
+#: templates/core/director_book.html:75
+msgid ""
+"Перед стратегическими решениями нужно анализировать прежние программы и "
+"собственный опыт реформ Казахстана, а не только зарубежный."
+msgstr ""
+"Strategic decisions should be preceded by an analysis of earlier programmes "
+"and Kazakhstan’s own reform experience, not just foreign practice."
+
+#: templates/core/director_book.html:83
+msgid "с. 25–40"
+msgstr "pp. 25–40"
+
+#: templates/core/director_book.html:87
+msgid "Ключевой факт"
+msgstr "Key fact"
+
+#: templates/core/director_book.html:88
+msgid ""
+"Из 48 видов деятельности по Уставу только 3 относятся к корпоративному "
+"центру. Большинство — к профилю оператора инфраструктуры."
+msgstr ""
+"Of the 48 activities listed in the Charter, only 3 belong to the corporate "
+"centre. Most fall within the remit of an infrastructure operator."
+
+#: templates/core/director_book.html:96
+msgid "с. 41–63"
+msgstr "pp. 41–63"
+
+#: templates/core/director_book.html:100 templates/projects/detail.html:38
+msgid "Решение"
+msgstr "Solution"
+
+#: templates/core/director_book.html:101
+msgid ""
+"Расширить понятия частного пользования и частной собственности в законе «О "
+"железнодорожном транспорте», чтобы привлечь частные инвестиции в регионы."
+msgstr ""
+"Broaden the concepts of private use and private ownership in the Law “On "
+"Railway Transport” to attract private investment into the regions."
+
+#: templates/core/director_book.html:109
+msgid "Выводы и предложения — в полной версии"
+msgstr "Conclusions and proposals — in the full version"
+
+#: templates/core/director_book.html:110
+msgid ""
+"Подробный разбор, 12 таблиц, графики по 161 району и все предложения авторов."
+msgstr ""
+"In-depth analysis, 12 tables, charts covering 161 districts, and all of the "
+"authors’ proposals."
+
+#: templates/core/director_book.html:111
+msgid "PDF · 74 страницы · 1,2 МБ"
+msgstr "PDF in Russian · 74 pages · 1.2 MB"
+
+#: templates/core/director_book.html:113
+msgid "Скачать PDF"
+msgstr "Download PDF"
+
+#: templates/core/director_book.html:120
+msgid "PDF · 74 с. · 1,2 МБ"
+msgstr "PDF in Russian · 74 pp. · 1.2 MB"
+
+#: templates/core/director_book.html:121
+msgid "Скачать"
+msgstr "Download"
 
 #: templates/core/faq.html:8
 msgid ""
@@ -1360,10 +1615,6 @@ msgstr "km of track"
 #: templates/projects/detail.html:33
 msgid "Задача"
 msgstr "Task"
-
-#: templates/projects/detail.html:38
-msgid "Решение"
-msgstr "Solution"
 
 #: templates/projects/detail.html:43
 msgid "Результат"

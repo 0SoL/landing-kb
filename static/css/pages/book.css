@@ -1,0 +1,597 @@
+/* ============================================
+   BOOK.CSS — «Книга директора» (/direktoru-kniga/)
+   Mockup: static/kniga-direktora/book-page.html
+   Brand tokens (tokens.css) are scoped to .book-page so they don't leak
+   into the shared header/footer. Font stays the site-wide Geologica.
+   ============================================ */
+
+.book-page {
+  --ink-900: #1a1a1a;
+  --ink-800: #242322;
+  --ink-700: #3a3733;
+  --gold-500: #c09441;
+  --gold-400: #d1a957;
+  --gold-700: #7d5d1f;   /* gold TEXT on light backgrounds (5.5:1) */
+  --cream-100: #f4f2ee;
+  --paper: #ffffff;
+  --text: var(--ink-900);
+  --text-muted: #5f5a52;
+  --text-on-dark: var(--cream-100);
+  --muted-on-dark: #9b968c;
+  --line-light: #d9d3c7;
+
+  background-color: var(--cream-100);
+  color: var(--text);
+}
+
+/* Overline label */
+.book-eyebrow {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Gold button: dark text on gold — white on gold fails contrast (2.6:1) */
+.btn--gold {
+  background-color: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--ink-900);
+}
+
+.btn--gold:hover,
+.btn--gold:focus-visible {
+  background-color: var(--gold-400);
+  border-color: var(--gold-400);
+}
+
+.book-btn {
+  gap: 0.625rem;
+  min-height: 3.5rem;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.08em;
+}
+
+.book-link {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream-100);
+  border-bottom: 2px solid var(--gold-500);
+  padding-bottom: 4px;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.book-link:hover,
+.book-link:focus-visible {
+  color: var(--gold-400);
+  border-color: var(--gold-400);
+}
+
+/* ── 1. HERO ── */
+
+.book-hero {
+  position: relative;
+  background-color: var(--ink-900);
+  color: var(--text-on-dark);
+  overflow: hidden;
+}
+
+.book-hero__photo {
+  position: absolute;
+  inset: 0 0 0 35%;
+  background: url('../../img/hero-images/kniga-direktora.webp') center / cover no-repeat;
+  opacity: 0.5;
+}
+
+.book-hero__photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--ink-900) 0%, rgba(26, 26, 26, 0.3) 55%, rgba(26, 26, 26, 0.6) 100%);
+}
+
+.book-hero__inner {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 5rem;
+  align-items: center;
+  padding-block: 3.5rem 6rem;
+}
+
+.book-hero__eyebrow {
+  color: var(--gold-500);
+  margin-bottom: 1.25rem;
+}
+
+.book-hero__title {
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  line-height: 0.95;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.book-hero__name {
+  font-size: 1.375rem;
+  line-height: 1.4;
+  font-weight: 600;
+  max-width: 620px;
+  margin-bottom: 0.625rem;
+}
+
+.book-hero__authors {
+  font-size: 0.9375rem;
+  color: var(--muted-on-dark);
+  margin-bottom: 2.5rem;
+}
+
+.book-hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem 2rem;
+}
+
+/* Book cover — pure CSS, decorative */
+.book-cover {
+  position: relative;
+  width: 300px;
+  aspect-ratio: 300 / 424;
+  margin-left: auto;
+  transform: perspective(1400px) rotateY(-14deg);
+  transform-origin: left center;
+}
+
+.book-cover__spine {
+  position: absolute;
+  left: -18px;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  background-color: #121212;
+}
+
+.book-cover__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 34px 28px;
+  background-color: var(--ink-800);
+  border: 1px solid var(--ink-700);
+  box-shadow: 24px 30px 60px rgba(0, 0, 0, 0.55);
+}
+
+.book-cover__eyebrow {
+  color: var(--gold-500);
+  font-size: 0.625rem;
+}
+
+.book-cover__rule {
+  height: 2px;
+  width: 44px;
+  background-color: var(--gold-500);
+  margin-block: 20px;
+}
+
+.book-cover__kicker {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: var(--gold-500);
+}
+
+.book-cover__title {
+  font-size: 1.3125rem;
+  line-height: 1.18;
+  font-weight: 800;
+  color: var(--cream-100);
+  margin-top: 8px;
+  hyphens: manual;
+}
+
+.book-cover__authors {
+  margin-top: auto;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--muted-on-dark);
+}
+
+.book-cover__authors b {
+  display: block;
+  color: var(--cream-100);
+  font-weight: 600;
+}
+
+.book-cover__rails {
+  position: absolute;
+  right: 28px;
+  bottom: 34px;
+  display: grid;
+  gap: 7px;
+}
+
+.book-cover__rails i {
+  display: block;
+  width: 60px;
+  height: 2px;
+  background-color: var(--gold-500);
+  opacity: 0.8;
+}
+
+/* ── 2. STATS ── */
+
+.book-stats {
+  position: relative;
+  background-color: var(--ink-800);
+  border-top: 1px solid var(--ink-700);
+}
+
+.book-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.book-stats__item {
+  padding: 2.25rem 2rem 2.5rem;
+  border-left: 1px solid var(--ink-700);
+}
+
+.book-stats__item:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.book-stats__item dt {
+  font-size: clamp(2.125rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  color: var(--gold-500);
+  margin-bottom: 0.75rem;
+  white-space: nowrap;
+}
+
+.book-stats__item dd {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cream-100);
+}
+
+/* ── 3. WALKTHROUGH ── */
+
+.book-walk {
+  padding-block: 6rem;
+}
+
+.book-walk__head {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+.book-walk__eyebrow {
+  color: var(--gold-700);
+  margin-bottom: 0.875rem;
+}
+
+.book-walk__title {
+  font-size: clamp(1.875rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+
+.book-walk__quote blockquote {
+  font-size: 1.25rem;
+  line-height: 1.55;
+  font-weight: 500;
+  padding-top: 6px;
+  quotes: '«' '»';
+}
+
+.book-walk__quote blockquote:lang(en) {
+  quotes: '“' '”';
+}
+
+.book-walk__quote blockquote p::before,
+.book-walk__quote blockquote p::after {
+  color: var(--gold-500);
+  font-weight: 800;
+}
+
+.book-walk__quote blockquote p::before { content: open-quote; }
+.book-walk__quote blockquote p::after { content: close-quote; }
+
+.book-walk__quote figcaption {
+  margin-top: 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.book-chapter {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) 380px;
+  gap: 3rem;
+  padding-block: 2.5rem;
+  border-top: 1px solid var(--line-light);
+}
+
+.book-chapter__num,
+.book-end__num {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  font-weight: 800;
+  line-height: 0.85;
+  color: var(--gold-500);
+}
+
+.book-chapter__title {
+  font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.book-chapter__pages {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+.book-chapter__text {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.book-chapter__key {
+  background-color: var(--paper);
+  border: 1px solid var(--line-light);
+  border-radius: var(--radius-sm);
+  padding: 1.5rem;
+}
+
+.book-chapter__key .book-eyebrow {
+  color: var(--gold-700);
+  margin-bottom: 0.625rem;
+}
+
+.book-chapter__key p:last-child {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+
+/* ── 4. FULL VERSION CTA ── */
+
+.book-end {
+  display: grid;
+  grid-template-columns: 110px minmax(0, 1fr) auto;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding: 2.5rem 3rem 2.5rem 0;
+  background-color: var(--ink-900);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-sm);
+}
+
+.book-end__num {
+  text-align: center;
+}
+
+.book-end__title {
+  font-size: clamp(1.375rem, 2.2vw, 1.625rem);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.book-end__text {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--muted-on-dark);
+  max-width: 560px;
+}
+
+.book-end__meta {
+  margin-top: 0.625rem;
+  font-size: 0.8125rem;
+  color: var(--cream-100);
+}
+
+.book-dock {
+  display: none;
+}
+
+/* ── TABLET ── */
+
+@media (max-width: 1100px) {
+  .book-hero__inner {
+    grid-template-columns: minmax(0, 1fr) 240px;
+    gap: 2.5rem;
+  }
+
+  .book-cover {
+    width: 230px;
+  }
+
+  .book-cover__title {
+    font-size: 1rem;
+  }
+
+  .book-stats__grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .book-stats__item:nth-child(3) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .book-stats__item:nth-child(n+3) {
+    border-top: 1px solid var(--ink-700);
+  }
+
+  .book-walk__head {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  .book-chapter {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 1rem 2rem;
+  }
+
+  .book-chapter__key {
+    grid-column: 2;
+  }
+
+  .book-end {
+    grid-template-columns: 80px minmax(0, 1fr);
+    gap: 1rem 2rem;
+    padding-right: 2rem;
+  }
+
+  .book-end .btn {
+    grid-column: 2;
+    justify-self: start;
+  }
+}
+
+/* ── PHONE ── */
+
+@media (max-width: 640px) {
+  .book-hero__photo {
+    inset: 0;
+    opacity: 0.35;
+  }
+
+  .book-hero__photo::after {
+    background: linear-gradient(180deg, rgba(26, 26, 26, 0.55) 0%, var(--ink-900) 85%);
+  }
+
+  .book-hero__inner {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding-block: 1.75rem 2.5rem;
+  }
+
+  /* Cover sits above the heading */
+  .book-cover {
+    order: -1;
+    width: 150px;
+    margin: 0 0 1.75rem;
+    transform: none;
+  }
+
+  .book-cover__spine { left: -10px; width: 10px; }
+  .book-cover__face { padding: 16px 14px; }
+  .book-cover__eyebrow { font-size: 7px; }
+  .book-cover__rule { margin-block: 10px; width: 28px; }
+  .book-cover__kicker { font-size: 8px; }
+  .book-cover__title { font-size: 11px; margin-top: 4px; }
+  .book-cover__authors { font-size: 8px; }
+  .book-cover__rails { display: none; }
+
+  .book-hero__title { margin-bottom: 1.25rem; }
+  .book-hero__name { font-size: 1.0625rem; }
+  .book-hero__authors { font-size: 0.875rem; margin-bottom: 1.75rem; }
+
+  .book-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .book-hero__actions .book-link {
+    align-self: flex-start;
+  }
+
+  .book-stats__item {
+    padding: 1.5rem 0.75rem 1.625rem 1rem;
+  }
+
+  .book-stats__item:nth-child(odd) {
+    padding-left: 0;
+  }
+
+  .book-stats__item dd {
+    font-size: 0.8125rem;
+  }
+
+  .book-walk {
+    padding-block: 3.5rem 2.5rem;
+  }
+
+  .book-walk__quote blockquote {
+    font-size: 1.0625rem;
+  }
+
+  .book-walk__head {
+    margin-bottom: 2.25rem;
+  }
+
+  .book-chapter {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding-block: 2rem;
+  }
+
+  .book-chapter__key {
+    grid-column: 1;
+    padding: 1.25rem;
+  }
+
+  .book-end {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    padding: 1.75rem 1.25rem;
+  }
+
+  .book-end__num {
+    text-align: left;
+  }
+
+  .book-end .btn {
+    grid-column: 1;
+    justify-self: stretch;
+    margin-top: 0.5rem;
+  }
+
+  /* Download bar pinned to the bottom of the viewport */
+  .book-dock {
+    display: flex;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem var(--container-pad) calc(0.75rem + env(safe-area-inset-bottom));
+    background-color: var(--ink-900);
+    border-top: 1px solid var(--ink-700);
+  }
+
+  .book-dock__label {
+    flex: 1;
+    font-size: 0.75rem;
+    line-height: 1.35;
+    color: var(--muted-on-dark);
+  }
+
+  .book-dock__label b {
+    display: block;
+    color: var(--cream-100);
+    font-weight: 600;
+  }
+
+  .book-dock__btn {
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    font-size: 0.75rem;
+  }
+}
